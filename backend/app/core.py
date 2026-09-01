@@ -11,7 +11,10 @@ from pathlib import Path
 from cryptography.fernet import Fernet
 
 ROOT = Path(os.getenv("JUSTICEVAULT_ROOT", os.getenv("SLIDMS_ROOT", str(Path(__file__).resolve().parents[2]))))
-DATA_DIR = ROOT / "data"
+if os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+    DATA_DIR = Path("/tmp/data")
+else:
+    DATA_DIR = ROOT / "data"
 VAULT_DIR = DATA_DIR / "vault"
 DB_PATH = DATA_DIR / "justicevault.db"
 SECRET = os.getenv("JUSTICEVAULT_SECRET", os.getenv("SLIDMS_SECRET", "justicevault-super-secure-production-secret-key-2026")).encode()
