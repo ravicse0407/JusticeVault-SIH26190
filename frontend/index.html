@@ -1177,12 +1177,74 @@
           return;
         }
 
-        const data = await res.json();
-        userToken = data.access_token;
-        currentUser = data.user || data.data?.user;
-       currentRole = currentUser.role.toUpperCase();
+       const data = await res.json();
 
-        localStorage.setItem('jv_token', userToken);
+if (!res.ok) {
+  throw new Error(getErrorMessage(data));
+}
+
+userToken = data.access_token;
+
+currentUser = data.user || data.data?.user || data.profile || data.data?.profile;
+
+if (!currentUser) {
+  const demoProfiles = {
+    'police.demo': {
+      id: 'police.demo',
+      name: 'Police Officer',
+      role: 'POLICE_OFFICER',
+      designation: 'Police Officer',
+      department: 'Police',
+      clearance: 3
+    },
+    'forensic.demo': {
+      id: 'forensic.demo',
+      name: 'Forensic Officer',
+      role: 'FORENSIC_OFFICER',
+      designation: 'Forensic Officer',
+      department: 'Forensics',
+      clearance: 4
+    },
+    'judiciary.demo': {
+      id: 'judiciary.demo',
+      name: 'Judiciary / Judge',
+      role: 'JUDICIARY',
+      designation: 'Judge',
+      department: 'Judiciary',
+      clearance: 6
+    },
+    'higher.demo': {
+      id: 'higher.demo',
+      name: 'Higher Officer',
+      role: 'HIGHER_OFFICER',
+      designation: 'Higher Officer',
+      department: 'Higher Office',
+      clearance: 5
+    },
+    'admin.demo': {
+      id: 'admin.demo',
+      name: 'Admin / PMO',
+      role: 'ADMIN',
+      designation: 'Administrator / PMO',
+      department: 'PMO',
+      clearance: 5
+    }
+  };
+
+  currentUser = demoProfiles[username];
+}
+
+if (!currentUser) {
+  throw new Error('Login API returned no user profile.');
+}
+
+currentRole = String(currentUser.role || '').toUpperCase();
+
+if (!currentRole) {
+  throw new Error('Login API returned a user profile without a role.');
+}
+
+localStorage.setItem('jv_token', userToken);
 
         document.getElementById('loginView').style.display = 'none';
         document.getElementById('appView').style.display = 'flex';
