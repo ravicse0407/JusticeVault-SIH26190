@@ -419,8 +419,8 @@ def init_db():
             vpath.write_bytes(FERNET.encrypt(raw_data))
 
             db.execute(
-                "INSERT OR REPLACE INTO documents VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                (d_id, c_id, name, d_type, dept, ver, digest, digest, "INTACT", is_conf, rel_path, created_by, utcnow())
+                "INSERT OR REPLACE INTO documents (id, case_id, name, document_type, department, current_version, original_hash, current_hash, status, is_confidential, vault_path, created_by, created_at, classification, requires_esign) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                (d_id, c_id, name, d_type, dept, ver, digest, digest, "INTACT", is_conf, rel_path, created_by, utcnow(), "CONFIDENTIAL" if is_conf else "UNCLASSIFIED", 1 if is_conf else 0)
             )
 
             # Store Version 1 in document_versions table
