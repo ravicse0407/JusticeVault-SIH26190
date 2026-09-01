@@ -1,0 +1,57 @@
+# Hyperledger Fabric Crypto Config for JusticeVault Multi-MSP Consortium
+# Smart India Hackathon 2026 | Team GenX | Channel: channel-legal-evidence
+
+OrdererOrgs:
+  - Name: Orderer
+    Domain: justicevault.gov.in
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer.justicevault.gov.in
+        SANS:
+          - localhost
+          - 127.0.0.1
+
+PeerOrgs:
+  - Name: PoliceHQ
+    Domain: police.justicevault.gov.in
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - localhost
+        - 127.0.0.1
+    Users:
+      Count: 3
+
+  - Name: ForensicLab
+    Domain: forensic.justicevault.gov.in
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - localhost
+        - 127.0.0.1
+    Users:
+      Count: 3
+
+  - Name: Judiciary
+    Domain: judiciary.justicevault.gov.in
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - localhost
+        - 127.0.0.1
+    Users:
+      Count: 2
+
+  - Name: PMOGovernance
+    Domain: pmo.justicevault.gov.in
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+        - 127.0.0.1
+    Users:
+      Count: 2
