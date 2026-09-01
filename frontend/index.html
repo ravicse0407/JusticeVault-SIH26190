@@ -1180,7 +1180,7 @@
         const data = await res.json();
         userToken = data.access_token;
         currentUser = data.user;
-        currentRole = data.user.role.toUpperCase();
+       currentRole = data.user?.role?.toUpperCase();
 
         localStorage.setItem('jv_token', userToken);
 
