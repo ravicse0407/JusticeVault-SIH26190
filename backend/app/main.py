@@ -6,7 +6,7 @@ import uuid
 from pathlib import Path
 from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 
 from .core import (
     ROOT, CASE_TYPES, VALID_CASE_CODES, audit, check_password,
