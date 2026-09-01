@@ -1,0 +1,2199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SLIDMS · Secure Legal Intelligence & Link Surf Verification Grid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ================= CENTRAL DESIGN SYSTEM TOKENS ================= */
+    :root {
+      --primary: #1d72b8;
+      --primary-hover: #155e9c;
+      --primary-subtle: rgba(29, 114, 184, 0.12);
+      --background: #060d17;
+      --surface: #0c1827;
+      --surface-hover: #112236;
+      --surface-elevated: #142a42;
+      --border: #1d3652;
+      --border-focus: #31659a;
+      --text-primary: #f0f6fc;
+      --text-secondary: #8fa5bd;
+      --text-muted: #5e7896;
+      --success: #2ea043;
+      --success-subtle: rgba(46, 160, 67, 0.15);
+      --warning: #d29922;
+      --warning-subtle: rgba(210, 153, 34, 0.15);
+      --danger: #f85149;
+      --danger-subtle: rgba(248, 81, 73, 0.15);
+      --accent-cyan: #38d4c9;
+      --accent-purple: #a371f7;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Space Grotesk', var(--font-sans);
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    /* Reset & Viewport Constraints */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background-color: var(--background);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--background); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-focus); }
+
+    /* Typography */
+    h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.4px; }
+    .mono { font-family: var(--font-mono); }
+    .text-secondary { color: var(--text-secondary); }
+    .text-muted { color: var(--text-muted); }
+    .text-cyan { color: var(--accent-cyan); }
+    .text-green { color: var(--success); }
+    .text-amber { color: var(--warning); }
+    .text-red { color: var(--danger); }
+    .text-purple { color: var(--accent-purple); }
+
+    /* Badges & Tags */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .tag.green { background: var(--success-subtle); color: var(--success); border: 1px solid rgba(46, 160, 67, 0.4); }
+    .tag.red { background: var(--danger-subtle); color: var(--danger); border: 1px solid rgba(248, 81, 73, 0.4); }
+    .tag.blue { background: var(--primary-subtle); color: #58a6ff; border: 1px solid rgba(88, 166, 255, 0.4); }
+    .tag.amber { background: var(--warning-subtle); color: var(--warning); border: 1px solid rgba(210, 153, 34, 0.4); }
+    .tag.cyan { background: rgba(56, 212, 201, 0.12); color: var(--accent-cyan); border: 1px solid rgba(56, 212, 201, 0.4); }
+    .tag.purple { background: rgba(163, 113, 247, 0.12); color: var(--accent-purple); border: 1px solid rgba(163, 113, 247, 0.4); }
+
+    /* Buttons & Form Controls */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:hover { border-color: var(--border-focus); background: var(--surface-hover); }
+    .btn.primary {
+      background: var(--primary);
+      border-color: #2b82c9;
+      color: #fff;
+    }
+    .btn.primary:hover { background: var(--primary-hover); }
+    .btn.phone-btn {
+      background: #113350;
+      border-color: #2e71a6;
+      color: #79c0ff;
+    }
+    .btn.phone-btn:hover { background: #164268; border-color: var(--accent-cyan); color: #fff; }
+    .btn.esign-btn {
+      background: #0f5c56;
+      border-color: var(--accent-cyan);
+      color: #b7fff9;
+    }
+    .btn.esign-btn:hover { background: #13746c; }
+    .btn.danger { background: var(--danger-subtle); border-color: rgba(248, 81, 73, 0.4); color: #ffa19b; }
+    .btn.danger:hover { background: rgba(248, 81, 73, 0.25); }
+
+    .input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #08111d;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input:focus, select:focus, textarea:focus { border-color: var(--accent-cyan); }
+
+    /* ================= MAIN LAYOUT SYSTEM ================= */
+    #loginView {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    #appView {
+      display: none;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+    }
+    #appView.active { display: grid; }
+
+    /* Clean Sticky Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 260px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 18px 12px;
+      z-index: 20;
+      overflow-y: auto;
+    }
+    .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 0 6px 16px; border-bottom: 1px solid var(--border); }
+    .brand-icon {
+      width: 34px;
+      height: 38px;
+      clip-path: polygon(50% 0, 94% 16%, 88% 74%, 50% 100%, 12% 74%, 6% 16%);
+      background: linear-gradient(135deg, #134e54 0%, #153359 100%);
+      border: 1px solid var(--accent-cyan);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      color: #9efff8;
+    }
+
+    .active-officer-banner {
+      margin: 14px 0;
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+    }
+    .officer-top { display: flex; align-items: center; gap: 10px; }
+    .officer-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--primary) 0%, #0e3b66 100%);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 11px;
+      color: #fff;
+    }
+    .officer-details b { display: block; font-size: 12px; }
+    .officer-details small { color: var(--accent-cyan); font-size: 10px; font-family: var(--font-mono); }
+    .officer-meta { margin-top: 8px; font-size: 9px; color: var(--text-secondary); display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 6px; }
+
+    .nav-list { list-style: none; margin-top: 6px; flex: 1; }
+    .nav-label { font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); padding: 12px 8px 4px; font-weight: 700; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 10px;
+      margin: 2px 0;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .nav-item i { width: 16px; text-align: center; font-style: normal; color: #58a6ff; font-size: 13px; }
+    .nav-item:hover { background: var(--surface-hover); color: var(--text-primary); }
+    .nav-item.active { background: var(--surface-elevated); color: #fff; font-weight: 600; box-shadow: inset 3px 0 var(--accent-cyan); }
+    .nav-item.active i { color: var(--accent-cyan); }
+
+    /* Main Content (ZERO MARGIN OFFSET) */
+    .main-panel {
+      margin-left: 0;
+      width: 100%;
+      min-width: 0;
+      padding: 0 28px 40px;
+    }
+
+    .top-bar {
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      background: rgba(6, 13, 23, 0.94);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .breadcrumbs { font-size: 11px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .breadcrumbs b { color: var(--text-primary); }
+    .top-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .pulse-dot.red { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+
+    /* Mobile Header */
+    .mobile-header { display: none; }
+
+    /* Tab Views */
+    .view-tab { display: none; padding-top: 20px; width: 100%; }
+    .view-tab.active { display: block; animation: fadeIn 0.2s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Cards & Grids */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+    .card-header h2 { font-size: 14px; font-weight: 600; }
+    .card-header small { color: var(--text-secondary); font-size: 11px; }
+
+    .hero-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #0d1e33 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      gap: 15px;
+    }
+    .hero-banner h1 { font-size: 22px; color: #fff; margin: 3px 0; }
+    .hero-banner p { color: var(--text-secondary); font-size: 12px; max-width: 650px; }
+
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-2-1 { display: grid; grid-template-columns: 1.65fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .metric-box { padding: 16px; }
+    .metric-box label { display: block; font-size: 10px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.7px; }
+    .metric-box .metric-value { font-family: var(--font-heading); font-size: 26px; font-weight: 700; margin: 5px 0 2px; }
+    .metric-box .metric-sub { font-size: 10px; color: var(--text-muted); }
+
+    /* Tables */
+    .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .data-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .data-table th { padding: 9px 10px; font-family: var(--font-mono); font-size: 10px; color: var(--text-secondary); border-bottom: 1px solid var(--border); font-weight: 600; }
+    .data-table td { padding: 10px; font-size: 12px; border-bottom: 1px solid rgba(29, 54, 82, 0.5); }
+    .data-table tr:hover td { background: var(--surface-hover); }
+    .data-table tr:last-child td { border-bottom: 0; }
+
+    /* Link Surf & Explorer */
+    .link-surf-search-box {
+      display: flex;
+      gap: 10px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+    .passport-card {
+      border: 1px solid #234c75;
+      background: linear-gradient(145deg, #0d233c 0%, #081627 100%);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 14px;
+    }
+    .passport-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 12px; }
+
+    .block-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .block-card:hover { border-color: var(--border-focus); background: var(--surface-hover); }
+    .block-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+
+    /* Confidential & Watermark */
+    .confidential-card {
+      border: 1px solid #3d244a;
+      background: linear-gradient(145deg, #170e24 0%, var(--surface) 100%);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .confidential-card.unlocked {
+      border-color: #1a5953;
+      background: linear-gradient(145deg, #0c2627 0%, var(--surface) 100%);
+    }
+    .watermark-overlay {
+      margin-top: 12px;
+      padding: 14px;
+      border: 1px dashed rgba(56, 212, 201, 0.4);
+      border-radius: 6px;
+      background: rgba(12, 38, 39, 0.4);
+      position: relative;
+    }
+    .watermark-stamp {
+      position: absolute;
+      right: 14px;
+      bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: rgba(56, 212, 201, 0.6);
+      border: 1px solid rgba(56, 212, 201, 0.4);
+      padding: 3px 6px;
+      border-radius: 3px;
+      transform: rotate(-2deg);
+      pointer-events: none;
+    }
+    .masked-text {
+      font-family: var(--font-mono);
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Modal System */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 14, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      place-items: center;
+      z-index: 100;
+      padding: 16px;
+    }
+    .modal-backdrop.show { display: grid; }
+    .modal-box {
+      width: min(540px, 94vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--border-focus);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.8);
+    }
+    .modal-box h2 { font-size: 16px; margin-bottom: 6px; }
+    .modal-box p { color: var(--text-secondary); font-size: 12px; margin-bottom: 14px; }
+
+    /* Toast Container */
+    .toast-container { position: fixed; right: 20px; bottom: 20px; z-index: 200; display: flex; flex-direction: column; gap: 6px; }
+    .toast {
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: #0f3325;
+      border: 1px solid var(--success);
+      color: #dffff1;
+      font-size: 12px;
+      font-weight: 500;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      animation: toastIn 0.2s ease;
+    }
+    .toast.error { background: #3d141a; border-color: var(--danger); color: #ffe6e8; }
+    @keyframes toastIn { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    /* ================= RESPONSIVE BREAKPOINTS ================= */
+    @media (max-width: 1024px) {
+      #appView { display: block; }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 270px;
+        height: 100vh;
+        z-index: 100;
+        transition: left 0.25s ease;
+        box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      }
+      .sidebar.open { left: 0; }
+      .sidebar-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 90;
+        display: none;
+      }
+      .sidebar-backdrop.show { display: block; }
+      .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 18px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 30;
+      }
+      .main-panel { padding: 0 16px 36px; }
+      .grid-4, .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2-1, .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .grid-4, .grid-3 { grid-template-columns: 1fr; }
+      .hero-banner { flex-direction: column; align-items: flex-start; }
+      .top-bar { height: auto; padding: 12px 0; flex-direction: column; align-items: flex-start; }
+      .top-actions { width: 100%; justify-content: space-between; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile Drawer Backdrop -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleMobileSidebar()"></div>
+
+  <!-- ================= 1. RANK-BASED AUTHENTICATION VIEW ================= -->
+  <div id="loginView">
+    <div style="width: min(920px, 96vw); background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 18px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="brand-icon" style="width: 44px; height: 48px; font-size: 18px;">⚖</div>
+          <div>
+            <h1 style="font-size: 20px;">SLIDMS Command Portal</h1>
+            <p class="text-secondary" style="font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase;">Legal Intelligence & Link Surf Verification Grid</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn phone-btn" onclick="openPhoneModal()" style="font-size: 11px;">📱 Open on Phone</button>
+          <span class="tag cyan">● Fabric Online</span>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span style="font-size: 11px; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.8px;">SELECT OFFICER IDENTITY & RANK TO SIGN IN</span>
+        <span class="mono text-cyan" style="font-size: 10px;">Passphrase for all: demo123</span>
+      </div>
+
+      <!-- Rank Selection Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 22px;" id="ranksGrid">
+        <div class="card rank-card" style="cursor: pointer; padding: 14px; margin-bottom: 0;" onclick="selectRank('io-001')">
+          <div style="font-size: 20px; margin-bottom: 6px;">👮</div>
+          <h3 style="font-size: 13px;">Investigating Officer</h3>
+          <div class="text-cyan" style="font-size: 11px; font-weight: 600;">Inspector Arjun Mehta</div>
+          <small class="text-muted">Evidence intake, case registry & scene transfers</small>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <span class="tag blue">Level 3 Clearance</span>
+            <span class="mono text-muted" style="font-size: 9px;">PoliceHQ.Org1</span>
+          </div>
+        </div>
+
+        <div class="card rank-card" style="cursor: pointer; padding: 14px; margin-bottom: 0;" onclick="selectRank('forensic-001')">
+          <div style="font-size: 20px; margin-bottom: 6px;">🔬</div>
+          <h3 style="font-size: 13px;">Chief Forensic Examiner</h3>
+          <div class="text-green" style="font-size: 11px; font-weight: 600;">Dr. Priya Iyer</div>
+          <small class="text-muted">Cryptographic hashing, tamper testing & lab reports</small>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <span class="tag green">Level 4 Clearance</span>
+            <span class="mono text-muted" style="font-size: 9px;">ForensicLab.Org2</span>
+          </div>
+        </div>
+
+        <div class="card rank-card" style="cursor: pointer; padding: 14px; margin-bottom: 0;" onclick="selectRank('prosecutor-001')">
+          <div style="font-size: 20px; margin-bottom: 6px;">⚖️</div>
+          <h3 style="font-size: 13px;">Public Prosecutor</h3>
+          <div class="text-amber" style="font-size: 11px; font-weight: 600;">Adv. Rajesh Sharma</div>
+          <small class="text-muted">Legal charge-sheeting, judicial bundling & trial evidence</small>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <span class="tag amber">Level 4 Clearance</span>
+            <span class="mono text-muted" style="font-size: 9px;">Prosecution.Org1</span>
+          </div>
+        </div>
+
+        <div class="card rank-card" style="cursor: pointer; padding: 14px; margin-bottom: 0;" onclick="selectRank('senior-001')">
+          <div style="font-size: 20px; margin-bottom: 6px;">🛡️</div>
+          <h3 style="font-size: 13px;">Senior Authority (DIG/SP)</h3>
+          <div class="text-purple" style="font-size: 11px; font-weight: 600;">DIG Asha Rao, IPS</div>
+          <small class="text-muted">High-level oversight & eSign approval for restricted dossiers</small>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <span class="tag purple">Level 5 Clearance</span>
+            <span class="mono text-muted" style="font-size: 9px;">PoliceHQ.Org1</span>
+          </div>
+        </div>
+
+        <div class="card rank-card" style="cursor: pointer; padding: 14px; margin-bottom: 0;" onclick="selectRank('judge-001')">
+          <div style="font-size: 20px; margin-bottom: 6px;">🏛️</div>
+          <h3 style="font-size: 13px;">Principal Sessions Judge</h3>
+          <div class="text-red" style="font-size: 11px; font-weight: 600;">Justice R.K. Verma</div>
+          <small class="text-muted">Judicial seal, unmasked confidential decryption & court trial</small>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <span class="tag red">Level 6 Judicial Seal</span>
+            <span class="mono text-muted" style="font-size: 9px;">Judiciary.Org3</span>
+          </div>
+        </div>
+
+        <div class="card rank-card" style="cursor: pointer; padding: 14px; margin-bottom: 0;" onclick="selectRank('admin-001')">
+          <div style="font-size: 20px; margin-bottom: 6px;">💻</div>
+          <h3 style="font-size: 13px;">Security Node Administrator</h3>
+          <div class="text-cyan" style="font-size: 11px; font-weight: 600;">Sanjay Deshmukh</div>
+          <small class="text-muted">Fabric channel consensus, node health & audit chronicle</small>
+          <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+            <span class="tag cyan">Level 5 Security</span>
+            <span class="mono text-muted" style="font-size: 9px;">SystemAdmin.Org0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Login Form -->
+      <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; background: #08111d; border: 1px solid var(--border); border-radius: 8px; padding: 18px; align-items: center;" class="login-action-form">
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 4px;">Selected Officer ID</label>
+          <input type="text" id="loginUsername" class="input mono" readonly value="io-001" style="background: var(--surface); color: var(--accent-cyan); margin-bottom: 10px;">
+          
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 4px;">Officer Password / PIN</label>
+          <input type="password" id="loginPassword" class="input" placeholder="demo123" value="demo123">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <button class="btn primary" style="padding: 10px;" onclick="performLogin()">🛡️ Authenticate & Launch Command Grid</button>
+          <button class="btn" style="font-size: 11px;" onclick="bypassDirect('judge-001')">⚡ Quick Sign-In as Judge (Level 6)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. FULL-SCREEN WORKSPACE APP VIEW ================= -->
+  <div id="appView">
+    <!-- Mobile Top Header -->
+    <div class="mobile-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="btn" style="padding: 6px 10px;" onclick="toggleMobileSidebar()">☰ Menu</button>
+        <b style="font-size: 14px;">SLIDMS Grid</b>
+      </div>
+      <div style="display: flex; gap: 6px;">
+        <button class="btn phone-btn" style="font-size: 10px; padding: 5px 8px;" onclick="openPhoneModal()">📱 Phone</button>
+        <button class="btn primary" style="font-size: 10px; padding: 5px 8px;" onclick="switchTab('linkSurf')">🌐 Surf</button>
+      </div>
+    </div>
+
+    <!-- Sticky Sidebar -->
+    <aside class="sidebar" id="mainSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">⚖</div>
+        <div>
+          <h2 style="font-size: 15px;">SLIDMS Grid</h2>
+          <small class="text-secondary" style="font-size: 9px; letter-spacing: 1px;">LEGAL INTELLIGENCE v2.5</small>
+        </div>
+      </div>
+
+      <div class="active-officer-banner">
+        <div class="officer-top">
+          <div class="officer-avatar" id="sideAvatar">AM</div>
+          <div class="officer-details">
+            <b id="sideName">Arjun Mehta</b>
+            <small id="sideRole">Investigating Officer</small>
+          </div>
+        </div>
+        <div class="officer-meta">
+          <span id="sideBadge" class="mono">IND-POL-8841</span>
+          <span class="tag cyan" id="sideClearance">Level 3</span>
+        </div>
+      </div>
+
+      <ul class="nav-list">
+        <div class="nav-label">COMMAND & CONTROL</div>
+        <li><button class="nav-item active" onclick="switchTab('overview')"><i>▦</i> Command Overview</button></li>
+        <li><button class="nav-item" onclick="switchTab('cases')"><i>◫</i> Case Registry</button></li>
+        <li><button class="nav-item" onclick="switchTab('vault')"><i>▤</i> Cryptographic Vault</button></li>
+        
+        <div class="nav-label">REMOTE VERIFY & BLOCKCHAIN</div>
+        <li><button class="nav-item" onclick="switchTab('linkSurf')"><i>🌐</i> Link Surf Verification</button></li>
+        <li><button class="nav-item" onclick="switchTab('confidential')"><i>◉</i> Confidential & eSign</button></li>
+        <li><button class="nav-item" onclick="switchTab('fabric')"><i>⛓</i> Hyperledger Explorer</button></li>
+        
+        <div class="nav-label">ASSURANCE & CHRONICLE</div>
+        <li><button class="nav-item" onclick="switchTab('verify')"><i>✓</i> Integrity Lab (Live Hash)</button></li>
+        <li><button class="nav-item" onclick="switchTab('custody')"><i>🤝</i> Chain of Custody</button></li>
+        <li><button class="nav-item" onclick="switchTab('audit')"><i>◷</i> Audit Chronicle</button></li>
+        <li><button class="nav-item" onclick="switchTab('threats')"><i>⚠</i> Threat Console</button></li>
+      </ul>
+
+      <div style="border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+        <span class="mono text-muted" style="font-size: 10px;" id="clockDisplay">--:--:--</span>
+        <button class="btn danger" style="padding: 4px 8px; font-size: 10px;" onclick="logout()">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Panel -->
+    <main class="main-panel">
+      <!-- Desktop Top Header -->
+      <header class="top-bar">
+        <div class="breadcrumbs">
+          <span>NATIONAL DIGITAL JUDICIAL GRID</span>
+          <span>/</span>
+          <span class="mono text-cyan" id="currentCaseRef">CASE-2026-001 (State v. N. Sharma)</span>
+          <span>/</span>
+          <b id="activeTabName">Command Overview</b>
+        </div>
+        <div class="top-actions">
+          <button class="btn phone-btn" style="font-size: 11px;" onclick="openPhoneModal()">📱 Open on Phone / QR</button>
+          <span class="tag green"><span class="pulse-dot"></span> FABRIC CHANNEL ONLINE</span>
+          <button class="btn" style="font-size: 11px;" onclick="openNewCaseModal()">+ New Case</button>
+          <button class="btn primary" style="font-size: 11px;" onclick="switchTab('linkSurf')">🌐 Link Surf</button>
+        </div>
+      </header>
+
+      <!-- ================= TAB 1: COMMAND OVERVIEW ================= -->
+      <section id="overviewTab" class="view-tab active">
+        <div class="hero-banner">
+          <div>
+            <div class="tag blue" style="margin-bottom: 6px;">OPERATIONAL INTELLIGENCE SNAPSHOT</div>
+            <h1>Investigation Command Center</h1>
+            <p>Unified cryptographic evidence orchestration, Fabric immutable settlement, role-based clearance gating, and Link Surf remote verification.</p>
+          </div>
+          <div style="text-align: right;">
+            <span class="tag amber"><span class="pulse-dot red"></span> 1 QUARANTINED TAMPER ALERT</span>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="card metric-box">
+            <label>Active Investigations</label>
+            <div class="metric-value text-blue" id="metricCases">3</div>
+            <div class="metric-sub"><span class="text-green">↑ 1</span> registered this cycle</div>
+          </div>
+          <div class="card metric-box">
+            <label>Protected Evidence Files</label>
+            <div class="metric-value text-cyan" id="metricDocs">6</div>
+            <div class="metric-sub">Fernet Encrypted Vault Storage</div>
+          </div>
+          <div class="card metric-box">
+            <label>Hyperledger Fabric Blocks</label>
+            <div class="metric-value text-green" id="metricBlocks">4</div>
+            <div class="metric-sub">Channel: channel-legal-evidence</div>
+          </div>
+          <div class="card metric-box">
+            <label>Integrity Assurance Score</label>
+            <div class="metric-value text-amber">98.2%</div>
+            <div class="metric-sub"><span class="text-red">1 isolated</span> tamper alert</div>
+          </div>
+        </div>
+
+        <div class="grid-2-1">
+          <div class="card">
+            <div class="card-header">
+              <h2>Recent Fabric Ledger & Audit Activity</h2>
+              <button class="btn" style="padding: 3px 8px; font-size: 10px;" onclick="switchTab('audit')">View All Trail →</button>
+            </div>
+            <div id="overviewFeedList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Active Officer Clearance</h2>
+              <span class="tag green" id="overviewClearanceTag">LEVEL 3</span>
+            </div>
+            <div style="font-size: 12px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 5px;">
+                <span class="text-secondary">Active Officer:</span>
+                <b id="ovOfficerName">Arjun Mehta</b>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 5px;">
+                <span class="text-secondary">MSP Organization:</span>
+                <span class="mono text-cyan" id="ovOrgMSP">PoliceHQ.Org1</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 5px;">
+                <span class="text-secondary">Confidential Access:</span>
+                <span id="ovConfidentialStatus" class="tag amber">Requires eSign</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding-top: 3px;">
+                <span class="text-secondary">Mobile Wi-Fi Grid:</span>
+                <span class="mono text-green">192.168.221.72:3000</span>
+              </div>
+            </div>
+            <div style="margin-top: 14px; padding: 10px; background: #08111d; border-radius: 6px; border: 1px solid var(--border); font-size: 11px;">
+              💡 <b>Mobile Access:</b> Click <b>📱 Open on Phone / QR</b> at any time to scan and control SLIDMS directly from your phone.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 2: CASE REGISTRY ================= -->
+      <section id="casesTab" class="view-tab">
+        <div class="card-header">
+          <div>
+            <h1>Investigation Case Registry</h1>
+            <p class="text-secondary">Active legal investigations, FIR numbers, assigned officers, and risk status.</p>
+          </div>
+          <button class="btn primary" onclick="openNewCaseModal()">+ Register New Case / FIR</button>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
+            <input type="text" id="caseSearchInput" class="input" placeholder="Search case ID, FIR number, or suspect title..." style="max-width: 320px;" oninput="filterCasesTable()">
+            <div style="display: flex; gap: 6px;">
+              <button class="btn" onclick="setCaseRiskFilter('ALL')">All</button>
+              <button class="btn" onclick="setCaseRiskFilter('HIGH')">High Risk</button>
+              <button class="btn" onclick="setCaseRiskFilter('ELEVATED')">Elevated</button>
+              <button class="btn" onclick="setCaseRiskFilter('NORMAL')">Normal</button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>CASE ID / FIR</th>
+                  <th>TITLE & SUMMARY</th>
+                  <th>LEAD OFFICER</th>
+                  <th>RISK STATUS</th>
+                  <th>CASE STATE</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="caseRegistryBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 3: CRYPTOGRAPHIC VAULT ================= -->
+      <section id="vaultTab" class="view-tab">
+        <div class="card-header">
+          <div>
+            <h1>Cryptographic Evidence Vault</h1>
+            <p class="text-secondary">Encrypted at-rest binary storage with live SHA-256 integrity checks and Fabric block indexing.</p>
+          </div>
+          <button class="btn primary" onclick="openUploadModal()">+ Deposit Evidence File</button>
+        </div>
+
+        <div class="grid-2-1">
+          <div class="card">
+            <div class="card-header">
+              <h2>Vault Evidence Inventory</h2>
+              <small id="vaultDocCount" class="mono text-cyan">6 Protected Records</small>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>DOC ID & FILENAME</th>
+                    <th>TYPE</th>
+                    <th>SHA-256 FINGERPRINT</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody id="vaultTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Direct File Vaulting & Hashing</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div>
+                <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Select Case</label>
+                <select id="uploadCaseSelect" class="input">
+                  <option value="CASE-2026-001">CASE-2026-001 (State v. N. Sharma)</option>
+                  <option value="CASE-2026-014">CASE-2026-014 (Operation Blue Gate)</option>
+                  <option value="CASE-2026-009">CASE-2026-009 (Biometric Identity Theft)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Document Category</label>
+                <select id="uploadDocType" class="input">
+                  <option value="FIR">First Information Report (FIR)</option>
+                  <option value="Forensic Report">Forensic Analysis Report</option>
+                  <option value="Victim Statement">Victim / Witness Statement</option>
+                  <option value="Digital Forensics">Digital Forensics Memory Dump</option>
+                  <option value="Toxicology">Chemical & Toxicology Report</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Select File</label>
+                <input type="file" id="vaultDirectFileInput" class="input" style="padding: 6px;">
+              </div>
+              <button class="btn primary" onclick="handleDirectVaultUpload()">🔒 Encrypt, Hash & Mint Fabric Block</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: LINK SURF (MULTI-DEVICE & REMOTE VERIFICATION) ================= -->
+      <section id="linkSurfTab" class="view-tab">
+        <div class="hero-banner">
+          <div>
+            <div class="tag cyan" style="margin-bottom: 6px;">REMOTE VERIFICATION GATEWAY</div>
+            <h1>Link Surf · Portable Evidence Verification</h1>
+            <p>Generate clean, portable verification deep links that work from any browser or mobile device on the Wi-Fi network.</p>
+          </div>
+          <button class="btn primary" onclick="copyCurrentSurfURL()">📋 Copy Portable Verification Link</button>
+        </div>
+
+        <div class="link-surf-search-box">
+          <input type="text" id="surfQueryInput" class="input mono" placeholder="Enter Document ID (e.g. DOC-88219), Case ID, or SHA-256 Hash to Surf..." style="font-size: 13px;">
+          <button class="btn primary" onclick="performLinkSurfSearch()">🔍 Surf & Verify</button>
+          <button class="btn" onclick="loadSampleSurf('DOC-88219')">Sample: DOC-88219</button>
+          <button class="btn" onclick="loadSampleSurf('DOC-99104')">Sample: Tampered</button>
+        </div>
+
+        <div id="linkSurfResultsContainer"></div>
+      </section>
+
+      <!-- ================= TAB 5: CONFIDENTIAL & eSIGN GATEWAY ================= -->
+      <section id="confidentialTab" class="view-tab">
+        <div class="hero-banner">
+          <div>
+            <div class="tag purple" style="margin-bottom: 6px;">ZERO-KNOWLEDGE RESTRICTED DOSSIERS</div>
+            <h1>Confidential Evidence & Digital eSign Protocol</h1>
+            <p>Sensitive victim PII, wiretap intercepts, and informant dossiers remain cryptographic ciphertext until an officer completes a verified eSign ceremony.</p>
+          </div>
+          <span class="tag green" id="esignEligibleBadge">ELIGIBLE: SENIOR SP (L5) & JUDGE (L6)</span>
+        </div>
+
+        <div id="confidentialDossierContainer"></div>
+      </section>
+
+      <!-- ================= TAB 6: HYPERLEDGER FABRIC EXPLORER ================= -->
+      <section id="fabricTab" class="view-tab">
+        <div class="card-header">
+          <div>
+            <h1>Hyperledger Fabric Blockchain Explorer</h1>
+            <p class="text-secondary">Immutable ledger blocks, cryptographic Merkle hashes, MSP endorsements, and transaction history.</p>
+          </div>
+          <button class="btn primary" onclick="refreshFabricLedger()">🔄 Refresh Ledger State</button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #08111d; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-bottom: 14px; font-size: 11px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <b>Channel:</b> <span class="mono text-cyan">channel-legal-evidence</span> &nbsp;|&nbsp; 
+            <b>Chaincode:</b> <span class="mono text-green">evidence_cc:v2.1</span>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <span class="tag blue"><span class="pulse-dot"></span> PoliceHQ.Org1MSP</span>
+            <span class="tag green"><span class="pulse-dot"></span> ForensicLab.Org2MSP</span>
+            <span class="tag red"><span class="pulse-dot"></span> Judiciary.Org3MSP</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Sequential Block Chain</h2>
+            <span class="tag cyan" id="fabricBlockCountTag">4 BLOCKS COMMITTED</span>
+          </div>
+          <div id="fabricBlocksList"></div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 7: INTEGRITY LAB ================= -->
+      <section id="verifyTab" class="view-tab">
+        <div class="card-header">
+          <div>
+            <h1>Cryptographic Integrity Lab</h1>
+            <p class="text-secondary">Client-side WebCrypto SHA-256 computation, baseline registration, and live tamper simulation.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h2>Select File to Compute Fingerprint</h2>
+              <span class="tag blue">CLIENT WEBCRYPTO SHA-256</span>
+            </div>
+            <div style="border: 2px dashed var(--border-focus); border-radius: 6px; padding: 22px; text-align: center; background: #08111d; margin-bottom: 12px;">
+              <div style="font-size: 24px; margin-bottom: 6px;">📂</div>
+              <b>Select any file to compute real-time cryptographic hash</b>
+              <p class="text-secondary" style="font-size: 11px; margin-top: 3px;">Runs completely offline inside your browser.</p>
+              <input type="file" id="labFileInput" class="input" style="margin-top: 10px; width: auto;" onchange="computeLabFileHash()">
+            </div>
+
+            <div id="labHashResultBox" style="display: none; padding: 12px; border-radius: 6px; background: var(--surface-elevated); border: 1px solid var(--border); margin-bottom: 12px;">
+              <div style="font-size: 10px; color: var(--text-secondary); margin-bottom: 3px;">Computed SHA-256 Fingerprint:</div>
+              <div class="mono text-cyan" id="labComputedHash" style="word-break: break-all; font-size: 11px;"></div>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn primary" onclick="trustLabFileBaseline()">⭐ Set as Trusted Baseline</button>
+              <button class="btn" onclick="verifyLabFileAgainstVault()">🔍 Verify Against Registry</button>
+              <button class="btn danger" onclick="simulateTamperOnDocument()">⚡ Simulate 1-Byte Tamper</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Integrity Assessment Output</h2>
+              <span class="tag green" id="labResultStatusTag">READY</span>
+            </div>
+            <div id="labAssessmentBox" style="padding: 14px; border-radius: 6px; background: #08111d; border: 1px solid var(--border); font-size: 12px; line-height: 1.6;">
+              Select a file or click <b>Simulate 1-Byte Tamper</b> to test cryptographic mismatch detection and quarantine snapshot creation.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 8: CHAIN OF CUSTODY ================= -->
+      <section id="custodyTab" class="view-tab">
+        <div class="card-header">
+          <div>
+            <h1>Chain of Custody & Evidence Transfers</h1>
+            <p class="text-secondary">Endorsed legal transfers binding parties, purpose, timestamp, and Hyperledger transaction receipts.</p>
+          </div>
+          <button class="btn primary" onclick="openCustodyModal()">+ Sign Custody Transfer</button>
+        </div>
+
+        <div class="card">
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>TIMESTAMP</th>
+                  <th>EVIDENCE ASSET</th>
+                  <th>TRANSFER (FROM → TO)</th>
+                  <th>PURPOSE</th>
+                  <th>PROOF SIGNATURE</th>
+                  <th>LEDGER STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="custodyTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 9: AUDIT CHRONICLE ================= -->
+      <section id="auditTab" class="view-tab">
+        <div class="card-header">
+          <div>
+            <h1>Append-Only Audit Chronicle</h1>
+            <p class="text-secondary">Tamper-evident legal audit log capturing every authentication, hash check, eSign, and custody handoff.</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn" onclick="exportAuditCSV()">📄 Export CSV</button>
+            <button class="btn" onclick="exportAuditJSON()">📥 Export JSON</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+            <input type="text" id="auditSearchInput" class="input" placeholder="Search actor, action, or document..." style="max-width: 300px;" oninput="filterAuditTable()">
+            <select id="auditActionFilter" class="input" style="max-width: 200px;" onchange="filterAuditTable()">
+              <option value="ALL">All Actions</option>
+              <option value="DOCUMENT_UPLOAD">Document Uploads</option>
+              <option value="DOCUMENT_VERIFY">Integrity Verifications</option>
+              <option value="TAMPER_DETECTED">Tamper Alerts</option>
+              <option value="CONFIDENTIAL_UNMASK_ESIGN">eSign Unmasking</option>
+              <option value="CUSTODY_TRANSFER">Custody Transfers</option>
+            </select>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>TIMESTAMP</th>
+                  <th>OFFICER & ROLE</th>
+                  <th>ACTION</th>
+                  <th>TARGET ASSET</th>
+                  <th>OUTCOME</th>
+                  <th>REASON / PROOF</th>
+                </tr>
+              </thead>
+              <tbody id="auditTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 10: THREAT CONSOLE ================= -->
+      <section id="threatsTab" class="view-tab">
+        <div class="card-header">
+          <div>
+            <h1>Cyber-Forensics Threat & Anomaly Console</h1>
+            <p class="text-secondary">Rule-based threat correlation, integrity quarantine alerts, and unauthorized PII query tracking.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <h2>Active Threat Incidents</h2>
+              <span class="tag red">1 HIGH PRIORITY</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="padding: 12px; background: rgba(248, 81, 73, 0.1); border-left: 3px solid var(--danger); border-radius: 0 6px 6px 0;">
+                <b class="text-red">🚨 INTEGRITY MISMATCH · SEC-241</b>
+                <p style="font-size: 11px; margin: 4px 0 8px;">Asset <code>Forensic_Report_v2.pdf</code> observed hash deviated from trusted Fabric record. Quarantined snapshot created; original vault asset remains intact.</p>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn primary" style="font-size: 10px; padding: 4px 8px;" onclick="inspectDocument('DOC-99104')">Inspect Quarantine Snapshot</button>
+                  <button class="btn" style="font-size: 10px; padding: 4px 8px;" onclick="toast('Threat resolution logged in audit chronicle')">Acknowledge Alert</button>
+                </div>
+              </div>
+
+              <div style="padding: 12px; background: rgba(210, 153, 34, 0.1); border-left: 3px solid var(--warning); border-radius: 0 6px 6px 0;">
+                <b class="text-amber">⚠️ REPEATED ZERO-KNOWLEDGE PII ACCESS ATTEMPTS</b>
+                <p style="font-size: 11px; margin: 4px 0;">3 unauthorized attempts logged from Level 3 clearance for Protected Witness Dossier. Zero-knowledge gateway enforced.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Automated Rule Engine</h2>
+              <span class="tag green">ALL POLICIES ONLINE</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 11px;">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 6px;">
+                <span>SHA-256 Hash Drift Detection Rule</span>
+                <span class="tag green">ACTIVE</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 6px;">
+                <span>Fabric Merkle Tree Root Consistency</span>
+                <span class="tag green">ACTIVE</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 6px;">
+                <span>Digital eSign Certificate Revocation (CRL)</span>
+                <span class="tag green">ACTIVE</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 6px;">
+                <span>Anomalous Evidence Export Velocity</span>
+                <span class="tag green">ACTIVE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ================= MODAL: PHONE / MOBILE QR CONNECT ================= -->
+  <div class="modal-backdrop" id="phoneModal">
+    <div class="modal-box" style="text-align: center;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <h2 style="font-size: 16px;">📱 Open SLIDMS on Your Phone</h2>
+        <span class="tag green">WI-FI LIVE</span>
+      </div>
+      <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+        Point your phone camera at the QR code below or type the link into your mobile browser (Chrome / Safari / Edge).
+      </p>
+
+      <div style="background: #ffffff; padding: 16px; border-radius: 12px; display: inline-block; box-shadow: 0 8px 30px rgba(0,0,0,0.5); margin-bottom: 16px;">
+        <img id="phoneQrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=http%3A%2F%2F192.168.221.72%3A3000%2Fsecure-legal-mvp.html" alt="Scan QR Code" style="width: 200px; height: 200px; display: block;">
+      </div>
+
+      <div style="text-align: left; background: #08111d; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+        <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 4px;">Phone Wi-Fi Network URL:</label>
+        <div style="display: flex; gap: 6px;">
+          <input type="text" id="phoneAccessUrl" class="input mono text-cyan" readonly value="http://192.168.221.72:3000/secure-legal-mvp.html" style="font-size: 12px; font-weight: 600;">
+          <button class="btn primary" onclick="copyPhoneAccessUrl()">📋 Copy</button>
+        </div>
+        <small class="text-muted" style="display: block; margin-top: 6px; font-size: 10px;">
+          ✓ Make sure your phone is connected to the same Wi-Fi network as this computer.
+        </small>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="btn primary" onclick="closePhoneModal()">Done / Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: DIGITAL eSIGN CEREMONY ================= -->
+  <div class="modal-backdrop" id="esignModal">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <h2>🖋️ Digital eSign Verification Ceremony</h2>
+        <span class="tag purple" id="modalClearanceBadge">CLEARANCE CHECK</span>
+      </div>
+      <p>Authenticate with your cryptographic digital certificate and passphrase to unlock and decrypt this confidential judicial record.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Record to Unmask</label>
+          <input type="text" id="esignRecordTitle" class="input" readonly style="background: #08111d; color: var(--accent-cyan);">
+        </div>
+
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Digital Certificate / Token</label>
+          <select id="esignCertType" class="input">
+            <option value="DSC_CLASS3">Class 3 DSC USB Token (Government PKI)</option>
+            <option value="AADHAAR_ESIGN">Aadhaar eSign 2.0 (UIDAI PKI Service)</option>
+            <option value="JUDICIAL_SEAL">Judicial Digital Seal Token (High Court of Bombay)</option>
+          </select>
+        </div>
+
+        <div style="background: #08111d; border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan);">
+          <b>DIGITAL SIGNING CHALLENGE NONCE:</b><br>
+          <span id="esignNonce">NONCE-88F9-2026</span><br>
+          <span style="font-size: 10px; color: var(--text-secondary);">Signer: <span id="esignSignerText">Arjun Mehta · Level 3</span></span>
+        </div>
+
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Cryptographic eSign Passphrase (PIN)</label>
+          <input type="password" id="esignPassphrase" class="input" placeholder="demo-sign" value="demo-sign">
+          <small class="text-muted" style="font-size: 10px; margin-top: 2px; display: block;">Use <code>demo-sign</code> for prototype verification.</small>
+        </div>
+
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Legal Purpose for Decryption</label>
+          <input type="text" id="esignPurpose" class="input" value="Official Judicial Trial Assessment & Case File Review">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px;">
+          <button class="btn" onclick="closeEsignModal()">Cancel</button>
+          <button class="btn esign-btn" onclick="submitEsignUnlock()">Sign & Decrypt Record</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: BLOCK INSPECTOR ================= -->
+  <div class="modal-backdrop" id="blockModal">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <h2 id="blockModalTitle">⛓️ Hyperledger Fabric Block Inspector</h2>
+        <span class="tag green" id="blockModalStatus">COMMITTED</span>
+      </div>
+      <p>Raw block header, transaction envelope, Merkle data hash, and peer endorsement signatures.</p>
+      
+      <div id="blockModalContent" style="background: #08111d; border: 1px solid var(--border); border-radius: 6px; padding: 14px; font-family: var(--font-mono); font-size: 11px; max-height: 350px; overflow-y: auto; color: var(--accent-cyan); white-space: pre-wrap;"></div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: 14px;">
+        <button class="btn primary" onclick="closeBlockModal()">Close Inspector</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: DOCUMENT INSPECTOR ================= -->
+  <div class="modal-backdrop" id="docModal">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <h2 id="docModalTitle">📄 Evidence Asset Metadata</h2>
+        <span class="tag green" id="docModalStatus">INTACT</span>
+      </div>
+      <p>Cryptographic fingerprint lineage, encryption vault path, and chain of custody binding.</p>
+
+      <div id="docModalDetails" style="font-size: 12px; display: flex; flex-direction: column; gap: 8px;"></div>
+
+      <div style="display: flex; justify-content: space-between; margin-top: 16px;">
+        <button class="btn" onclick="surfDocFromModal()">🌐 Surf Link & Verify</button>
+        <button class="btn primary" onclick="closeDocModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: CUSTODY TRANSFER ================= -->
+  <div class="modal-backdrop" id="custodyModal">
+    <div class="modal-box">
+      <h2>🤝 Authorize Chain of Custody Transfer</h2>
+      <p>Bind evidence fingerprint to recipient, purpose, timestamp, and Hyperledger transaction.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Select Evidence Asset</label>
+          <select id="custodyDocSelect" class="input">
+            <option value="FIR_2026_8741.pdf">FIR_2026_8741.pdf (DOC-88219)</option>
+            <option value="Forensic_Report_v2.pdf">Forensic_Report_v2.pdf (DOC-99104)</option>
+            <option value="Evidence_Record_17.zip">Evidence_Record_17.zip (DOC-44012)</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Recipient Unit / Officer</label>
+          <input type="text" id="custodyRecipient" class="input" placeholder="e.g., Central Forensic Science Laboratory (CFSL)" value="State Forensic Science Laboratory, Mumbai">
+        </div>
+
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Purpose of Movement</label>
+          <input type="text" id="custodyPurposeInput" class="input" placeholder="e.g., Advanced chemical toxicology examination" value="Cryptographic Hash Verification & Formal Court Submission">
+        </div>
+
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Signer Passphrase</label>
+          <input type="password" id="custodySignPass" class="input" placeholder="demo-sign" value="demo-sign">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px;">
+          <button class="btn" onclick="closeCustodyModal()">Cancel</button>
+          <button class="btn primary" onclick="submitCustodyTransfer()">Endorse & Commit to Fabric</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: REGISTER CASE ================= -->
+  <div class="modal-backdrop" id="newCaseModal">
+    <div class="modal-box">
+      <h2>📁 Register New Legal Investigation</h2>
+      <p>Create an active case workspace and mint initial Hyperledger registration block.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Case Reference ID</label>
+          <input type="text" id="newCaseId" class="input mono" value="CASE-2026-022">
+        </div>
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">FIR Number</label>
+          <input type="text" id="newCaseFir" class="input mono" placeholder="e.g., FIR 2026/9902" value="FIR 2026/9902">
+        </div>
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Case Title</label>
+          <input type="text" id="newCaseTitle" class="input" placeholder="e.g., State v. Cyber Syndicate B" value="State v. Offshore Payment Syndicate">
+        </div>
+        <div>
+          <label style="font-size: 10px; color: var(--text-secondary); display: block; margin-bottom: 3px;">Synopsis / Allegation</label>
+          <textarea id="newCaseDesc" class="input" rows="3" placeholder="Brief summary...">Unauthorized API key extraction and automated laundering of cryptocurrency assets.</textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px;">
+          <button class="btn" onclick="closeNewCaseModal()">Cancel</button>
+          <button class="btn primary" onclick="submitNewCase()">Register Case</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Box -->
+  <div class="toast-container" id="toastBox"></div>
+
+  <!-- ================= APPLICATION JAVASCRIPT ================= -->
+  <script>
+    const RANKS = {
+      "io-001": { id: "io-001", name: "Arjun Mehta", role: "Investigating Officer", badge: "IND-POL-8841", clearance: 3, org: "PoliceHQ.Org1", avatar: "AM", designation: "Inspector / Lead IO" },
+      "forensic-001": { id: "forensic-001", name: "Dr. Priya Iyer", role: "Chief Forensic Examiner", badge: "CFSL-DEL-209", clearance: 4, org: "ForensicLab.Org2", avatar: "PI", designation: "Forensic Director" },
+      "prosecutor-001": { id: "prosecutor-001", name: "Adv. Rajesh Sharma", role: "Public Prosecutor", badge: "BAR-MAH-7714", clearance: 4, org: "StateProsecution.Org1", avatar: "RS", designation: "State Counsel" },
+      "senior-001": { id: "senior-001", name: "DIG Asha Rao, IPS", role: "Senior Authority", badge: "IPS-MAH-1044", clearance: 5, org: "PoliceHQ.Org1", avatar: "AR", designation: "Deputy Inspector General" },
+      "judge-001": { id: "judge-001", name: "Justice R.K. Verma", role: "Principal Sessions Judge", badge: "JUD-MAH-0012", clearance: 6, org: "Judiciary.Org3", avatar: "RV", designation: "Sessions Court Judge" },
+      "admin-001": { id: "admin-001", name: "Sanjay Deshmukh", role: "Security Architect", badge: "SEC-ADM-9901", clearance: 5, org: "SystemAdmin.Org0", avatar: "SD", designation: "Node Administrator" }
+    };
+
+    let currentUser = null;
+    let selectedRecordForEsign = null;
+    let labFileHash = null;
+    let labFileName = null;
+    let activeCaseRiskFilter = 'ALL';
+    let currentInspectedDoc = null;
+
+    const DB = {
+      getCases: () => JSON.parse(localStorage.getItem('slidms_cases')) || [
+        { id: "CASE-2026-001", fir: "FIR 2026/8741", title: "State v. N. Sharma", desc: "Multi-crore banking API manipulation and illegal wire transfers.", officer: "Arjun Mehta", risk: "HIGH", status: "ACTIVE" },
+        { id: "CASE-2026-014", fir: "FIR 2026/8122", title: "Operation Blue Gate", desc: "Encrypted VoIP syndicate intercept and digital evidence.", officer: "Dr. Priya Iyer", risk: "NORMAL", status: "SEALED" },
+        { id: "CASE-2026-009", fir: "FIR 2026/7808", title: "Biometric Identity Theft", desc: "Forged digital certificates and unauthorized credential generation.", officer: "Arjun Mehta", risk: "ELEVATED", status: "PENDING_REVIEW" }
+      ],
+      setCases: (c) => localStorage.setItem('slidms_cases', JSON.stringify(c)),
+
+      getDocs: () => JSON.parse(localStorage.getItem('slidms_docs')) || [
+        { id: "DOC-88219", case_id: "CASE-2026-001", name: "FIR_2026_8741.pdf", type: "FIR", hash: "a81f79b1d83499c2e4f09c3b881249bfa81f79b1d83499c2e4f09c3b881249bf", status: "INTACT", block: 1, created: "2026-08-30" },
+        { id: "DOC-99104", case_id: "CASE-2026-001", name: "Forensic_Report_v2.pdf", type: "Forensic Report", hash: "c3d12548b9a4f210b7269a0e118944ecc3d12548b9a4f210b7269a0e118944ec", status: "TAMPERED", block: 2, created: "2026-08-31" },
+        { id: "DOC-44012", case_id: "CASE-2026-001", name: "Evidence_Record_17.zip", type: "Digital Forensics", hash: "7f4c9103de482b819f6a11394c8b00517f4c9103de482b819f6a11394c8b0051", status: "INTACT", block: 3, created: "2026-08-31" }
+      ],
+      setDocs: (d) => localStorage.setItem('slidms_docs', JSON.stringify(d)),
+
+      getBlocks: () => JSON.parse(localStorage.getItem('slidms_blocks')) || [
+        { block_num: 0, channel: "channel-legal-evidence", prev_hash: "0000000000000000000000000000000000000000000000000000000000000000", block_hash: "3a91b2c48891001ff82149b1049281a93a91b2c48891001ff82149b1049281a9", tx_type: "GENESIS_CONFIG", endorsers: ["PoliceHQ.Org1MSP", "ForensicLab.Org2MSP", "Judiciary.Org3MSP"], time: "2026-08-30 09:00:00", data: { channel: "channel-legal-evidence", status: "GENESIS_COMMITTED" } },
+        { block_num: 1, channel: "channel-legal-evidence", prev_hash: "3a91b2c48891001ff82149b1049281a93a91b2c48891001ff82149b1049281a9", block_hash: "d88192a0149bb410948c21a488b1940cd88192a0149bb410948c21a488b1940c", tx_type: "DOCUMENT_REGISTERED", endorsers: ["PoliceHQ.Org1MSP", "ForensicLab.Org2MSP"], time: "2026-08-30 10:42:17", data: { doc_id: "DOC-88219", name: "FIR_2026_8741.pdf", hash: "a81f79b1d83499c2e4f09c3b881249bfa81f79b1d83499c2e4f09c3b881249bf" } },
+        { block_num: 2, channel: "channel-legal-evidence", prev_hash: "d88192a0149bb410948c21a488b1940cd88192a0149bb410948c21a488b1940c", block_hash: "f1048b2910488c91a02938148c90192bf1048b2910488c91a02938148c90192b", tx_type: "TAMPER_INCIDENT_COMMITTED", endorsers: ["PoliceHQ.Org1MSP", "Judiciary.Org3MSP"], time: "2026-08-31 10:31:44", data: { doc_id: "DOC-99104", incident: "SEC-241", observed_mismatch: "c3d12548b9a4..." } },
+        { block_num: 3, channel: "channel-legal-evidence", prev_hash: "f1048b2910488c91a02938148c90192bf1048b2910488c91a02938148c90192b", block_hash: "88914ba091823901a8849102498b109288914ba091823901a8849102498b1092", tx_type: "CUSTODY_TRANSFER_ENDORSED", endorsers: ["PoliceHQ.Org1MSP", "ForensicLab.Org2MSP"], time: "2026-08-31 11:20:05", data: { doc: "Evidence_Record_17.zip", from: "Scene Unit 04", to: "Dr. Priya Iyer" } }
+      ],
+      setBlocks: (b) => localStorage.setItem('slidms_blocks', JSON.stringify(b)),
+
+      getAudits: () => JSON.parse(localStorage.getItem('slidms_audits')) || [
+        { time: "10:42:17 IST", actor: "Arjun Mehta (IO)", action: "DOCUMENT_UPLOAD", object: "FIR_2026_8741.pdf", result: "SUCCESS", reason: "Minted Fabric Block #1" },
+        { time: "10:31:44 IST", actor: "Dr. Priya Iyer (Forensic)", action: "TAMPER_DETECTED", object: "Forensic_Report_v2.pdf", result: "ALERT", reason: "Observed SHA256 mismatch; preserved SEC-241" },
+        { time: "09:55:02 IST", actor: "Arjun Mehta (IO)", action: "CUSTODY_TRANSFER", object: "Evidence Record 17", result: "SIGNED", reason: "Handoff to Forensic Lab" }
+      ],
+      setAudits: (a) => localStorage.setItem('slidms_audits', JSON.stringify(a)),
+
+      getCustody: () => JSON.parse(localStorage.getItem('slidms_custody')) || [
+        { time: "30 Aug · 11:20", doc: "Evidence_Record_17.zip", from: "Scene Unit 04", to: "Dr. Priya Iyer", purpose: "Laboratory Digital Examination", proof: "CUSTODY-SIG-88F901", status: "COMMITTED" },
+        { time: "30 Aug · 16:40", doc: "FIR_2026_8741.pdf", from: "Arjun Mehta", to: "Evidence Vault", purpose: "Cryptographic Archival", proof: "CUSTODY-SIG-33A192", status: "COMMITTED" }
+      ],
+      setCustody: (c) => localStorage.setItem('slidms_custody', JSON.stringify(c))
+    };
+
+    const CONFIDENTIAL_RECORDS = [
+      {
+        id: "CONF-001",
+        title: "Protected Whistleblower & Witness Identity Dossier",
+        classification: "TOP SECRET // WITNESS PROTECTION",
+        required_clearance: 5,
+        masked: {
+          code: "WIT-ALPHA-92",
+          name: "S•••••• K••••",
+          address: "Sector ••, Confidential Safehouse #4, Mumbai",
+          id: "AADHAAR ••••-••••-8821",
+          phone: "+91 98••• ••621",
+          threat: "GRADE A - EXTREME",
+          summary: "Whistleblower provided encrypted offshore account ledger."
+        },
+        decrypted: {
+          code: "WIT-ALPHA-92",
+          name: "Siddharth Kulshrestha",
+          address: "Flat 804, Building 12-B, Sagarika Enclave, Worli Seaface, Mumbai 400018",
+          id: "AADHAAR 8291-3304-8821",
+          phone: "+91 98201 44621",
+          threat: "GRADE A - EXTREME",
+          summary: "Whistleblower provided full decrypted memory dump confirming illicit transaction ledger routed through Swiss-Mauritius payment hub on 14 Aug 2026."
+        },
+        unlocked: false
+      },
+      {
+        id: "CONF-002",
+        title: "Restricted Forensic Toxicology & Wiretap Intercept Report",
+        classification: "RESTRICTED FORENSIC INTELLIGENCE",
+        required_clearance: 4,
+        masked: {
+          sample: "TOX-2026-881",
+          victim: "V-2026-09",
+          imei: "8644•••••••••••",
+          calls: "14 encrypted VoIP calls intercepted",
+          tox_finding: "Synthetic opioid compound detected at •.• mg/L in serum sample."
+        },
+        decrypted: {
+          sample: "TOX-2026-881",
+          victim: "Rahul Mehra (Deceased / Key Accused Associate)",
+          imei: "864402049182391",
+          calls: "14 VoIP encrypted calls routed via IP 194.26.29.112 (Zurich node) directly to primary suspect terminal.",
+          tox_finding: "Synthetic Fentanyl analog (0.42 mg/L) detected in serum sample. Confirmed lethal dose administered prior to digital data wipe."
+        },
+        unlocked: false
+      }
+    ];
+
+    const $ = id => document.getElementById(id);
+    function toast(msg, isError = false) {
+      const t = document.createElement('div');
+      t.className = 'toast' + (isError ? ' error' : '');
+      t.innerHTML = (isError ? '⚠️ ' : '✓ ') + msg;
+      $('toastBox').appendChild(t);
+      setTimeout(() => t.remove(), 3500);
+    }
+
+    function updateClock() {
+      const now = new Date();
+      $('clockDisplay').textContent = now.toLocaleTimeString('en-IN', { hour12: false }) + ' IST';
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function toggleMobileSidebar() {
+      const s = $('mainSidebar');
+      const b = $('sidebarBackdrop');
+      s.classList.toggle('open');
+      b.classList.toggle('show');
+    }
+
+    // Phone / QR Modal functions
+    function openPhoneModal() {
+      const currentPath = window.location.pathname.includes('secure-legal') ? '/secure-legal-mvp.html' : '/';
+      const phoneUrl = `http://192.168.221.72:3000${currentPath}`;
+      $('phoneAccessUrl').value = phoneUrl;
+      $('phoneQrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(phoneUrl)}`;
+      $('phoneModal').classList.add('show');
+    }
+
+    function closePhoneModal() {
+      $('phoneModal').classList.remove('show');
+    }
+
+    function copyPhoneAccessUrl() {
+      const url = $('phoneAccessUrl').value;
+      navigator.clipboard.writeText(url).then(() => {
+        toast(`Phone link copied:\n${url}`);
+      }).catch(() => {
+        toast(`Phone link: ${url}`);
+      });
+    }
+
+    // Rank Authentication Logic
+    function selectRank(rankId) {
+      document.querySelectorAll('.rank-card').forEach(c => c.style.borderColor = 'var(--border)');
+      event.currentTarget.style.borderColor = 'var(--accent-cyan)';
+      $('loginUsername').value = rankId;
+    }
+
+    function performLogin() {
+      const userKey = $('loginUsername').value;
+      const pass = $('loginPassword').value;
+
+      if (pass !== 'demo123') {
+        toast('Authentication failed! Password is demo123', true);
+        return;
+      }
+
+      currentUser = RANKS[userKey] || RANKS['io-001'];
+      sessionStorage.setItem('slidms_auth', JSON.stringify(currentUser));
+      initWorkspace();
+      toast(`Authenticated as ${currentUser.name} (${currentUser.role})`);
+    }
+
+    function bypassDirect(rankId) {
+      currentUser = RANKS[rankId];
+      sessionStorage.setItem('slidms_auth', JSON.stringify(currentUser));
+      initWorkspace();
+      toast(`Signed in as ${currentUser.name}`);
+    }
+
+    function logout() {
+      sessionStorage.removeItem('slidms_auth');
+      currentUser = null;
+      $('appView').classList.remove('active');
+      $('loginView').style.display = 'flex';
+      toast('Signed out.');
+    }
+
+    function initWorkspace() {
+      $('loginView').style.display = 'none';
+      $('appView').classList.add('active');
+
+      $('sideName').textContent = currentUser.name;
+      $('sideRole').textContent = currentUser.role;
+      $('sideBadge').textContent = currentUser.badge;
+      $('sideAvatar').textContent = currentUser.avatar;
+      $('sideClearance').textContent = `Level ${currentUser.clearance}`;
+
+      $('ovOfficerName').textContent = currentUser.name;
+      $('ovOrgMSP').textContent = currentUser.org;
+      $('overviewClearanceTag').textContent = `LEVEL ${currentUser.clearance}`;
+
+      renderAllViews();
+      checkURLParamsForLinkSurf();
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+
+      const targetTab = $(tabId + 'Tab');
+      if (targetTab) targetTab.classList.add('active');
+
+      const navBtn = Array.from(document.querySelectorAll('.nav-item')).find(b => b.getAttribute('onclick')?.includes(tabId));
+      if (navBtn) navBtn.classList.add('active');
+
+      const titles = {
+        overview: "Command Overview",
+        cases: "Case Registry",
+        vault: "Cryptographic Evidence Vault",
+        linkSurf: "Link Surf Verification",
+        confidential: "Confidential & eSign",
+        fabric: "Hyperledger Fabric Explorer",
+        verify: "Integrity Lab",
+        custody: "Chain of Custody",
+        audit: "Audit Chronicle",
+        threats: "Threat Console"
+      };
+      $('activeTabName').textContent = titles[tabId] || "Workspace";
+      
+      $('mainSidebar').classList.remove('open');
+      $('sidebarBackdrop').classList.remove('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderAllViews() {
+      renderOverviewFeed();
+      renderCases();
+      renderVault();
+      renderConfidentialDossiers();
+      renderFabricBlocks();
+      renderCustody();
+      renderAuditChronicle();
+    }
+
+    function renderOverviewFeed() {
+      const audits = DB.getAudits();
+      $('overviewFeedList').innerHTML = audits.slice(0, 4).map(a => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #08111d; border-radius: 6px; border: 1px solid var(--border);">
+          <div>
+            <b>${a.object} · ${a.action}</b>
+            <div style="font-size: 10px; color: var(--text-secondary);">${a.actor} · ${a.reason}</div>
+          </div>
+          <span class="tag ${a.result === 'SUCCESS' || a.result === 'SIGNED' ? 'green' : (a.result === 'ALERT' ? 'red' : 'amber')}">${a.result}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderCases() {
+      const cases = DB.getCases();
+      const filtered = cases.filter(c => {
+        if (activeCaseRiskFilter !== 'ALL' && c.risk !== activeCaseRiskFilter) return false;
+        const q = $('caseSearchInput')?.value.toLowerCase();
+        if (q && !c.id.toLowerCase().includes(q) && !c.fir.toLowerCase().includes(q) && !c.title.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      $('caseRegistryBody').innerHTML = filtered.map(c => `
+        <tr>
+          <td><b class="mono text-cyan">${c.id}</b><br><small class="mono text-muted">${c.fir}</small></td>
+          <td><b>${c.title}</b><br><small class="text-secondary">${c.desc}</small></td>
+          <td>${c.officer}</td>
+          <td><span class="tag ${c.risk === 'HIGH' ? 'red' : (c.risk === 'ELEVATED' ? 'amber' : 'blue')}">${c.risk}</span></td>
+          <td><span class="tag green">${c.status}</span></td>
+          <td><button class="btn" style="padding: 3px 8px; font-size: 10px;" onclick="surfCase('${c.id}')">🌐 Link Surf</button></td>
+        </tr>
+      `).join('');
+      $('metricCases').textContent = cases.length;
+    }
+
+    function filterCasesTable() { renderCases(); }
+    function setCaseRiskFilter(filter) { activeCaseRiskFilter = filter; renderCases(); }
+
+    function renderVault() {
+      const docs = DB.getDocs();
+      $('vaultTableBody').innerHTML = docs.map(d => `
+        <tr>
+          <td><b class="mono text-cyan">${d.id}</b><br><span>${d.name}</span></td>
+          <td><span class="tag blue">${d.type}</span></td>
+          <td class="mono" style="font-size: 10px; color: #8bb2dc;">${d.hash.slice(0, 16)}...${d.hash.slice(-8)}</td>
+          <td><span class="tag ${d.status === 'INTACT' ? 'green' : 'red'}">${d.status}</span></td>
+          <td style="display: flex; gap: 6px;">
+            <button class="btn" style="padding: 2px 6px; font-size: 10px;" onclick="inspectDocument('${d.id}')">Inspect</button>
+            <button class="btn primary" style="padding: 2px 6px; font-size: 10px;" onclick="loadSampleSurf('${d.id}')">🌐 Surf</button>
+          </td>
+        </tr>
+      `).join('');
+      $('metricDocs').textContent = docs.length;
+      $('vaultDocCount').textContent = `${docs.length} Protected Records`;
+    }
+
+    function checkURLParamsForLinkSurf() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const surfId = urlParams.get('surf') || urlParams.get('verify') || urlParams.get('link_surf');
+      if (surfId) {
+        switchTab('linkSurf');
+        $('surfQueryInput').value = surfId;
+        performLinkSurfSearch();
+      }
+    }
+
+    function copyCurrentSurfURL() {
+      const query = $('surfQueryInput').value.trim() || 'DOC-88219';
+      const cleanUrl = window.location.origin + window.location.pathname + '?surf=' + encodeURIComponent(query);
+      navigator.clipboard.writeText(cleanUrl).then(() => {
+        toast(`Link Surf URL copied! Shareable to any device:\n${cleanUrl}`);
+      }).catch(() => {
+        toast(`Shareable URL: ${cleanUrl}`);
+      });
+    }
+
+    function loadSampleSurf(id) {
+      switchTab('linkSurf');
+      $('surfQueryInput').value = id;
+      performLinkSurfSearch();
+    }
+
+    function surfCase(caseId) {
+      switchTab('linkSurf');
+      $('surfQueryInput').value = caseId;
+      performLinkSurfSearch();
+    }
+
+    function performLinkSurfSearch() {
+      const query = $('surfQueryInput').value.trim();
+      const docs = DB.getDocs();
+      const cases = DB.getCases();
+      const container = $('linkSurfResultsContainer');
+
+      if (!query) {
+        toast('Please enter a Document ID, Case ID, or SHA-256 hash', true);
+        return;
+      }
+
+      const docMatch = docs.find(d => d.id.toLowerCase() === query.toLowerCase() || d.name.toLowerCase() === query.toLowerCase() || d.hash.toLowerCase().includes(query.toLowerCase()));
+      const caseMatch = cases.find(c => c.id.toLowerCase() === query.toLowerCase() || c.fir.toLowerCase().includes(query.toLowerCase()));
+
+      if (docMatch) {
+        const isIntact = docMatch.status === 'INTACT';
+        container.innerHTML = `
+          <div class="passport-card">
+            <div class="passport-header">
+              <div>
+                <span class="tag cyan">OFFICIAL VERIFIED EVIDENCE PASSPORT</span>
+                <h2 style="font-size: 16px; margin-top: 6px;">${docMatch.name}</h2>
+                <small class="mono text-muted">ID: ${docMatch.id} · Associated Case: ${docMatch.case_id}</small>
+              </div>
+              <span class="tag ${isIntact ? 'green' : 'red'}" style="font-size: 11px;">
+                ${isIntact ? '✓ INTEGRITY VERIFIED (INTACT)' : '🚨 TAMPER DETECTED (QUARANTINED)'}
+              </span>
+            </div>
+
+            <div class="grid-2" style="gap: 12px; font-size: 12px; margin-bottom: 14px;">
+              <div><span class="text-secondary">Cryptographic Hash (SHA-256):</span><br><span class="mono text-cyan" style="word-break: break-all; font-size: 11px;">${docMatch.hash}</span></div>
+              <div><span class="text-secondary">Hyperledger Block Number:</span><br><b class="mono text-green">Block #${docMatch.block} (Committed)</b></div>
+              <div><span class="text-secondary">Channel Consensus:</span><br><span class="mono">channel-legal-evidence (Org1 & Org2 Endorsed)</span></div>
+              <div><span class="text-secondary">Vault Lineage:</span><br><span class="mono text-secondary">vault://${docMatch.case_id}/${docMatch.id}/v1</span></div>
+            </div>
+
+            <div style="background: #08111d; border: 1px solid var(--border); border-radius: 6px; padding: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <b style="font-size: 11px;">Remote Portable Verification Link:</b><br>
+                <span class="mono text-cyan" style="font-size: 10px;">${window.location.origin + window.location.pathname}?surf=${docMatch.id}</span>
+              </div>
+              <button class="btn primary" style="font-size: 11px;" onclick="copyCurrentSurfURL()">📋 Copy Deep Link</button>
+            </div>
+          </div>
+        `;
+        logAudit('LINK_SURF_VERIFY', docMatch.id, isIntact ? 'SUCCESS' : 'ALERT', `Remote query: ${query}`);
+        toast(`Link Surf retrieved record for ${docMatch.id}`);
+      } else if (caseMatch) {
+        container.innerHTML = `
+          <div class="passport-card">
+            <div class="passport-header">
+              <div>
+                <span class="tag blue">OFFICIAL CASE REGISTRY PASSPORT</span>
+                <h2 style="font-size: 16px; margin-top: 6px;">${caseMatch.title}</h2>
+                <small class="mono text-muted">${caseMatch.id} · ${caseMatch.fir}</small>
+              </div>
+              <span class="tag green">${caseMatch.status}</span>
+            </div>
+            <p style="font-size: 12px; margin-bottom: 12px;">${caseMatch.desc}</p>
+            <div class="grid-2" style="font-size: 11px;">
+              <div><span class="text-secondary">Lead Investigator:</span> <b>${caseMatch.officer}</b></div>
+              <div><span class="text-secondary">Risk Level:</span> <span class="tag ${caseMatch.risk === 'HIGH' ? 'red' : 'blue'}">${caseMatch.risk}</span></div>
+            </div>
+          </div>
+        `;
+        toast(`Link Surf retrieved case ${caseMatch.id}`);
+      } else {
+        container.innerHTML = `
+          <div class="card" style="text-align: center; padding: 30px;">
+            <div style="font-size: 26px; margin-bottom: 8px;">🔎</div>
+            <h3>No Evidence Found for "${query}"</h3>
+            <p class="text-secondary" style="font-size: 12px; margin-top: 4px;">Check the Document ID, Case ID, or SHA-256 fingerprint and try again.</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderConfidentialDossiers() {
+      const container = $('confidentialDossierContainer');
+      container.innerHTML = CONFIDENTIAL_RECORDS.map(rec => {
+        return `
+          <div class="confidential-card ${rec.unlocked ? 'unlocked' : ''}">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <span class="tag ${rec.unlocked ? 'green' : 'purple'}">${rec.classification}</span>
+                <h2 style="font-size: 14px; margin-top: 4px;">${rec.title}</h2>
+                <small class="mono text-secondary">Record ID: ${rec.id} · Required Clearance: Level ${rec.required_clearance}</small>
+              </div>
+              <div>
+                ${rec.unlocked ? `
+                  <button class="btn danger" style="padding: 3px 8px; font-size: 10px;" onclick="relockConfidentialRecord('${rec.id}')">🔒 Re-Lock Dossier</button>
+                ` : `
+                  <button class="btn esign-btn" onclick="openEsignCeremony('${rec.id}')">🖋️ Initiate eSign Ceremony</button>
+                `}
+              </div>
+            </div>
+
+            ${!rec.unlocked ? `
+              <div style="background: rgba(0,0,0,0.25); border: 1px dashed rgba(163, 113, 247, 0.4); border-radius: 6px; padding: 14px; font-size: 11px;">
+                <div style="color: var(--warning); margin-bottom: 6px;">🔒 <b>ZERO-KNOWLEDGE RESTRICTED CIPHERTEXT VIEW</b></div>
+                <div class="grid-2" style="gap: 6px;">
+                  <div><span class="text-secondary">Code:</span> <span class="masked-text">${rec.masked.code || rec.masked.sample}</span></div>
+                  <div><span class="text-secondary">Identity:</span> <span class="masked-text">${rec.masked.name || rec.masked.victim}</span></div>
+                  <div><span class="text-secondary">Location:</span> <span class="masked-text">${rec.masked.address || rec.masked.calls}</span></div>
+                  <div><span class="text-secondary">ID / IMEI:</span> <span class="masked-text">${rec.masked.id || rec.masked.imei}</span></div>
+                </div>
+              </div>
+            ` : `
+              <div class="watermark-overlay">
+                <div class="watermark-stamp">CONFIDENTIAL JUDICIAL DECRYPTION · ESIGN VERIFIED</div>
+                <div style="color: var(--accent-cyan); margin-bottom: 6px;">🔓 <b>DECRYPTED JUDICIAL EVIDENCE DOSSIER</b></div>
+                <div class="grid-2" style="gap: 8px; font-size: 12px;">
+                  <div><span class="text-secondary">Subject Name:</span> <b class="text-green">${rec.decrypted.name || rec.decrypted.victim}</b></div>
+                  <div><span class="text-secondary">National ID / IMEI:</span> <span class="mono text-cyan">${rec.decrypted.id || rec.decrypted.imei}</span></div>
+                  <div style="grid-column: span 2;"><span class="text-secondary">Location / Source:</span> <span>${rec.decrypted.address || rec.decrypted.calls}</span></div>
+                  <div style="grid-column: span 2;"><span class="text-secondary">Confidential Intelligence:</span> <p style="margin-top: 3px; color: #d0f4ff; font-size: 11px;">${rec.decrypted.summary || rec.decrypted.tox_finding}</p></div>
+                </div>
+              </div>
+            `}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openEsignCeremony(recordId) {
+      selectedRecordForEsign = CONFIDENTIAL_RECORDS.find(r => r.id === recordId);
+      if (!selectedRecordForEsign) return;
+
+      $('esignRecordTitle').value = `${selectedRecordForEsign.id} - ${selectedRecordForEsign.title}`;
+      $('modalClearanceBadge').textContent = `REQ: LEVEL ${selectedRecordForEsign.required_clearance}`;
+      $('esignSignerText').textContent = `${currentUser.name} (${currentUser.role}) · Clearance L${currentUser.clearance}`;
+      $('esignNonce').textContent = `NONCE-${Math.random().toString(36).slice(2, 8).toUpperCase()}-${Date.now().toString().slice(-4)}`;
+      $('esignPassphrase').value = 'demo-sign';
+      $('esignModal').classList.add('show');
+    }
+
+    function closeEsignModal() {
+      $('esignModal').classList.remove('show');
+      selectedRecordForEsign = null;
+    }
+
+    function submitEsignUnlock() {
+      const pin = $('esignPassphrase').value;
+      if (pin !== 'demo-sign') {
+        toast('eSign verification failed! PIN must be demo-sign', true);
+        return;
+      }
+
+      if (currentUser.clearance < selectedRecordForEsign.required_clearance) {
+        toast(`Access Denied! Officer clearance (L${currentUser.clearance}) below required (L${selectedRecordForEsign.required_clearance})`, true);
+        logAudit('CONFIDENTIAL_UNMASK_REQUEST', selectedRecordForEsign.id, 'DENIED', `Clearance L${currentUser.clearance} insufficient`);
+        closeEsignModal();
+        return;
+      }
+
+      mintFabricBlock('CONFIDENTIAL_UNMASK_ESIGN', {
+        record_id: selectedRecordForEsign.id,
+        signer: currentUser.badge,
+        cert: $('esignCertType').value,
+        purpose: $('esignPurpose').value
+      });
+
+      selectedRecordForEsign.unlocked = true;
+      logAudit('CONFIDENTIAL_UNMASK_ESIGN', selectedRecordForEsign.id, 'SUCCESS', `Decrypted via ${$('esignCertType').value}`);
+      
+      closeEsignModal();
+      renderConfidentialDossiers();
+      toast('eSign ceremony verified! Dossier decrypted with Judicial Watermark.');
+    }
+
+    function relockConfidentialRecord(recordId) {
+      const rec = CONFIDENTIAL_RECORDS.find(r => r.id === recordId);
+      if (rec) {
+        rec.unlocked = false;
+        renderConfidentialDossiers();
+        toast(`Record ${recordId} re-locked under zero-knowledge encryption.`);
+      }
+    }
+
+    function renderFabricBlocks() {
+      const blocks = DB.getBlocks();
+      $('fabricBlocksList').innerHTML = blocks.map(b => `
+        <div class="block-card" onclick="openBlockInspector(${b.block_num})">
+          <div class="block-card-header">
+            <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--accent-cyan); display: flex; align-items: center; gap: 8px;">
+              <span>⛓️ BLOCK #${b.block_num}</span>
+              <span class="tag cyan">${b.tx_type}</span>
+            </div>
+            <span class="mono text-muted" style="font-size: 10px;">${b.time}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 100px 1fr; gap: 3px 10px; font-size: 11px; margin: 4px 0;">
+            <span class="text-muted">Block Hash:</span>
+            <span class="mono text-green">${b.block_hash.slice(0, 32)}...</span>
+            <span class="text-muted">Prev Hash:</span>
+            <span class="mono text-secondary">${b.prev_hash.slice(0, 32)}...</span>
+            <span class="text-muted">Endorsers:</span>
+            <span>${b.endorsers.map(e => `<span class="tag blue" style="font-size: 8px; margin-right: 4px;">${e}</span>`).join('')}</span>
+          </div>
+        </div>
+      `).join('');
+      $('metricBlocks').textContent = blocks.length;
+      $('fabricBlockCountTag').textContent = `${blocks.length} BLOCKS COMMITTED`;
+    }
+
+    function refreshFabricLedger() {
+      renderFabricBlocks();
+      toast('Fabric blockchain ledger state synchronized.');
+    }
+
+    function openBlockInspector(blockNum) {
+      const blocks = DB.getBlocks();
+      const b = blocks.find(x => x.block_num === blockNum);
+      if (!b) return;
+
+      $('blockModalTitle').textContent = `⛓️ Hyperledger Fabric Block #${b.block_num}`;
+      $('blockModalContent').textContent = JSON.stringify(b, null, 2);
+      $('blockModal').classList.add('show');
+    }
+
+    function closeBlockModal() { $('blockModal').classList.remove('show'); }
+
+    function inspectDocument(docId) {
+      const docs = DB.getDocs();
+      const d = docs.find(x => x.id === docId);
+      if (!d) return;
+
+      currentInspectedDoc = d;
+      $('docModalTitle').textContent = `📄 ${d.name}`;
+      $('docModalStatus').className = 'tag ' + (d.status === 'INTACT' ? 'green' : 'red');
+      $('docModalStatus').textContent = d.status;
+
+      $('docModalDetails').innerHTML = `
+        <div><span class="text-secondary">Document ID:</span> <b class="mono text-cyan">${d.id}</b></div>
+        <div><span class="text-secondary">Case Assignment:</span> <b class="mono">${d.case_id}</b></div>
+        <div><span class="text-secondary">Document Type:</span> <span class="tag blue">${d.type}</span></div>
+        <div><span class="text-secondary">SHA-256 Cryptographic Hash:</span><br><span class="mono text-cyan" style="word-break: break-all; font-size: 11px;">${d.hash}</span></div>
+        <div><span class="text-secondary">Committed on Fabric Block:</span> <span class="mono text-green">Block #${d.block}</span></div>
+        <div><span class="text-secondary">Vault Encryption Status:</span> <span class="mono text-green">AES-256 Fernet Ciphertext</span></div>
+      `;
+      $('docModal').classList.add('show');
+    }
+
+    function closeDocModal() { $('docModal').classList.remove('show'); }
+
+    function surfDocFromModal() {
+      if (currentInspectedDoc) {
+        closeDocModal();
+        loadSampleSurf(currentInspectedDoc.id);
+      }
+    }
+
+    async function computeLabFileHash() {
+      const file = $('labFileInput').files[0];
+      if (!file) return;
+
+      labFileName = file.name;
+      const buffer = await file.arrayBuffer();
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      labFileHash = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      $('labComputedHash').textContent = labFileHash;
+      $('labHashResultBox').style.display = 'block';
+      $('labAssessmentBox').innerHTML = `
+        <b>File Loaded:</b> ${file.name} (${(file.size / 1024).toFixed(1)} KB)<br>
+        <b>SHA-256 Fingerprint:</b> <span class="mono text-cyan">${labFileHash}</span><br><br>
+        Click <b>Set as Trusted Baseline</b> or <b>Verify Against Registry</b>.
+      `;
+      toast('Computed WebCrypto SHA-256 hash');
+    }
+
+    function trustLabFileBaseline() {
+      if (!labFileHash) return toast('Please choose a file first', true);
+
+      const docs = DB.getDocs();
+      const newDoc = {
+        id: `DOC-${Math.floor(10000 + Math.random() * 90000)}`,
+        case_id: "CASE-2026-001",
+        name: labFileName,
+        type: "Evidence File",
+        hash: labFileHash,
+        status: "INTACT",
+        block: DB.getBlocks().length,
+        created: new Date().toISOString().slice(0, 10)
+      };
+      docs.unshift(newDoc);
+      DB.setDocs(docs);
+
+      mintFabricBlock('DOCUMENT_BASELINE_REGISTERED', { doc_id: newDoc.id, name: labFileName, hash: labFileHash });
+      logAudit('DOCUMENT_BASELINE_CREATED', labFileName, 'SUCCESS', `Registered hash ${labFileHash.slice(0, 12)}...`);
+
+      renderVault();
+      $('labResultStatusTag').className = 'tag green';
+      $('labResultStatusTag').textContent = 'BASELINE REGISTERED';
+      $('labAssessmentBox').innerHTML = `<b class="text-green">✓ Trusted Baseline Registered to Fabric Ledger</b><br>Hash: <span class="mono text-cyan">${labFileHash}</span>`;
+      toast('Baseline saved and minted to Hyperledger Fabric!');
+    }
+
+    function verifyLabFileAgainstVault() {
+      if (!labFileHash) return toast('Please choose a file first', true);
+
+      const docs = DB.getDocs();
+      const matched = docs.find(d => d.name === labFileName);
+
+      if (!matched) {
+        $('labResultStatusTag').className = 'tag amber';
+        $('labResultStatusTag').textContent = 'NO BASELINE';
+        $('labAssessmentBox').innerHTML = `<b class="text-amber">⚠️ Unregistered Evidence File</b><br>No prior baseline found for "${labFileName}". Register as baseline first.`;
+        return;
+      }
+
+      if (matched.hash === labFileHash) {
+        $('labResultStatusTag').className = 'tag green';
+        $('labResultStatusTag').textContent = 'INTEGRITY MATCH';
+        $('labAssessmentBox').innerHTML = `
+          <b class="text-green">✓ 100% Cryptographic Match Confirmed</b><br>
+          Observed file fingerprint exactly matches trusted Fabric ledger record.<br>
+          <span class="mono text-cyan">${labFileHash}</span>
+        `;
+        logAudit('DOCUMENT_VERIFY', labFileName, 'SUCCESS', 'SHA-256 matched trusted metadata');
+        toast('Integrity confirmed against ledger!');
+      } else {
+        $('labResultStatusTag').className = 'tag red';
+        $('labResultStatusTag').textContent = 'TAMPER DETECTED';
+        $('labAssessmentBox').innerHTML = `
+          <b class="text-red">🚨 CRITICAL INTEGRITY MISMATCH</b><br>
+          Observed hash differs from trusted baseline!<br>
+          <b>Trusted:</b> <span class="mono text-green">${matched.hash.slice(0, 24)}...</span><br>
+          <b>Observed:</b> <span class="mono text-red">${labFileHash.slice(0, 24)}...</span>
+        `;
+        mintFabricBlock('TAMPER_DETECTED', { doc_id: matched.id, observed: labFileHash });
+        logAudit('TAMPER_DETECTED', labFileName, 'ALERT', 'Hash drift detected; alert SEC-242 created');
+        toast('Tamper detected! Quarantine alert raised.', true);
+      }
+    }
+
+    function simulateTamperOnDocument() {
+      const docs = DB.getDocs();
+      const target = docs[0];
+      if (!target) return;
+
+      const tamperedHash = "ff9019a8bc449120914c9901823901a" + Math.random().toString(36).slice(2, 10);
+      target.status = 'TAMPERED';
+      DB.setDocs(docs);
+
+      mintFabricBlock('TAMPER_DETECTED', { doc_id: target.id, simulated_tamper: tamperedHash });
+      logAudit('TAMPER_DETECTED', target.name, 'ALERT', 'Simulated byte perturbation triggered tamper alert SEC-242');
+
+      $('labResultStatusTag').className = 'tag red';
+      $('labResultStatusTag').textContent = 'TAMPER DETECTED';
+      $('labAssessmentBox').innerHTML = `
+        <b class="text-red">🚨 SIMULATED TAMPER INCIDENT TRIGGERED</b><br>
+        Asset: <b>${target.name}</b><br>
+        Trusted Hash: <span class="mono text-green">${target.hash.slice(0, 24)}...</span><br>
+        Observed Tampered: <span class="mono text-red">${tamperedHash.slice(0, 24)}...</span><br><br>
+        <i>Quarantine snapshot SEC-242 minted to Fabric ledger.</i>
+      `;
+      renderVault();
+      toast('Tamper simulation executed! Quarantined snapshot created.', true);
+    }
+
+    async function handleDirectVaultUpload() {
+      const fileInput = $('vaultDirectFileInput');
+      if (!fileInput.files[0]) return toast('Please select a file to deposit', true);
+
+      const file = fileInput.files[0];
+      const buffer = await file.arrayBuffer();
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      const digest = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      const docs = DB.getDocs();
+      const newDoc = {
+        id: `DOC-${Math.floor(10000 + Math.random() * 90000)}`,
+        case_id: $('uploadCaseSelect').value,
+        name: file.name,
+        type: $('uploadDocType').value,
+        hash: digest,
+        status: "INTACT",
+        block: DB.getBlocks().length,
+        created: new Date().toISOString().slice(0, 10)
+      };
+      docs.unshift(newDoc);
+      DB.setDocs(docs);
+
+      mintFabricBlock('DOCUMENT_REGISTERED', { doc_id: newDoc.id, name: file.name, hash: digest });
+      logAudit('DOCUMENT_UPLOAD', file.name, 'SUCCESS', `Deposited in vault & minted Fabric block`);
+
+      renderVault();
+      fileInput.value = '';
+      toast(`Evidence ${file.name} encrypted and committed to Fabric!`);
+    }
+
+    function openCustodyModal() { $('custodyModal').classList.add('show'); }
+    function closeCustodyModal() { $('custodyModal').classList.remove('show'); }
+
+    function submitCustodyTransfer() {
+      if ($('custodySignPass').value !== 'demo-sign') return toast('Invalid signature passphrase (use demo-sign)', true);
+
+      const custodyList = DB.getCustody();
+      const newItem = {
+        time: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short' }) + ' · ' + new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+        doc: $('custodyDocSelect').value,
+        from: currentUser.name,
+        to: $('custodyRecipient').value || "State Forensic Laboratory",
+        purpose: $('custodyPurposeInput').value || "Official Analysis",
+        proof: `CUSTODY-SIG-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
+        status: "COMMITTED"
+      };
+      custodyList.unshift(newItem);
+      DB.setCustody(custodyList);
+
+      mintFabricBlock('CUSTODY_TRANSFER_ENDORSED', { doc: newItem.doc, to: newItem.to, proof: newItem.proof });
+      logAudit('CUSTODY_TRANSFER', newItem.doc, 'SIGNED', `Handoff to ${newItem.to}`);
+
+      renderCustody();
+      closeCustodyModal();
+      toast('Custody transfer endorsed and committed to Fabric!');
+    }
+
+    function openNewCaseModal() { $('newCaseModal').classList.add('show'); }
+    function closeNewCaseModal() { $('newCaseModal').classList.remove('show'); }
+
+    function submitNewCase() {
+      const cases = DB.getCases();
+      const newC = {
+        id: $('newCaseId').value,
+        fir: $('newCaseFir').value || "FIR 2026/9902",
+        title: $('newCaseTitle').value || "State Investigation",
+        desc: $('newCaseDesc').value || "Case under active investigation.",
+        officer: currentUser.name,
+        risk: "NORMAL",
+        status: "ACTIVE"
+      };
+      cases.unshift(newC);
+      DB.setCases(cases);
+
+      mintFabricBlock('CASE_REGISTERED', { case_id: newC.id, fir: newC.fir, lead: currentUser.badge });
+      logAudit('CASE_CREATION', newC.id, 'SUCCESS', `Registered FIR ${newC.fir}`);
+
+      renderCases();
+      closeNewCaseModal();
+      toast(`Case ${newC.id} registered and minted on Fabric!`);
+    }
+
+    function mintFabricBlock(txType, payload) {
+      const blocks = DB.getBlocks();
+      const lastBlock = blocks[0] || { block_hash: "0000000000000000000000000000000000000000000000000000000000000000", block_num: 0 };
+      const nextNum = blocks.length;
+
+      const blockHash = Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b => b.toString(16).padStart(2, '0')).join('');
+
+      const newBlock = {
+        block_num: nextNum,
+        channel: "channel-legal-evidence",
+        prev_hash: lastBlock.block_hash,
+        block_hash: blockHash,
+        tx_type: txType,
+        endorsers: [currentUser.org, "Judiciary.Org3MSP"],
+        time: new Date().toISOString().replace('T', ' ').slice(0, 19),
+        data: payload
+      };
+
+      blocks.unshift(newBlock);
+      DB.setBlocks(blocks);
+      renderFabricBlocks();
+    }
+
+    function logAudit(action, object, result, reason) {
+      const audits = DB.getAudits();
+      audits.unshift({
+        time: new Date().toLocaleTimeString('en-IN', { hour12: false }) + ' IST',
+        actor: `${currentUser.name} (${currentUser.role})`,
+        action,
+        object,
+        result,
+        reason
+      });
+      DB.setAudits(audits);
+      renderAuditChronicle();
+      renderOverviewFeed();
+    }
+
+    function renderAuditChronicle() {
+      const audits = DB.getAudits();
+      const q = $('auditSearchInput')?.value.toLowerCase();
+      const filterAction = $('auditActionFilter')?.value;
+
+      const filtered = audits.filter(a => {
+        if (filterAction && filterAction !== 'ALL' && a.action !== filterAction) return false;
+        if (q && !a.actor.toLowerCase().includes(q) && !a.action.toLowerCase().includes(q) && !a.object.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      $('auditTableBody').innerHTML = filtered.map(a => `
+        <tr>
+          <td class="mono text-muted">${a.time}</td>
+          <td><b>${a.actor}</b></td>
+          <td><span class="mono text-cyan">${a.action}</span></td>
+          <td>${a.object}</td>
+          <td><span class="tag ${a.result === 'SUCCESS' || a.result === 'SIGNED' ? 'green' : (a.result === 'ALERT' ? 'red' : 'amber')}">${a.result}</span></td>
+          <td class="text-secondary" style="font-size: 11px;">${a.reason}</td>
+        </tr>
+      `).join('');
+    }
+
+    function filterAuditTable() { renderAuditChronicle(); }
+
+    function exportAuditJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(DB.getAudits(), null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `SLIDMS_AUDIT_LOG_${Date.now()}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      toast('Audit log exported as JSON');
+    }
+
+    function exportAuditCSV() {
+      const audits = DB.getAudits();
+      let csv = "Time,Actor,Action,Object,Result,Reason\n";
+      audits.forEach(a => {
+        csv += `"${a.time}","${a.actor}","${a.action}","${a.object}","${a.result}","${a.reason}"\n`;
+      });
+      const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `SLIDMS_AUDIT_LOG_${Date.now()}.csv`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      toast('Audit log exported as CSV');
+    }
+
+    function renderCustody() {
+      const items = DB.getCustody();
+      $('custodyTableBody').innerHTML = items.map(c => `
+        <tr>
+          <td class="mono text-muted">${c.time}</td>
+          <td><b>${c.doc}</b></td>
+          <td><span class="text-cyan">${c.from}</span> → <span class="text-green">${c.to}</span></td>
+          <td>${c.purpose}</td>
+          <td><span class="mono text-purple" style="font-size: 10px;">${c.proof}</span></td>
+          <td><span class="tag green">${c.status}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedAuth = sessionStorage.getItem('slidms_auth');
+      if (savedAuth) {
+        try {
+          currentUser = JSON.parse(savedAuth);
+          initWorkspace();
+        } catch (e) {}
+      }
+    });
+  </script>
+</body>
+</html>
