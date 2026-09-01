@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Database & sensitive data
+data/*.db
+data/vault/
+*.db
+*.sqlite
+*.sqlite3
+
+# Encryption secrets / keys
+*.key
+*.pem
+*.p12
+*.pfx
+*.enc
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (if any)
+node_modules/
+
+# Test artifacts
+.pytest_cache/
+htmlcov/
+.coverage
