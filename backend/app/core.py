@@ -24,12 +24,21 @@ FERNET = Fernet(FERNET_KEY.encode() if FERNET_KEY else base64.urlsafe_b64encode(
 def utcnow():
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
+_DB_INITIALIZED = False
+
 def connection():
+    global _DB_INITIALIZED
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     VAULT_DIR.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(DB_PATH, timeout=30.0, check_same_thread=False)
-    db.execute("PRAGMA journal_mode=WAL;")
-    db.execute("PRAGMA busy_timeout=30000;")
+    try:
+        db.execute("PRAGMA journal_mode=WAL;")
+    except Exception:
+        pass
+    try:
+        db.execute("PRAGMA busy_timeout=30000;")
+    except Exception:
+        pass
     db.row_factory = sqlite3.Row
     return db
 
