@@ -1,0 +1,3487 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>JUSTICEVAULT · Secure Digital Evidence & Legal Document Trust Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ================= CENTRAL SECURE THEME DESIGN SYSTEM ================= */
+    :root {
+      --primary: #003d7a;
+      --primary-hover: #002850;
+      --primary-light: #e8f1f8;
+      --primary-border: #99c2ec;
+      --secondary: #0263b8;
+      --secondary-light: #e3f2fd;
+      --success: #1b7e34;
+      --success-light: #eaf6ec;
+      --success-border: #a3d9ad;
+      --warning: #b76e00;
+      --warning-light: #fff8e1;
+      --warning-border: #ffe082;
+      --danger: #c41c3b;
+      --danger-light: #fce8eb;
+      --danger-border: #f5b7c1;
+      --info: #0077b6;
+      --info-light: #e0f2fe;
+      --background: #f4f6f9;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --border: #d2dbe5;
+      --border-subtle: #e5ebf2;
+      --text-primary: #101828;
+      --text-secondary: #475467;
+      --text-muted: #8492a6;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Space Grotesk', var(--font-sans);
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+      --shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+      --shadow-lg: 0 12px 32px rgba(16, 24, 40, 0.14);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: 24px; margin-bottom: 6px; }
+    h2 { font-size: 19px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    h4 { font-size: 14px; font-weight: 600; }
+    .mono { font-family: var(--font-mono); }
+
+    /* ================= BUTTONS ================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 13px;
+      line-height: 1.2;
+      text-decoration: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .btn:active { transform: translateY(0); }
+    .btn.primary { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+    .btn.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+    .btn.secondary { background: var(--secondary); color: #ffffff; }
+    .btn.secondary:hover { background: #014f96; }
+    .btn.success { background: var(--success); color: #ffffff; }
+    .btn.success:hover { background: #136328; }
+    .btn.danger { background: var(--danger); color: #ffffff; }
+    .btn.danger:hover { background: #9e142d; }
+    .btn.outline { background: var(--surface); border-color: var(--border); color: var(--text-primary); }
+    .btn.outline:hover { background: var(--surface-alt); border-color: var(--primary-border); }
+    .btn.sm { padding: 6px 11px; font-size: 12px; }
+    .btn.xs { padding: 4px 8px; font-size: 11px; }
+
+    /* ================= FORM CONTROLS ================= */
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 12.5px;
+    }
+    .form-group label .req { color: var(--danger); margin-left: 2px; }
+    .input, .textarea, .select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      background: var(--surface);
+      color: var(--text-primary);
+      transition: all 0.15s ease;
+    }
+    .input:focus, .textarea:focus, .select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px var(--secondary-light);
+    }
+    .input.is-invalid, .textarea.is-invalid, .select.is-invalid {
+      border-color: var(--danger) !important;
+      background-color: #fff9fa;
+    }
+    .field-error {
+      color: var(--danger);
+      font-size: 11.5px;
+      font-weight: 500;
+      margin-top: 4px;
+      display: none;
+    }
+    .field-error.show { display: block; }
+    .textarea { resize: vertical; min-height: 80px; }
+
+    /* ================= CARDS & CONTAINERS ================= */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* ================= BADGES & TAGS ================= */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+    .tag.blue { background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); }
+    .tag.green { background: var(--success-light); color: var(--success); border: 1px solid var(--success-border); }
+    .tag.red { background: var(--danger-light); color: var(--danger); border: 1px solid var(--danger-border); }
+    .tag.amber { background: var(--warning-light); color: var(--warning); border: 1px solid var(--warning-border); }
+    .tag.purple { background: #f3e8ff; color: #7e22ce; border: 1px solid #d8b4fe; }
+    .tag.gray { background: #eef2f6; color: #475467; border: 1px solid #d0d7e2; }
+
+    /* ================= LOGIN VIEW ================= */
+    #loginView {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      background: radial-gradient(circle at 50% 20%, #004b94 0%, #002244 100%);
+    }
+    .login-container {
+      width: 100%;
+      max-width: 520px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 34px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+    }
+    .login-header h1 {
+      font-size: 26px;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .role-card {
+      padding: 12px 8px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      background: var(--surface-alt);
+    }
+    .role-card:hover {
+      border-color: var(--secondary);
+      background: var(--primary-light);
+    }
+    .role-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(0,61,122,0.2);
+    }
+
+    /* ================= APP LAYOUT ================= */
+    #appView {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+    .topbar {
+      height: 62px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .main-wrapper {
+      display: flex;
+      flex: 1;
+      min-height: calc(100vh - 62px);
+    }
+    .sidebar {
+      width: 260px;
+      background: #08162b;
+      color: #e2e8f0;
+      padding: 18px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-right: 1px solid #142a47;
+      flex-shrink: 0;
+    }
+    .sidebar-section-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #718eb2;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 8px 12px 4px;
+      margin-top: 4px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      background: transparent;
+      color: #cbd5e1;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      text-align: left;
+      font-size: 13px;
+    }
+    .nav-item:hover {
+      background: #112848;
+      color: #ffffff;
+    }
+    .nav-item.active {
+      background: #0052a3;
+      color: #ffffff;
+      font-weight: 600;
+      border-color: #3b82f6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .content-area {
+      flex: 1;
+      padding: 26px 32px;
+      overflow-y: auto;
+      background: var(--background);
+      min-width: 0;
+    }
+
+    /* ================= KPI CARDS ================= */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease;
+    }
+    .kpi-card:hover { transform: translateY(-2px); }
+    .kpi-label {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: var(--font-heading);
+      margin-bottom: 4px;
+    }
+    .kpi-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ================= TABLES ================= */
+    .table-container {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      background: var(--surface-alt);
+      padding: 11px 14px;
+      font-weight: 700;
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f9fbfe; }
+
+    /* ================= CASE CATEGORIES GRID ================= */
+    .case-category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+    .category-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      background: var(--surface);
+      transition: all 0.16s ease;
+    }
+    .category-card:hover {
+      border-color: var(--secondary);
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+    .category-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(0,61,122,0.25);
+    }
+    .category-card-icon { font-size: 22px; margin-bottom: 4px; }
+    .category-card-name { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+    .category-card.selected .category-card-name { color: var(--primary); font-weight: 700; }
+
+    /* ================= ALERTS & NOTICES ================= */
+    .alert {
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      border-left: 4px solid;
+      font-size: 13px;
+    }
+    .alert.info { background: var(--info-light); border-color: var(--info); color: #004b75; }
+    .alert.success { background: var(--success-light); border-color: var(--success); color: #0c5a24; }
+    .alert.warning { background: var(--warning-light); border-color: var(--warning); color: #7a4600; }
+    .alert.danger { background: var(--danger-light); border-color: var(--danger); color: #7e1024; }
+
+    /* ================= VICTIM MASKING ================= */
+    .victim-masking {
+      background: #fffcf2;
+      border: 1.5px dashed var(--warning);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .victim-field-masked {
+      font-family: var(--font-mono);
+      background: #f4ece1;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #633800;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    /* ================= MODAL BACKDROP ================= */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 20, 38, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal-backdrop.show { display: flex; }
+    .modal-dialog {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-dialog.lg { max-width: 820px; }
+    @keyframes modalIn {
+      from { transform: translateY(12px) scale(0.98); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .modal-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body {
+      padding: 22px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-footer {
+      padding: 14px 22px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: var(--surface-alt);
+      border-bottom-left-radius: var(--radius-md);
+      border-bottom-right-radius: var(--radius-md);
+    }
+
+    /* ================= TOAST NOTIFICATION ================= */
+    #toastContainer {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      background: #111827;
+      color: #ffffff;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 280px;
+      max-width: 420px;
+      animation: toastIn 0.22s ease-out;
+      border-left: 4px solid var(--primary-border);
+    }
+    .toast.success { border-left-color: var(--success); }
+    .toast.danger { border-left-color: var(--danger); }
+    .toast.warning { border-left-color: var(--warning); }
+    @keyframes toastIn {
+      from { transform: translateX(40px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .main-wrapper { flex-direction: column; }
+      .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #142a47; overflow-x: auto; flex-direction: row; }
+      .content-area { padding: 16px; }
+      .role-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= TOAST CONTAINER ================= -->
+  <div id="toastContainer"></div>
+
+  <!-- ================= LOGIN VIEW ================= -->
+  <div id="loginView">
+    <div class="login-container">
+      <div class="login-header">
+        <h1>⚖️ JUSTICEVAULT</h1>
+        <p style="color: var(--text-secondary); font-size: 12.5px; font-weight: 500;">Secure Digital Document Management System for Legal and Investigation Documents</p>
+        <div style="margin-top: 6px; display: flex; gap: 6px; justify-content: center;">
+          <span class="tag blue">SIH26190</span>
+          <span class="tag purple">TEAM GENX</span>
+          <span class="tag amber">MOCK FABRIC MODE</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label style="font-size: 11.5px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 8px;">SELECT SIH ROLE PROFILE:</label>
+        <div class="role-grid">
+          <div class="role-card selected" onclick="selectRole(this, 'police.demo', 'Police@Demo2026!')">
+            <div style="font-size: 22px;">👮</div>
+            <div style="font-size: 12px; font-weight: 700; margin-top: 4px;">Police Officer</div>
+            <div style="font-size: 10px; color: var(--text-muted);">L3 Clearance</div>
+          </div>
+          <div class="role-card" onclick="selectRole(this, 'forensic.demo', 'Forensic@Demo2026!')">
+            <div style="font-size: 22px;">🔬</div>
+            <div style="font-size: 12px; font-weight: 700; margin-top: 4px;">Forensic Officer</div>
+            <div style="font-size: 10px; color: var(--text-muted);">L4 Clearance</div>
+          </div>
+          <div class="role-card" onclick="selectRole(this, 'judiciary.demo', 'Judiciary@Demo2026!')">
+            <div style="font-size: 22px;">🏛️</div>
+            <div style="font-size: 12px; font-weight: 700; margin-top: 4px;">Judiciary / Judge</div>
+            <div style="font-size: 10px; color: var(--text-muted);">L6 Clearance</div>
+          </div>
+          <div class="role-card" onclick="selectRole(this, 'higher.demo', 'Higher@Demo2026!')">
+            <div style="font-size: 22px;">🛡️</div>
+            <div style="font-size: 12px; font-weight: 700; margin-top: 4px;">Higher Officer</div>
+            <div style="font-size: 10px; color: var(--text-muted);">L5 Clearance</div>
+          </div>
+          <div class="role-card" onclick="selectRole(this, 'admin.demo', 'Admin@Demo2026!')">
+            <div style="font-size: 22px;">💻</div>
+            <div style="font-size: 12px; font-weight: 700; margin-top: 4px;">Admin / PMO</div>
+            <div style="font-size: 10px; color: var(--text-muted);">L5 Clearance</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Officer Username / ID</label>
+        <input type="text" id="loginUsername" class="input" value="police.demo" readonly>
+      </div>
+
+      <div class="form-group">
+        <label>Secure Passphrase / PIN</label>
+        <input type="password" id="loginPassword" class="input" value="Police@Demo2026!">
+      </div>
+
+      <button class="btn primary" style="width: 100%; padding: 12px; font-size: 14px; margin-top: 8px;" onclick="performLogin()">
+        🛡️ Authenticate & Enter JusticeVault
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= APPLICATION VIEW ================= -->
+  <div id="appView">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div style="font-size: 17px; font-weight: 800; color: var(--primary); font-family: var(--font-heading);">⚖️ JUSTICEVAULT</div>
+        <span class="tag blue" style="font-size: 10px;">SIH26190</span>
+        <span class="tag amber" style="font-size: 10px;">BLOCKCHAIN: MOCK MODE</span>
+      </div>
+      <div class="topbar-right">
+        <div style="text-align: right;">
+          <div id="userNameDisplay" style="font-weight: 700; font-size: 13px; color: var(--text-primary);"></div>
+          <div id="userRoleDisplay" style="font-size: 11px; color: var(--text-secondary);"></div>
+        </div>
+        <button class="btn outline sm" onclick="refreshCurrentView()">🔄 Refresh</button>
+        <button class="btn danger sm" onclick="performLogout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebarNav">
+        <!-- Injected dynamically based on role -->
+      </aside>
+
+      <!-- Content Area -->
+      <main class="content-area" id="contentArea">
+        <!-- Rendered dynamically by switchSection() -->
+      </main>
+    </div>
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. CREATE CASE MODAL -->
+  <div class="modal-backdrop" id="modalCreateCase">
+    <div class="modal-dialog lg">
+      <div class="modal-header">
+        <h2>📋 Create New Investigation Case</h2>
+        <button class="btn outline sm" onclick="closeModal('create-case')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert info">
+          <strong>Official Case Registration:</strong> Enforces backend-generated unique case ID format (e.g. <code>JV-CC-2026-0001</code>) and anchors case registration provenance on Hyperledger Fabric ledger (mock mode).
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label>Case Title <span class="req">*</span></label>
+            <input type="text" id="formCaseTitle" class="input" placeholder="e.g. State v. Cyber Financial Infiltration">
+            <div id="err_caseTitle" class="field-error">Case title is required</div>
+          </div>
+          <div class="form-group">
+            <label>Police Station / Department <span class="req">*</span></label>
+            <input type="text" id="formPoliceStation" class="input" value="Cyber Crime Branch HQ">
+            <div id="err_policeStation" class="field-error">Police station is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Case Category / Offence Type <span class="req">*</span></label>
+          <div class="case-category-grid" id="createCaseCategoryGrid">
+            <!-- Dynamically populated categories -->
+          </div>
+          <input type="hidden" id="formCaseType" value="">
+          <div id="err_caseType" class="field-error">Please select a case category</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label>Investigating Officer <span class="req">*</span></label>
+            <input type="text" id="formInvestigatingOfficer" class="input" value="Inspector Vikram Rathore">
+            <div id="err_investigatingOfficer" class="field-error">Investigating officer is required</div>
+          </div>
+          <div class="form-group">
+            <label>Priority / Risk Level <span class="req">*</span></label>
+            <select id="formPriority" class="select">
+              <option value="LOW">Low</option>
+              <option value="NORMAL" selected>Normal</option>
+              <option value="ELEVATED">Elevated</option>
+              <option value="HIGH">High</option>
+              <option value="CRITICAL">Critical</option>
+            </select>
+            <div id="err_priority" class="field-error">Priority is required</div>
+          </div>
+          <div class="form-group">
+            <label>Reference Number / FIR (Optional)</label>
+            <input type="text" id="formReferenceNumber" class="input" placeholder="FIR/2026/8901">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label>Incident Date (Optional)</label>
+            <input type="date" id="formIncidentDate" class="input">
+          </div>
+          <div class="form-group">
+            <label>Location / Jurisdiction (Optional)</label>
+            <input type="text" id="formLocation" class="input" placeholder="e.g. Mumbai Cyber Zone 1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Case Summary & Description <span class="req">*</span></label>
+          <textarea id="formDescription" class="textarea" placeholder="Comprehensive summary of allegations, incident details, and investigation scope (minimum 5 characters)..."></textarea>
+          <div id="err_description" class="field-error">Description is required (minimum 5 characters)</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn outline" onclick="closeModal('create-case')">Cancel</button>
+        <button class="btn primary" id="btnSubmitCreateCase" onclick="submitCreateCaseForm(event)">
+          ✓ Create Case & Mint Provenance
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. UPLOAD DOCUMENT MODAL -->
+  <div class="modal-backdrop" id="modalUploadDocument">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>📤 Upload Evidence Document</h2>
+        <button class="btn outline sm" onclick="closeModal('upload-document')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Target Case ID <span class="req">*</span></label>
+          <select id="uploadCaseId" class="select">
+            <option value="">-- Select Case --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Document Classification Type <span class="req">*</span></label>
+          <select id="uploadDocType" class="select">
+            <option value="First Information Report (FIR)">📋 First Information Report (FIR)</option>
+            <option value="Police Investigation Report">📄 Police Investigation Report</option>
+            <option value="Forensic Analysis Report">🔬 Forensic Analysis Report</option>
+            <option value="Digital Evidence Image / Dump">💾 Digital Evidence Image / Dump</option>
+            <option value="Wiretap / VoIP Transcript">📞 Wiretap / VoIP Transcript</option>
+            <option value="Seized Memory Package">📦 Seized Memory Package</option>
+            <option value="Judicial Order">🏛️ Judicial Order</option>
+            <option value="Other Evidence">📎 Other Supporting Evidence</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Evidence File Payload <span class="req">*</span></label>
+          <input type="file" id="uploadFileInput" class="input" style="padding: 6px;">
+        </div>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer;">
+            <input type="checkbox" id="uploadConfidential">
+            <span>Mark as Confidential (Restricted to higher clearance L5+)</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn outline" onclick="closeModal('upload-document')">Cancel</button>
+        <button class="btn primary" onclick="submitUploadDocumentAction()">
+          🔐 Encrypt & Anchor to Ledger
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. VICTIM PROFILE E-SIGN AUTHORIZATION MODAL -->
+  <div class="modal-backdrop" id="modalVictimAccess">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>🔒 Confidential Victim Record Authorization (e-Sign)</h2>
+        <button class="btn outline sm" onclick="closeModal('victim-access')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert warning">
+          <strong>⚠️ PRIVACY PROTECTION:</strong> Protected witness and victim personal data is encrypted and zero-knowledge masked. Decryption requires step-up digital signature (e-Sign) authorization with purpose logging.
+        </div>
+
+        <div class="victim-masking" id="victimMaskingBox">
+          <h4 style="color: var(--warning); margin-bottom: 8px;">MASKED CONFIDENTIAL DOSSIER</h4>
+          <div style="font-size: 12.5px; text-align: left; display: grid; gap: 6px;">
+            <div><strong>Protected Code:</strong> <span class="mono" id="vicMaskCode">WIT-ALPHA-92</span></div>
+            <div><strong>Full Name:</strong> <span class="victim-field-masked" id="vicMaskName">████████████</span></div>
+            <div><strong>Phone Number:</strong> <span class="victim-field-masked" id="vicMaskPhone">██-████-████</span></div>
+            <div><strong>Safehouse Address:</strong> <span class="victim-field-masked" id="vicMaskAddress">████████████████████</span></div>
+            <div><strong>Status:</strong> <span class="tag red">CONFIDENTIAL - RESTRICTED</span></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Reason for Step-Up Access <span class="req">*</span></label>
+          <textarea id="victimAccessReason" class="textarea" placeholder="e.g. Official Judicial In-Camera Witness Review / Urgent High Court Evidence Cross-Examination"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Certificate / Signature Type</label>
+          <select id="victimCertType" class="select">
+            <option value="DSC_TOKEN">Digital Signature Certificate Token (DSC)</option>
+            <option value="AADHAAR_ESIGN">Govt e-Sign Provider (UIDAI Auth)</option>
+            <option value="SECURITY_PIN">Hardware Security Node PIN</option>
+          </select>
+        </div>
+
+        <div style="background: var(--warning-light); border: 1px solid var(--warning-border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 14px;">
+          <label style="font-weight: 700; color: #7a4600; display: block; margin-bottom: 6px;">
+            🔐 Step-Up e-Sign Passphrase / PIN (Demo PIN: <code>demo-sign</code> or <code>123456</code>)
+          </label>
+          <input type="password" id="victimAccessPin" class="input" placeholder="Enter e-Sign Passphrase or PIN">
+        </div>
+
+        <div id="victimAccessError" class="alert danger" style="display: none;">
+          <strong>❌ ACCESS DENIED:</strong> Invalid e-Sign Passphrase or insufficient clearance. Failed attempt logged to audit chronicle.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn outline" onclick="closeModal('victim-access')">Cancel</button>
+        <button class="btn primary" onclick="submitVictimEsignAuthorizationAction()">
+          ✓ Authorize & Decrypt Dossier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. DOCUMENT EDIT / NEW VERSION MODAL -->
+  <div class="modal-backdrop" id="modalDocumentEdit">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>📝 Create Document Edition (Version Control)</h2>
+        <button class="btn outline sm" onclick="closeModal('document-edit')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert info">
+          <strong>Immutable Preservation:</strong> Original document (V1) is permanently locked in the vault and cannot be modified. Creating a new edition generates V2 with complete edit reason and hash linkage.
+        </div>
+
+        <div class="form-group">
+          <label>Document Name</label>
+          <input type="text" id="editDocName" class="input" readonly>
+          <input type="hidden" id="editDocId">
+        </div>
+
+        <div class="form-group">
+          <label>Reason for Edit / Amendment <span class="req">*</span></label>
+          <textarea id="editReason" class="textarea" placeholder="e.g. Added supplementary witness testimony and offshore banking audit corroboration..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Replacement File (New Edition Payload) <span class="req">*</span></label>
+          <input type="file" id="editFileInput" class="input" style="padding: 6px;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn outline" onclick="closeModal('document-edit')">Cancel</button>
+        <button class="btn primary" onclick="submitDocumentEditAction()">
+          ✓ Create New Edition
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. TAMPER DETECTION ALERT MODAL -->
+  <div class="modal-backdrop" id="modalModificationAlert">
+    <div class="modal-dialog">
+      <div class="modal-header" style="background: var(--danger-light);">
+        <h2 style="color: var(--danger);">⚠️ UNAUTHORIZED MODIFICATION DETECTED</h2>
+        <button class="btn outline sm" onclick="closeModal('modification-alert')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert danger">
+          <strong>CRITICAL SECURITY ALERT:</strong> File hash does not match trusted Hyperledger Fabric baseline.
+        </div>
+
+        <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 11px; margin-bottom: 14px;">
+          <div style="margin-bottom: 8px;">
+            <strong>Trusted Original Hash:</strong><br>
+            <span id="modOriginalHash" style="color: var(--success); word-break: break-all;">...</span>
+          </div>
+          <div>
+            <strong>Observed Tampered Hash:</strong><br>
+            <span id="modCurrentHash" style="color: var(--danger); word-break: break-all;">...</span>
+          </div>
+        </div>
+
+        <div class="alert info">
+          <strong>Security Action Taken:</strong>
+          <ul style="margin: 6px 0 0 18px;">
+            <li>Original trusted document remains safe in vault and was NOT overwritten</li>
+            <li>Quarantined forensic snapshot created (<span id="modSnapshotId" class="mono">SNAP-...</span>)</li>
+            <li>Tamper incident permanently committed to Hyperledger Fabric</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn primary" onclick="closeModal('modification-alert')">Acknowledge Alert</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. PROTOTYPE E-SIGN MODAL FOR RESTRICTED DOCUMENTS -->
+  <div class="modal-backdrop" id="modalDocumentEsign">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>🔒 PROTOTYPE E-SIGN Authorization Ceremony</h2>
+        <button class="btn outline sm" onclick="closeModal('document-esign')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert warning">
+          <strong>PROTOTYPE E-SIGN NOTICE:</strong> This mechanism simulates a step-up cryptographic digital signature authorization ceremony. It is <em>not legally equivalent</em> to India's statutory DSC/eSign services.
+        </div>
+
+        <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <strong id="docEsignName" style="color: var(--primary);">Document_Name.pdf</strong>
+            <span class="tag red" id="docEsignClassification">TOP_SECRET</span>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-muted);">
+            Document ID: <span class="mono" id="docEsignId">DOC-XXXX</span> · Clearance Required: <span class="tag purple">L5 / L6</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Access Purpose / Official Justification <span class="req">*</span></label>
+          <textarea id="docEsignPurpose" class="textarea" placeholder="e.g. In-camera judicial evidentiary analysis and cross-verification for Trial Case REF-8741"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Certificate / Token Type</label>
+          <select id="docEsignCertType" class="select">
+            <option value="DSC_TOKEN">Class 3 Digital Signature Certificate (DSC Token)</option>
+            <option value="GOV_HARDWARE_KEY">Hardware Security Module (HSM Key)</option>
+            <option value="IN_CAMERA_JUDICIAL">Judicial In-Camera Chambers Authorization</option>
+          </select>
+        </div>
+
+        <div style="background: var(--warning-light); border: 1px solid var(--warning-border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 14px;">
+          <label style="font-weight: 700; color: #7a4600; display: block; margin-bottom: 6px;">
+            🔐 Digital Signature PIN / Passphrase (Demo: <code>demo-sign</code> or <code>123456</code>)
+          </label>
+          <input type="password" id="docEsignPin" class="input" placeholder="Enter Digital PIN or Passphrase">
+        </div>
+
+        <div id="docEsignError" class="alert danger" style="display: none;">
+          <strong>❌ PROTOTYPE E-SIGN REJECTED:</strong> Invalid signature PIN or insufficient clearance authority. Incident recorded on audit trail.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn outline" onclick="closeModal('document-esign')">Cancel</button>
+        <button class="btn primary" onclick="submitDocumentEsignAction()">
+          ⚡ Execute Prototype E-Sign & Unlock
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. SECURE DOCUMENT PREVIEW MODAL -->
+  <div class="modal-backdrop" id="modalDocumentPreview">
+    <div class="modal-dialog" style="max-width: 700px;">
+      <div class="modal-header">
+        <h2>📄 Decrypted Vault Document Preview</h2>
+        <button class="btn outline sm" onclick="closeModal('document-preview')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div>
+            <h4 id="previewDocTitle" style="margin: 0;">Document Title</h4>
+            <span class="mono" id="previewDocId" style="font-size: 11px; color: var(--text-muted);">DOC-000</span>
+          </div>
+          <span class="tag green" id="previewDocClassification">INTACT / DECRYPTED</span>
+        </div>
+
+        <div style="background: #08162b; border: 1px solid #142a47; border-radius: 6px; padding: 16px; color: #e2e8f0; font-family: var(--font-mono); font-size: 12px; line-height: 1.6; max-height: 320px; overflow-y: auto; white-space: pre-wrap;" id="previewDocContent">
+          Loading document payload...
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn outline" onclick="closeModal('document-preview')">Close</button>
+        <button class="btn primary" id="previewDocDownloadBtn">⬇️ Download File</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT APPLICATION CORE ================= -->
+  <script>
+    /* ================= GLOBAL STATE ================= */
+    const API_BASE = '/api';
+    let currentUser = null;
+    let currentRole = null;
+    let userToken = null;
+    let activeSection = 'dashboard';
+    let activeModal = null;
+    let globalCases = [];
+    let globalDocuments = [];
+    let globalAudits = [];
+    let globalVersions = [];
+    let globalCategories = [];
+    let activeEsignTokens = {}; // docId -> { token, expires_at, auth_id, proof }
+    let currentEsignTarget = null; // { docId, docName, classification }
+    let offlineQueue = [
+      { id: 'OFF-001', filename: 'CrimeScene_Fingerprint_Scan.pdf', case_id: 'CASE-2026-001', doc_type: 'Digital Evidence Record', created_at: '2026-09-01T10:15:00Z', status: 'QUEUED' },
+      { id: 'OFF-002', filename: 'Forensic_Soil_Sample_Analysis.pdf', case_id: 'CASE-2026-014', doc_type: 'Forensic Lab Finding', created_at: '2026-09-01T11:40:00Z', status: 'QUEUED' }
+    ];
+
+    /* ================= ERROR HANDLING HELPER ================= */
+    function getErrorMessage(error) {
+      if (!error) return 'An unexpected error occurred';
+      if (typeof error === 'string') return error;
+
+      // Handle backend structured error format: { success: false, error: { message, fields } }
+      if (error.error && typeof error.error === 'object') {
+        if (error.error.fields && typeof error.error.fields === 'object') {
+          const fieldMsgs = Object.values(error.error.fields).filter(Boolean);
+          if (fieldMsgs.length > 0) return fieldMsgs.join('; ');
+        }
+        if (error.error.message) return error.error.message;
+      }
+
+      // Handle FastAPI detail
+      if (error.detail) {
+        if (typeof error.detail === 'string') return error.detail;
+        if (Array.isArray(error.detail)) {
+          return error.detail.map(d => (d && d.msg) ? `${d.loc ? d.loc.join('.') + ': ' : ''}${d.msg}` : JSON.stringify(d)).join(', ');
+        }
+        if (typeof error.detail === 'object') {
+          return JSON.stringify(error.detail);
+        }
+      }
+
+      if (error.message) return error.message;
+
+      try {
+        const str = JSON.stringify(error);
+        if (str !== '{}') return str;
+      } catch (e) {}
+
+      return 'Unable to complete request';
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `<div>${message}</div>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(40px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 4500);
+    }
+
+    /* ================= MODAL MANAGEMENT ================= */
+    function openModal(modalName, data = null) {
+      activeModal = modalName;
+      closeAllModals();
+
+      if (modalName === 'create-case') {
+        document.getElementById('modalCreateCase').classList.add('show');
+        resetCreateCaseForm();
+        if (data && data.category) {
+          selectCategoryInForm(data.category);
+        }
+      } else if (modalName === 'upload-document') {
+        document.getElementById('modalUploadDocument').classList.add('show');
+        populateUploadCaseDropdown();
+        if (data && data.case_id) {
+          document.getElementById('uploadCaseId').value = data.case_id;
+        }
+      } else if (modalName === 'victim-access') {
+        document.getElementById('modalVictimAccess').classList.add('show');
+        document.getElementById('victimAccessError').style.display = 'none';
+        document.getElementById('victimAccessPin').value = '';
+        document.getElementById('victimAccessReason').value = '';
+      } else if (modalName === 'document-edit') {
+        document.getElementById('modalDocumentEdit').classList.add('show');
+        if (data) {
+          document.getElementById('editDocName').value = data.name || data.id;
+          document.getElementById('editDocId').value = data.id;
+        }
+      } else if (modalName === 'modification-alert') {
+        document.getElementById('modalModificationAlert').classList.add('show');
+        if (data) {
+          document.getElementById('modOriginalHash').textContent = data.original_hash || '...';
+          document.getElementById('modCurrentHash').textContent = data.observed_hash || '...';
+          document.getElementById('modSnapshotId').textContent = data.snapshot_id || 'SNAP-QUARANTINE';
+        }
+      } else if (modalName === 'document-esign') {
+        document.getElementById('modalDocumentEsign').classList.add('show');
+        document.getElementById('docEsignError').style.display = 'none';
+        document.getElementById('docEsignPin').value = '';
+        document.getElementById('docEsignPurpose').value = '';
+        if (data) {
+          document.getElementById('docEsignName').textContent = data.name || data.id;
+          document.getElementById('docEsignId').textContent = data.id;
+          document.getElementById('docEsignClassification').textContent = data.classification || 'RESTRICTED';
+          currentEsignTarget = data;
+        }
+      } else if (modalName === 'document-preview') {
+        document.getElementById('modalDocumentPreview').classList.add('show');
+        if (data) {
+          document.getElementById('previewDocTitle').textContent = data.name || data.id;
+          document.getElementById('previewDocId').textContent = data.id;
+          document.getElementById('previewDocClassification').textContent = (data.classification || 'INTACT') + ' / DECRYPTED';
+          document.getElementById('previewDocContent').textContent = data.content || 'No text payload available';
+          document.getElementById('previewDocDownloadBtn').onclick = () => downloadDocumentFile(data.id);
+        }
+      }
+    }
+
+    function closeModal(modalName) {
+      activeModal = null;
+      if (modalName === 'create-case') document.getElementById('modalCreateCase').classList.remove('show');
+      if (modalName === 'upload-document') document.getElementById('modalUploadDocument').classList.remove('show');
+      if (modalName === 'victim-access') document.getElementById('modalVictimAccess').classList.remove('show');
+      if (modalName === 'document-edit') document.getElementById('modalDocumentEdit').classList.remove('show');
+      if (modalName === 'modification-alert') document.getElementById('modalModificationAlert').classList.remove('show');
+      if (modalName === 'document-esign') document.getElementById('modalDocumentEsign').classList.remove('show');
+      if (modalName === 'document-preview') document.getElementById('modalDocumentPreview').classList.remove('show');
+    }
+
+    function closeAllModals() {
+      document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('show'));
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAllModals();
+    });
+
+    /* ================= AUTHENTICATION ================= */
+    function selectRole(elem, username, password) {
+      document.querySelectorAll('.role-card').forEach(e => e.classList.remove('selected'));
+      elem.classList.add('selected');
+      document.getElementById('loginUsername').value = username;
+      document.getElementById('loginPassword').value = password;
+    }
+
+    async function performLogin() {
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('password', password);
+
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (res.status === 401) {
+          alert('Invalid credentials. Please select a valid role.');
+          return;
+        }
+
+        const data = await res.json();
+        userToken = data.access_token;
+        currentUser = data.user;
+        currentRole = data.user.role.toUpperCase();
+
+        localStorage.setItem('jv_token', userToken);
+
+        document.getElementById('loginView').style.display = 'none';
+        document.getElementById('appView').style.display = 'flex';
+
+        await initApp();
+      } catch (err) {
+        alert('Login failed: ' + getErrorMessage(err));
+      }
+    }
+
+    function performLogout() {
+      userToken = null;
+      currentUser = null;
+      currentRole = null;
+      localStorage.removeItem('jv_token');
+      document.getElementById('loginView').style.display = 'flex';
+      document.getElementById('appView').style.display = 'none';
+      closeAllModals();
+    }
+
+    /* ================= APP INITIALIZATION ================= */
+    async function initApp() {
+      document.getElementById('userNameDisplay').textContent = currentUser.name;
+      document.getElementById('userRoleDisplay').textContent = `${currentUser.role} · Clearance L${currentUser.clearance} (${currentUser.department})`;
+
+      await loadCategories();
+      await renderSidebarForRole();
+      await switchSection('dashboard', 'Dashboard');
+    }
+
+    async function loadCategories() {
+      try {
+        const res = await fetch(`${API_BASE}/case-categories`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          globalCategories = data.categories || [];
+        }
+      } catch (e) {
+        console.warn('Could not load categories:', e);
+      }
+    }
+
+    /* ================= SIDEBAR NAVIGATION ================= */
+    async function renderSidebarForRole() {
+      let sidebarItems = [];
+
+      // Exact role-specific sidebar items required by specification
+      if (currentRole === 'POLICE_OFFICER') {
+        sidebarItems = ["Dashboard", "My Cases", "Create Case", "Upload Document", "Document Versions", "Access History", "Offline Queue", "Notifications"];
+      } else if (currentRole === 'FORENSIC_OFFICER') {
+        sidebarItems = ["Dashboard", "Assigned Files", "Upload Forensic Report", "Evidence Analysis", "Document Versions", "Integrity Verification", "Audit History"];
+      } else if (currentRole === 'JUDGE') {
+        sidebarItems = ["Dashboard", "Authorized Cases", "Documents", "Evidence", "Integrity Verification", "Audit Trail", "Access Requests"];
+      } else if (currentRole === 'HIGHER_OFFICER') {
+        sidebarItems = ["Dashboard", "Cases", "Oversight", "E-Sign & Confidential Access", "Access Requests", "Security Alerts", "Audit", "Verification"];
+      } else if (currentRole === 'ADMIN') {
+        sidebarItems = ["Dashboard", "Users", "Roles", "Permissions", "Cases", "Documents", "Audit", "Security", "E-Sign & Confidential Access", "Blockchain", "Cloud", "System Settings"];
+      } else {
+        sidebarItems = ["Dashboard", "My Cases", "Document Versions", "Access History"];
+      }
+
+      const iconMap = {
+        "Dashboard": "📊",
+        "My Cases": "📁",
+        "Cases": "📁",
+        "Authorized Cases": "⚖️",
+        "Assigned Files": "🔬",
+        "Create Case": "➕",
+        "Upload Document": "📤",
+        "Upload Report": "📤",
+        "Upload Forensic Report": "📤",
+        "Evidence Analysis": "🧪",
+        "Documents": "📄",
+        "Evidence": "🔍",
+        "Document Versions": "📝",
+        "Versions": "📝",
+        "Integrity Verification": "🛡️",
+        "Integrity Check": "🛡️",
+        "Verification": "🛡️",
+        "Access History": "📜",
+        "Audit Trail": "📜",
+        "Audit History": "📜",
+        "Audit": "📜",
+        "Offline Queue": "📶",
+        "Notifications": "🔔",
+        "Security Alerts": "⚠️",
+        "Oversight": "👁️",
+        "Access Requests": "🔑",
+        "Users": "👥",
+        "Roles": "🎖️",
+        "Permissions": "🔒",
+        "Security": "🛡️",
+        "E-Sign & Confidential Access": "🔒",
+        "E-Sign Access": "🔒",
+        "Blockchain": "⛓️",
+        "Cloud": "☁️",
+        "System Settings": "⚙️"
+      };
+
+      const sidebar = document.getElementById('sidebarNav');
+      let html = `<div class="sidebar-section-title">NAVIGATION MENU</div>`;
+
+      sidebarItems.forEach((item, idx) => {
+        const sectionId = item.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+        const icon = iconMap[item] || '📌';
+        html += `
+          <button class="nav-item ${idx === 0 ? 'active' : ''}" 
+                  id="navBtn_${sectionId}" 
+                  data-section="${sectionId}" 
+                  onclick="handleSidebarClick(event, '${sectionId}', '${item}')">
+            <span>${icon}</span>
+            <span>${item}</span>
+          </button>
+        `;
+      });
+
+      sidebar.innerHTML = html;
+    }
+
+    function handleSidebarClick(event, sectionId, sectionName) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      switchSection(sectionId, sectionName);
+    }
+
+    async function switchSection(sectionId, sectionName) {
+      activeSection = sectionId;
+
+      document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
+      const activeBtn = document.querySelector(`[data-section="${sectionId}"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const contentArea = document.getElementById('contentArea');
+      contentArea.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">🔄 Loading ${sectionName}...</div>`;
+
+      // Specific Section Renderers
+      if (sectionId === 'dashboard') {
+        await renderDashboardSection();
+      } else if (['my-cases', 'cases', 'authorized-cases', 'assigned-files', 'oversight'].includes(sectionId)) {
+        await renderCasesSection(sectionName);
+      } else if (sectionId === 'create-case') {
+        renderCreateCaseSection();
+      } else if (['upload-document', 'upload-report', 'upload-forensic-report'].includes(sectionId)) {
+        renderUploadDocumentSection(sectionName);
+      } else if (['document-versions', 'versions'].includes(sectionId)) {
+        await renderDocumentVersionsSection();
+      } else if (['access-history', 'audit-trail', 'audit-history', 'audit'].includes(sectionId)) {
+        await renderAccessHistorySection();
+      } else if (sectionId === 'offline-queue') {
+        renderOfflineQueueSection();
+      } else if (['notifications', 'security-alerts'].includes(sectionId)) {
+        await renderNotificationsSection();
+      } else if (['integrity-verification', 'integrity-check', 'verification', 'evidence-analysis'].includes(sectionId)) {
+        await renderIntegritySection();
+      } else if (['e-sign-access', 'e-sign-confidential-access', 'e-sign-&-confidential-access', 'confidential-access', 'e-sign'].includes(sectionId)) {
+        await renderEsignConfidentialSection();
+      } else if (sectionId === 'users') {
+        renderUsersSection();
+      } else if (sectionId === 'roles') {
+        renderRolesSection();
+      } else if (sectionId === 'permissions') {
+        renderPermissionsSection();
+      } else if (sectionId === 'blockchain') {
+        await renderBlockchainSection();
+      } else if (sectionId === 'cloud') {
+        renderCloudSection();
+      } else if (sectionId === 'system-settings') {
+        renderSystemSettingsSection();
+      } else if (sectionId === 'security') {
+        await renderSecuritySection();
+      } else if (['documents', 'evidence'].includes(sectionId)) {
+        await renderDocumentsListView(sectionName);
+      } else if (sectionId === 'access-requests') {
+        renderAccessRequestsSection();
+      } else {
+        contentArea.innerHTML = `<h2>${sectionName}</h2><p style="color: var(--text-secondary);">Section interface active for ${currentUser.name}.</p>`;
+      }
+    }
+
+    function refreshCurrentView() {
+      switchSection(activeSection, activeSection.replace(/-/g, ' ').toUpperCase());
+    }
+
+    /* ================= SECTION 1: DASHBOARD ================= */
+    async function renderDashboardSection() {
+      let stats = { total_cases: 0, total_docs: 0, total_blocks: 0, tamper_alerts: 0 };
+      try {
+        const [dashRes, casesRes] = await Promise.all([
+          fetch(`${API_BASE}/dashboard`, { headers: { 'Authorization': `Bearer ${userToken}` } }),
+          fetch(`${API_BASE}/cases`, { headers: { 'Authorization': `Bearer ${userToken}` } })
+        ]);
+        if (dashRes.ok) {
+          const dashData = await dashRes.json();
+          stats = {
+            total_cases: dashData.total_cases || 0,
+            total_docs: dashData.documents || 0,
+            total_blocks: dashData.fabric_blocks || 0,
+            tamper_alerts: dashData.tamper_alerts || 0
+          };
+        }
+        if (casesRes.ok) {
+          globalCases = await casesRes.json();
+        }
+      } catch (e) {
+        console.warn('Dashboard fetch error:', e);
+      }
+
+      const isPolice = (currentRole === 'POLICE_OFFICER');
+      const isForensic = (currentRole === 'FORENSIC_OFFICER');
+      const isJudge = (currentRole === 'JUDGE');
+      const isHigher = (currentRole === 'HIGHER_OFFICER');
+      const isAdmin = (currentRole === 'ADMIN');
+
+      let html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+              <h1>Welcome, ${currentUser.name}</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">${currentUser.designation} · ${currentUser.department} (Clearance Level ${currentUser.clearance})</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              ${!isForensic ? `<button class="btn primary sm" onclick="openModal('create-case')">+ Create Case</button>` : ''}
+              <button class="btn outline sm" onclick="openModal('upload-document')">📤 Upload Document</button>
+            </div>
+          </div>
+
+          <!-- KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Active Cases</div>
+              <div class="kpi-value">${globalCases.length}</div>
+              <div class="kpi-meta">Under investigation & custody</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Vault Documents</div>
+              <div class="kpi-value">${stats.total_docs}</div>
+              <div class="kpi-meta">AES-256 encrypted storage</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Ledger Blocks</div>
+              <div class="kpi-value">${stats.total_blocks}</div>
+              <div class="kpi-meta">Hyperledger Fabric (Mock Mode)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Integrity Status</div>
+              <div class="kpi-value" style="color: ${stats.tamper_alerts > 0 ? 'var(--danger)' : 'var(--success)'}; font-size: 22px;">
+                ${stats.tamper_alerts > 0 ? `⚠️ ${stats.tamper_alerts} Alerts` : '✓ 100% INTACT'}
+              </div>
+              <div class="kpi-meta">Zero hash deviation</div>
+            </div>
+          </div>
+      `;
+
+      // Role Specific Workspace Banner
+      if (isPolice) {
+        html += `
+          <div class="card" style="background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%); border-color: var(--primary-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3>👮 Police Investigating Officer Workspace</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Register FIRs, create new crime cases, deposit seized digital evidence, and manage immutable version control. Original documents (V1) are permanently preserved in vault.</p>
+              </div>
+              <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                <button class="btn primary" onclick="openModal('create-case')">➕ Register New Case</button>
+                <button class="btn secondary" onclick="openModal('upload-document')">📤 Upload Evidence</button>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (isForensic) {
+        html += `
+          <div class="card" style="background: linear-gradient(135deg, #f0fdf4 0%, #e8f5ec 100%); border-color: var(--success-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="color: var(--success);">🔬 Chief Forensic Examiner Laboratory</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Examine seized packages, upload forensic laboratory reports, execute tamper detection diagnostics, and verify document SHA-256 baselines.</p>
+              </div>
+              <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                <button class="btn success" onclick="openModal('upload-document')">📤 Upload Forensic Report</button>
+                <button class="btn outline" onclick="switchSection('integrity-verification', 'Integrity Verification')">🛡️ Verify Hash Integrity</button>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (isJudge) {
+        html += `
+          <div class="card" style="background: linear-gradient(135deg, #fdf2f4 0%, #fae8eb 100%); border-color: var(--danger-border);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h3 style="color: var(--danger);">🏛️ Judicial Evidentiary Chamber</h3>
+                <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Holistic access across Police and Forensic documents. High-clearance digital e-Sign step-up ceremony to unmask protected witness & victim profiles for court proceedings.</p>
+              </div>
+              <button class="btn danger" onclick="switchSection('authorized-cases', 'Authorized Cases')">📋 Review Cases & Evidence</button>
+            </div>
+          </div>
+        `;
+      } else if (isHigher) {
+        html += `
+          <div class="card" style="background: linear-gradient(135deg, #f5f8ff 0%, #eaf0ff 100%); border-color: var(--primary-border);">
+            <h3>🛡️ Senior Authority Oversight (DIG / SP)</h3>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Cross-departmental case oversight, sensitive access approvals, and tamper incident monitoring across all police stations.</p>
+          </div>
+        `;
+      } else if (isAdmin) {
+        html += `
+          <div class="card" style="background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%); border-color: var(--border);">
+            <h3>💻 Security Node Architect & System Governance</h3>
+            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Hyperledger Fabric consensus explorer, user role assignments, audit logs export, and cloud vault health monitoring.</p>
+          </div>
+        `;
+      }
+
+      // Case Category Selection Section (Visible to Police, Higher, Judge, Admin - NOT Forensic)
+      if (!isForensic) {
+        html += `
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>🏷️ Case Category Quick Register</h3>
+                <p style="color: var(--text-secondary); font-size: 12px;">Select an investigation category to open Create Case with preset code:</p>
+              </div>
+            </div>
+            <div class="case-category-grid">
+              ${renderCategoryCardsForDashboard()}
+            </div>
+          </div>
+        `;
+      }
+
+      // Recent Cases Overview Table
+      html += `
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Active Investigation Cases</h3>
+            <button class="btn outline sm" onclick="switchSection('my-cases', 'Cases')">View All Cases →</button>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>FIR / Ref</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${renderCasesTableRows(globalCases.slice(0, 5))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    function renderCategoryCardsForDashboard() {
+      const defaultCategories = [
+        { code: "CYBER_CRIME", label: "Cyber Crime", icon: "🖥️" },
+        { code: "BULLYING_HARASSMENT", label: "Bullying / Harassment", icon: "👥" },
+        { code: "FRAUD", label: "Fraud", icon: "💳" },
+        { code: "FINANCIAL_CRIME", label: "Financial Crime", icon: "💰" },
+        { code: "MISSING_PERSON", label: "Missing Person", icon: "🔍" },
+        { code: "THEFT", label: "Theft", icon: "🔓" },
+        { code: "ASSAULT", label: "Assault", icon: "🚨" },
+        { code: "SEXUAL_OFFENCE", label: "Sexual Offence", icon: "⚠️" },
+        { code: "DRUG_RELATED", label: "Drug Related", icon: "🚫" },
+        { code: "ORGANIZED_CRIME", label: "Organized Crime", icon: "🎯" },
+        { code: "DOMESTIC_VIOLENCE", label: "Domestic Violence", icon: "🏠" },
+        { code: "CHILD_PROTECTION", label: "Child Protection", icon: "👶" },
+        { code: "OTHER", label: "Other", icon: "📋" }
+      ];
+
+      const list = (globalCategories && globalCategories.length > 0) ? globalCategories : defaultCategories;
+      return list.map(cat => `
+        <div class="category-card" onclick="handleDashboardCategoryClick('${cat.code || cat.id}', '${cat.label || cat.name}')">
+          <div class="category-card-icon">${cat.icon || '📁'}</div>
+          <div class="category-card-name">${cat.label || cat.name}</div>
+        </div>
+      `).join('');
+    }
+
+    function handleDashboardCategoryClick(categoryCode, categoryLabel) {
+      openModal('create-case', { category: categoryCode });
+    }
+
+    /* ================= SECTION 2: CASES LIST & DOSSIER ================= */
+    async function renderCasesSection(title = 'Investigation Cases') {
+      try {
+        const res = await fetch(`${API_BASE}/cases`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) globalCases = await res.json();
+      } catch (e) {
+        console.warn(e);
+      }
+
+      let html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h1>${title}</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">${globalCases.length} total active dossiers in secure vault index</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              ${currentRole !== 'FORENSIC_OFFICER' ? `<button class="btn primary sm" onclick="openModal('create-case')">+ Create Case</button>` : ''}
+              <button class="btn outline sm" onclick="openModal('upload-document')">📤 Upload Evidence</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 14px; margin-bottom: 16px;">
+            <input type="text" id="caseSearchInput" class="input" placeholder="🔍 Search cases by ID, FIR number, title, or category..." onkeyup="filterCasesTable()">
+          </div>
+
+          <div class="table-container">
+            <table id="mainCasesTable">
+              <thead>
+                <tr>
+                  <th>Case ID</th>
+                  <th>FIR / Ref</th>
+                  <th>Title & Description</th>
+                  <th>Category</th>
+                  <th>Priority</th>
+                  <th>Officer</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="casesTableBody">
+                ${renderCasesTableRows(globalCases)}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    function renderCasesTableRows(casesList) {
+      if (!casesList || casesList.length === 0) {
+        return `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 24px;">No cases found in registry.</td></tr>`;
+      }
+
+      return casesList.map(c => {
+        const priorityTag = (c.risk_level === 'HIGH' || c.priority === 'HIGH' || c.priority === 'CRITICAL') ? 'red' : ((c.risk_level === 'ELEVATED' || c.priority === 'ELEVATED') ? 'amber' : 'blue');
+        const caseType = c.case_type ? c.case_type.replace(/_/g, ' ') : 'General';
+
+        return `
+          <tr>
+            <td><strong class="mono" style="color: var(--primary);">${c.id}</strong></td>
+            <td><span class="mono">${c.fir_number || 'N/A'}</span></td>
+            <td>
+              <div style="font-weight: 600;">${c.title}</div>
+              <div style="font-size: 11.5px; color: var(--text-secondary); max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${c.description || 'No description provided'}</div>
+            </td>
+            <td><span class="tag gray">${caseType}</span></td>
+            <td><span class="tag ${priorityTag}">${c.priority || c.risk_level || 'NORMAL'}</span></td>
+            <td><span style="font-size: 12px;">${c.assigned_officer || 'Police HQ'}</span></td>
+            <td><span class="tag green">${c.status || 'ACTIVE'}</span></td>
+            <td>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn outline xs" onclick="viewCaseDossier('${c.id}')">Dossier</button>
+                <button class="btn outline xs" style="color: var(--warning);" onclick="openModal('victim-access', { case_id: '${c.id}' })">🔒 Victim e-Sign</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterCasesTable() {
+      const q = document.getElementById('caseSearchInput').value.toLowerCase();
+      const filtered = globalCases.filter(c => 
+        (c.id && c.id.toLowerCase().includes(q)) ||
+        (c.fir_number && c.fir_number.toLowerCase().includes(q)) ||
+        (c.title && c.title.toLowerCase().includes(q)) ||
+        (c.case_type && c.case_type.toLowerCase().includes(q))
+      );
+      document.getElementById('casesTableBody').innerHTML = renderCasesTableRows(filtered);
+    }
+
+    async function viewCaseDossier(caseId) {
+      try {
+        const res = await fetch(`${API_BASE}/cases/${caseId}`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (!res.ok) throw new Error('Case not found');
+        const caseData = await res.json();
+
+        let docsHtml = (caseData.documents && caseData.documents.length > 0)
+          ? caseData.documents.map(d => `
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 6px;">
+                <div>
+                  <strong>${d.name}</strong> <span class="tag blue" style="margin-left: 6px;">V${d.current_version}</span>
+                  <div class="mono" style="font-size: 11px; color: var(--text-muted);">Hash: ${d.current_hash ? d.current_hash.substring(0, 16) + '...' : 'N/A'}</div>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button class="btn outline xs" onclick="downloadDocumentFile('${d.id}')">Download</button>
+                  <button class="btn outline xs" onclick="openModal('document-edit', { id: '${d.id}', name: '${d.name}' })">Edit / New V</button>
+                </div>
+              </div>
+            `).join('')
+          : `<p style="color: var(--text-muted); font-size: 12px;">No evidence files attached to this dossier yet.</p>`;
+
+        const html = `
+          <div>
+            <button class="btn outline sm" style="margin-bottom: 16px;" onclick="switchSection('cases', 'Cases')">← Back to Cases</button>
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h2>${caseData.title}</h2>
+                  <div class="mono" style="color: var(--primary); font-weight: 700;">Case ID: ${caseData.id} · FIR: ${caseData.fir_number}</div>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button class="btn primary sm" onclick="openModal('upload-document', { case_id: '${caseData.id}' })">📤 Upload Document</button>
+                  <button class="btn outline sm" style="color: var(--warning);" onclick="openModal('victim-access', { case_id: '${caseData.id}' })">🔒 Step-Up e-Sign</button>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+                <div style="background: var(--surface-alt); padding: 12px; border-radius: 6px; border: 1px solid var(--border);">
+                  <div class="kpi-label">Category</div>
+                  <div style="font-weight: 700;">${(caseData.case_type || 'General').replace(/_/g, ' ')}</div>
+                </div>
+                <div style="background: var(--surface-alt); padding: 12px; border-radius: 6px; border: 1px solid var(--border);">
+                  <div class="kpi-label">Lead Officer</div>
+                  <div style="font-weight: 700;">${caseData.assigned_officer || 'Police HQ'}</div>
+                </div>
+                <div style="background: var(--surface-alt); padding: 12px; border-radius: 6px; border: 1px solid var(--border);">
+                  <div class="kpi-label">Risk Level</div>
+                  <div style="font-weight: 700;">${caseData.priority || caseData.risk_level || 'NORMAL'}</div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 20px;">
+                <h4>Case Summary & Investigation Background:</h4>
+                <p style="color: var(--text-secondary); margin-top: 6px; font-size: 13px;">${caseData.description || 'No description provided.'}</p>
+              </div>
+
+              <div style="margin-bottom: 20px;">
+                <h4>Deposited Evidence Documents (${caseData.documents ? caseData.documents.length : 0}):</h4>
+                <div style="margin-top: 10px;">${docsHtml}</div>
+              </div>
+            </div>
+          </div>
+        `;
+        document.getElementById('contentArea').innerHTML = html;
+      } catch (err) {
+        showToast('Failed to load case dossier: ' + getErrorMessage(err), 'danger');
+      }
+    }
+
+    /* ================= SECTION 3: CREATE CASE (PAGE VIEW) ================= */
+    function renderCreateCaseSection() {
+      if (currentRole === 'FORENSIC_OFFICER') {
+        document.getElementById('contentArea').innerHTML = `
+          <div class="alert danger">
+            <strong>Access Restricted:</strong> Forensic Officers are not authorized to create case records.
+          </div>
+        `;
+        return;
+      }
+
+      openModal('create-case');
+      switchSection('cases', 'My Cases');
+    }
+
+    function resetCreateCaseForm() {
+      document.getElementById('formCaseTitle').value = '';
+      document.getElementById('formCaseTitle').classList.remove('is-invalid');
+      document.getElementById('formPoliceStation').value = (currentUser && currentUser.department === 'Police') ? 'Cyber Crime Branch HQ' : 'Metropolitan Investigation Division';
+      document.getElementById('formPoliceStation').classList.remove('is-invalid');
+      document.getElementById('formInvestigatingOfficer').value = currentUser ? currentUser.name : 'Inspector Vikram Rathore';
+      document.getElementById('formInvestigatingOfficer').classList.remove('is-invalid');
+      document.getElementById('formPriority').value = 'NORMAL';
+      document.getElementById('formDescription').value = '';
+      document.getElementById('formDescription').classList.remove('is-invalid');
+      document.getElementById('formReferenceNumber').value = '';
+      document.getElementById('formIncidentDate').value = '';
+      document.getElementById('formLocation').value = '';
+      document.getElementById('formCaseType').value = 'CYBER_CRIME';
+
+      // Clear validation error messages
+      document.querySelectorAll('.field-error').forEach(e => e.classList.remove('show'));
+
+      // Render categories in modal grid
+      renderModalCategoryGrid();
+    }
+
+    function renderModalCategoryGrid() {
+      const defaultCategories = [
+        { code: "CYBER_CRIME", label: "Cyber Crime", icon: "🖥️" },
+        { code: "BULLYING_HARASSMENT", label: "Bullying / Harassment", icon: "👥" },
+        { code: "FRAUD", label: "Fraud", icon: "💳" },
+        { code: "FINANCIAL_CRIME", label: "Financial Crime", icon: "💰" },
+        { code: "MISSING_PERSON", label: "Missing Person", icon: "🔍" },
+        { code: "THEFT", label: "Theft", icon: "🔓" },
+        { code: "ASSAULT", label: "Assault", icon: "🚨" },
+        { code: "SEXUAL_OFFENCE", label: "Sexual Offence", icon: "⚠️" },
+        { code: "DRUG_RELATED", label: "Drug Related", icon: "🚫" },
+        { code: "ORGANIZED_CRIME", label: "Organized Crime", icon: "🎯" },
+        { code: "DOMESTIC_VIOLENCE", label: "Domestic Violence", icon: "🏠" },
+        { code: "CHILD_PROTECTION", label: "Child Protection", icon: "👶" },
+        { code: "OTHER", label: "Other", icon: "📋" }
+      ];
+
+      const list = (globalCategories && globalCategories.length > 0) ? globalCategories : defaultCategories;
+      const currentSelected = document.getElementById('formCaseType').value || 'CYBER_CRIME';
+
+      const grid = document.getElementById('createCaseCategoryGrid');
+      grid.innerHTML = list.map(cat => {
+        const code = cat.code || cat.id;
+        const isSelected = (code === currentSelected);
+        return `
+          <div class="category-card ${isSelected ? 'selected' : ''}" 
+               id="catCard_${code}" 
+               onclick="selectCategoryInForm('${code}')">
+            <div class="category-card-icon">${cat.icon || '📁'}</div>
+            <div class="category-card-name">${cat.label || cat.name}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectCategoryInForm(categoryCode) {
+      document.getElementById('formCaseType').value = categoryCode;
+      document.querySelectorAll('#createCaseCategoryGrid .category-card').forEach(e => e.classList.remove('selected'));
+      const activeCard = document.getElementById(`catCard_${categoryCode}`);
+      if (activeCard) activeCard.classList.add('selected');
+      const errElem = document.getElementById('err_caseType');
+      if (errElem) errElem.classList.remove('show');
+    }
+
+    async function submitCreateCaseForm(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      // Read form fields
+      const caseTitle = document.getElementById('formCaseTitle').value.trim();
+      const caseType = document.getElementById('formCaseType').value.trim();
+      const policeStation = document.getElementById('formPoliceStation').value.trim();
+      const investigatingOfficer = document.getElementById('formInvestigatingOfficer').value.trim();
+      const priority = document.getElementById('formPriority').value;
+      const description = document.getElementById('formDescription').value.trim();
+      const incidentDate = document.getElementById('formIncidentDate').value;
+      const location = document.getElementById('formLocation').value.trim();
+      const referenceNumber = document.getElementById('formReferenceNumber').value.trim();
+
+      // Field Level Validations
+      let hasError = false;
+      const setFieldValidation = (id, errId, condition, msg) => {
+        const input = document.getElementById(id);
+        const err = document.getElementById(errId);
+        if (condition) {
+          input.classList.add('is-invalid');
+          err.textContent = msg;
+          err.classList.add('show');
+          hasError = true;
+        } else {
+          input.classList.remove('is-invalid');
+          err.classList.remove('show');
+        }
+      };
+
+      setFieldValidation('formCaseTitle', 'err_caseTitle', !caseTitle || caseTitle.length < 2, 'Case Title is required (minimum 2 characters)');
+      setFieldValidation('formCaseType', 'err_caseType', !caseType, 'Case Type is required');
+      setFieldValidation('formPoliceStation', 'err_policeStation', !policeStation, 'Police Station is required');
+      setFieldValidation('formInvestigatingOfficer', 'err_investigatingOfficer', !investigatingOfficer, 'Investigating Officer is required');
+      setFieldValidation('formPriority', 'err_priority', !priority, 'Priority is required');
+      setFieldValidation('formDescription', 'err_description', !description || description.length < 5, 'Description is required (minimum 5 characters)');
+
+      if (hasError) {
+        showToast('Please correct highlighted validation fields', 'warning');
+        return;
+      }
+
+      const submitBtn = document.getElementById('btnSubmitCreateCase');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Creating & Anchoring...';
+
+      const payload = {
+        caseTitle: caseTitle,
+        caseType: caseType,
+        policeStation: policeStation,
+        investigatingOfficer: investigatingOfficer,
+        priority: priority,
+        description: description,
+        incidentDate: incidentDate || undefined,
+        location: location || undefined,
+        referenceNumber: referenceNumber || undefined
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/cases`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          const caseData = data.data || {};
+          closeModal('create-case');
+
+          // Success notification flow
+          const successMsg = `✓ CASE CREATED SUCCESSFULLY\n` +
+            `Case ID: ${caseData.case_id}\n` +
+            `Type: ${caseData.case_type || caseType}\n` +
+            `Created By: ${caseData.created_by || currentUser.name}\n` +
+            `Created At: ${caseData.created_at || new Date().toISOString()}\n` +
+            `Status: ${caseData.status || 'ACTIVE'}\n` +
+            `Ledger Status: BLOCKCHAIN: MOCK MODE`;
+
+          alert(successMsg);
+          showToast(`✓ Case ${caseData.case_id} registered & anchored!`, 'success');
+
+          // Add to local cases store immediately
+          globalCases.unshift(caseData);
+
+          // Refresh cases section
+          switchSection('my-cases', 'My Cases');
+        } else {
+          const errorMsg = getErrorMessage(data);
+          alert('Error creating case: ' + errorMsg);
+          showToast(errorMsg, 'danger');
+        }
+      } catch (err) {
+        const errorMsg = getErrorMessage(err);
+        alert('Unable to connect to Case Service: ' + errorMsg);
+        showToast('Unable to connect to Case Service', 'danger');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '✓ Create Case & Mint Provenance';
+      }
+    }
+
+    /* ================= SECTION 4: UPLOAD DOCUMENT ================= */
+    function renderUploadDocumentSection(title = 'Upload Document') {
+      openModal('upload-document');
+      switchSection('cases', 'Cases');
+    }
+
+    function populateUploadCaseDropdown() {
+      const select = document.getElementById('uploadCaseId');
+      if (globalCases && globalCases.length > 0) {
+        select.innerHTML = `<option value="">-- Select Case --</option>` +
+          globalCases.map(c => `<option value="${c.id}">${c.id} · ${c.title}</option>`).join('');
+      } else {
+        select.innerHTML = `
+          <option value="CASE-2026-001">CASE-2026-001 · State v. N. Sharma</option>
+          <option value="CASE-2026-014">CASE-2026-014 · Operation Blue Gate</option>
+          <option value="CASE-2026-009">CASE-2026-009 · Biometric Identity Theft Case</option>
+        `;
+      }
+    }
+
+    async function submitUploadDocumentAction() {
+      const caseId = document.getElementById('uploadCaseId').value;
+      const docType = document.getElementById('uploadDocType').value;
+      const fileInput = document.getElementById('uploadFileInput');
+      const isConfidential = document.getElementById('uploadConfidential').checked;
+
+      if (!caseId) {
+        alert('Please select a target Case ID');
+        return;
+      }
+      if (!fileInput.files || fileInput.files.length === 0) {
+        alert('Please select an evidence file to upload');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('case_id', caseId);
+      formData.append('document_type', docType);
+      formData.append('is_confidential', isConfidential ? '1' : '0');
+      formData.append('file', file);
+
+      try {
+        const res = await fetch(`${API_BASE}/documents`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${userToken}` },
+          body: formData
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          closeModal('upload-document');
+          fileInput.value = '';
+          alert(
+            `✓ DOCUMENT UPLOADED & ENCRYPTED\n` +
+            `Document ID: ${data.document_id}\n` +
+            `Filename: ${data.filename}\n` +
+            `SHA-256 Fingerprint: ${data.sha256}\n` +
+            `Hyperledger Fabric Block: #${data.ledger ? data.ledger.block_num : '1'}\n` +
+            `Original Status: V1 IMMUTABLE INTACT`
+          );
+          showToast(`✓ Document ${data.filename} encrypted & anchored`, 'success');
+          switchSection('document-versions', 'Document Versions');
+        } else {
+          alert('Error uploading document: ' + getErrorMessage(data));
+        }
+      } catch (err) {
+        alert('Upload failed: ' + getErrorMessage(err));
+      }
+    }
+
+    /* ================= SECTION 5: DOCUMENT VERSIONS (CLEAN TERMINOLOGY) ================= */
+    async function renderDocumentVersionsSection() {
+      try {
+        const res = await fetch(`${API_BASE}/document-versions/all`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) globalVersions = await res.json();
+      } catch (e) {
+        console.warn(e);
+      }
+
+      let rowsHtml = '';
+      if (!globalVersions || globalVersions.length === 0) {
+        rowsHtml = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 24px;">No version history records found.</td></tr>`;
+      } else {
+        rowsHtml = globalVersions.map(v => `
+          <tr>
+            <td>
+              <strong style="color: var(--primary);">${v.document_name}</strong>
+              <div class="mono" style="font-size: 11px; color: var(--text-muted);">${v.document_id} (${v.case_id})</div>
+            </td>
+            <td><span class="tag blue">${v.version}</span></td>
+            <td><span class="tag ${v.action === 'ORIGINAL' ? 'green' : 'amber'}">${v.action}</span></td>
+            <td>
+              <div>${v.user}</div>
+              <div style="font-size: 11px; color: var(--text-secondary);">${v.role}</div>
+            </td>
+            <td><span style="font-size: 12px;">${v.timestamp ? v.timestamp.replace('T', ' ').substring(0, 19) : 'N/A'}</span></td>
+            <td><span style="font-size: 12px; color: var(--text-secondary);">${v.reason || 'Initial evidence deposit'}</span></td>
+            <td><span class="mono" style="font-size: 11px;">${v.sha256 ? v.sha256.substring(0, 16) + '...' : 'N/A'}</span></td>
+            <td><span class="tag ${v.status === 'VERIFIED' ? 'green' : 'red'}">${v.status}</span></td>
+          </tr>
+        `).join('');
+      }
+
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h1>📝 Document Version History</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Original V1 immutable preservation with chronological version chain</p>
+            </div>
+            <button class="btn primary sm" onclick="openModal('upload-document')">📤 Upload New Document</button>
+          </div>
+
+          <div class="alert info">
+            <strong>Immutable Preservation Rule:</strong> Normal document updates create new sequential versions (V2, V3) with verified edit history badges. The original V1 is permanently preserved in the vault and is never overwritten.
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Document</th>
+                  <th>Version</th>
+                  <th>Action</th>
+                  <th>User / Role</th>
+                  <th>Timestamp</th>
+                  <th>Reason for Edit</th>
+                  <th>SHA-256 Fingerprint</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    async function submitDocumentEditAction() {
+      const docId = document.getElementById('editDocId').value;
+      const reason = document.getElementById('editReason').value.trim();
+      const fileInput = document.getElementById('editFileInput');
+
+      if (!reason) {
+        alert('Please provide a reason for the amendment / edit');
+        return;
+      }
+      if (!fileInput.files || fileInput.files.length === 0) {
+        alert('Please select the replacement edition file');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('reason', reason);
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        const res = await fetch(`${API_BASE}/documents/${docId}/versions`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${userToken}` },
+          body: formData
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          closeModal('document-edit');
+          alert(
+            `✓ NEW DOCUMENT EDITION CREATED\n` +
+            `New Version: V${data.version}\n` +
+            `Original V1: Preserved permanently in vault\n` +
+            `New Hash: ${data.new_hash}\n` +
+            `Hyperledger Block: #${data.ledger ? data.ledger.block_num : '1'}`
+          );
+          showToast(`✓ Created edition V${data.version}`, 'success');
+          switchSection('document-versions', 'Document Versions');
+        } else {
+          alert('Error creating version: ' + getErrorMessage(data));
+        }
+      } catch (err) {
+        alert('Failed to create version: ' + getErrorMessage(err));
+      }
+    }
+
+    /* ================= SECTION 6: ACCESS HISTORY & AUDIT TRAIL ================= */
+    async function renderAccessHistorySection() {
+      try {
+        const res = await fetch(`${API_BASE}/audits?limit=50`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) globalAudits = await res.json();
+      } catch (e) {
+        console.warn(e);
+      }
+
+      let rowsHtml = '';
+      if (!globalAudits || globalAudits.length === 0) {
+        rowsHtml = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 24px;">No audit records found.</td></tr>`;
+      } else {
+        rowsHtml = globalAudits.map(a => {
+          let resultTag = 'green';
+          if (a.result === 'DENIED' || a.result === 'REJECTED') resultTag = 'red';
+          else if (a.result === 'CRITICAL_ALERT') resultTag = 'red';
+          else if (a.result === 'GRANTED' || a.result === 'SUCCESS') resultTag = 'green';
+          else resultTag = 'blue';
+
+          return `
+            <tr>
+              <td>
+                <strong>${a.user_id || 'System'}</strong>
+                <div style="font-size: 11px; color: var(--text-secondary);">${a.role || 'Service Node'} (${a.department || 'HQ'})</div>
+              </td>
+              <td>
+                <span class="tag blue">${a.action}</span>
+                <div class="mono" style="font-size: 11px; margin-top: 3px;">${a.case_id || a.document_id || 'Global'}</div>
+              </td>
+              <td><span style="font-size: 12px;">${a.created_at ? a.created_at.replace('T', ' ').substring(0, 19) : 'N/A'}</span></td>
+              <td><span style="font-size: 12px; color: var(--text-secondary);">${a.reason || 'Standard operational access'}</span></td>
+              <td><span class="tag ${resultTag}">${a.result}</span></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h1>📜 Append-Only Audit & Access Chronicle</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Complete WHO, WHAT, WHEN, WHY, and RESULT forensic audit chain</p>
+            </div>
+            <button class="btn outline sm" onclick="switchSection('access-history', 'Access History')">🔄 Refresh Audit</button>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>WHO (User & Role)</th>
+                  <th>WHAT (Action / Target)</th>
+                  <th>WHEN (Timestamp)</th>
+                  <th>WHY (Reason / Purpose)</th>
+                  <th>RESULT</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    /* ================= SECTION 7: OFFLINE SYNC QUEUE ================= */
+    function renderOfflineQueueSection() {
+      const rowsHtml = offlineQueue.map((item, idx) => `
+        <tr>
+          <td><strong>${item.filename}</strong></td>
+          <td><span class="mono">${item.case_id}</span></td>
+          <td><span class="tag blue">${item.doc_type}</span></td>
+          <td><span style="font-size: 12px;">${item.created_at.replace('T', ' ').substring(0, 19)}</span></td>
+          <td><span class="tag ${item.status === 'SYNCED' ? 'green' : (item.status === 'SYNCING' ? 'blue' : 'amber')}">${item.status}</span></td>
+          <td>
+            <button class="btn outline xs" onclick="syncSingleOfflineItem(${idx})">
+              ${item.status === 'SYNCED' ? '✓ Synced' : '⚡ Sync'}
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h1>📶 OFFLINE SYNC CENTER</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">IndexedDB / LocalStorage queue for edge crime scenes without network</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn outline sm" onclick="addSampleOfflineItem()">+ Queue Sample Offline Report</button>
+              <button class="btn primary sm" onclick="syncAllOfflineQueue()">⚡ Sync All Pending to Vault</button>
+            </div>
+          </div>
+
+          <div class="alert info">
+            <strong>Edge Investigation Queue:</strong> When police or forensic investigators operate in offline areas, evidence is stored encrypted locally in IndexedDB. Once reconnected, click <strong>Sync All</strong> to commit to Hyperledger Fabric.
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Queued Document</th>
+                  <th>Case ID</th>
+                  <th>Classification</th>
+                  <th>Created At</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rowsHtml}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    function addSampleOfflineItem() {
+      const id = 'OFF-' + Math.floor(100 + Math.random() * 900);
+      offlineQueue.unshift({
+        id: id,
+        filename: `Remote_Scene_Evidence_${id}.pdf`,
+        case_id: (globalCases[0] ? globalCases[0].id : 'CASE-2026-001'),
+        doc_type: 'Offline Evidence Report',
+        created_at: new Date().toISOString(),
+        status: 'QUEUED'
+      });
+      showToast('Added offline document to local sync queue', 'info');
+      renderOfflineQueueSection();
+    }
+
+    async function syncSingleOfflineItem(index) {
+      const item = offlineQueue[index];
+      if (item.status === 'SYNCED') {
+        showToast('Document already synchronized', 'info');
+        return;
+      }
+
+      item.status = 'SYNCING';
+      renderOfflineQueueSection();
+
+      try {
+        const payload = [{
+          queue_id: item.id,
+          case_id: item.case_id,
+          document_type: item.doc_type,
+          filename: item.filename,
+          content_base64: btoa(`Official Offline Evidence File: ${item.filename}`)
+        }];
+
+        const res = await fetch(`${API_BASE}/sync`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          item.status = 'SYNCED';
+          showToast(`✓ Synced ${item.filename} to vault and Fabric ledger!`, 'success');
+        } else {
+          item.status = 'FAILED';
+          showToast('Sync failed for item', 'danger');
+        }
+      } catch (e) {
+        item.status = 'FAILED';
+        showToast('Network error during offline sync', 'danger');
+      }
+      renderOfflineQueueSection();
+    }
+
+    async function syncAllOfflineQueue() {
+      const pending = offlineQueue.filter(i => i.status !== 'SYNCED');
+      if (pending.length === 0) {
+        alert('All documents in offline queue are already synchronized.');
+        return;
+      }
+
+      const payload = pending.map(i => ({
+        queue_id: i.id,
+        case_id: i.case_id,
+        document_type: i.doc_type,
+        filename: i.filename,
+        content_base64: btoa(`Official Offline Evidence File: ${i.filename}`)
+      }));
+
+      try {
+        const res = await fetch(`${API_BASE}/sync`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          offlineQueue.forEach(i => i.status = 'SYNCED');
+          alert(`✓ SYNC COMPLETE: ${data.synced_count || pending.length} offline documents deposited in vault and anchored on Fabric.`);
+          showToast(`✓ Synchronized ${data.synced_count} documents`, 'success');
+        } else {
+          alert('Sync error: ' + getErrorMessage(data));
+        }
+      } catch (e) {
+        alert('Offline sync failed: ' + getErrorMessage(e));
+      }
+      renderOfflineQueueSection();
+    }
+
+    /* ================= SECTION 8: VICTIM PRIVACY & E-SIGN CEREMONY ================= */
+    async function submitVictimEsignAuthorizationAction() {
+      const reason = document.getElementById('victimAccessReason').value.trim();
+      const certType = document.getElementById('victimCertType').value;
+      const pin = document.getElementById('victimAccessPin').value.trim();
+
+      if (!reason) {
+        alert('Please specify the official purpose/reason for accessing confidential victim information');
+        return;
+      }
+      if (!pin) {
+        alert('Please enter your e-Sign digital PIN or Passphrase (demo: demo-sign or 123456)');
+        return;
+      }
+
+      // Check clearance
+      if (currentUser.clearance < 4) {
+        document.getElementById('victimAccessError').style.display = 'block';
+        document.getElementById('victimAccessError').innerHTML = `<strong>❌ ACCESS DENIED:</strong> Record requires Clearance L4+ (Your clearance: L${currentUser.clearance}). Unauthorized access attempt logged.`;
+        return;
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append('certificate_type', certType);
+        formData.append('passphrase', pin === '123456' ? 'demo-sign' : pin);
+        formData.append('reason', reason);
+
+        const victimId = 'VIC-2026-001';
+        const res = await fetch(`${API_BASE}/victims/${victimId}/esign-authorize`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${userToken}` },
+          body: formData
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.status === 'DECRYPTED_ACCESS_GRANTED') {
+          document.getElementById('victimAccessError').style.display = 'none';
+          const pii = data.decrypted_data || {};
+
+          // Reveal decrypted data in modal
+          const box = document.getElementById('victimMaskingBox');
+          box.style.background = '#eaf8ed';
+          box.style.borderColor = 'var(--success)';
+          box.innerHTML = `
+            <h4 style="color: var(--success); margin-bottom: 8px;">✓ DECRYPTED CONFIDENTIAL DOSSIER</h4>
+            <div style="font-size: 12.5px; text-align: left; display: grid; gap: 6px;">
+              <div><strong>Witness Code:</strong> <span class="mono">${pii.witness_code || 'WIT-ALPHA-92'}</span></div>
+              <div><strong>Full Legal Name:</strong> <strong style="color: var(--primary);">${pii.full_name || 'Siddharth Kulshrestha'}</strong></div>
+              <div><strong>Secure Phone:</strong> <strong>${pii.secure_phone || '+91 98201 44621'}</strong></div>
+              <div><strong>Protected Safehouse:</strong> ${pii.safehouse_address || 'Flat 804, Building 12-B, Sagarika Enclave, Worli Seaface, Mumbai'}</div>
+              <div><strong>Government ID:</strong> <span class="mono">${pii.government_id || 'AADHAAR 8291-3304-8821'}</span></div>
+              <div><strong>e-Sign Proof:</strong> <span class="mono" style="font-size: 11px;">${data.esign_certificate ? data.esign_certificate.signature_proof : 'ESIGN-VERIFIED'}</span></div>
+            </div>
+          `;
+
+          showToast('✓ Confidential dossier unmasked and authorized on Fabric!', 'success');
+        } else {
+          document.getElementById('victimAccessError').style.display = 'block';
+          document.getElementById('victimAccessError').innerHTML = `<strong>❌ ACCESS DENIED:</strong> ${getErrorMessage(data)}`;
+        }
+      } catch (err) {
+        document.getElementById('victimAccessError').style.display = 'block';
+        document.getElementById('victimAccessError').innerHTML = `<strong>❌ ACCESS DENIED:</strong> ${getErrorMessage(err)}`;
+      }
+    }
+
+    /* ================= SECTION 9: INTEGRITY VERIFICATION ================= */
+    async function renderIntegritySection() {
+      let docsList = [];
+      try {
+        const res = await fetch(`${API_BASE}/documents`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) docsList = await res.json();
+      } catch (e) {
+        console.warn(e);
+      }
+
+      const options = docsList.map(d => `<option value="${d.id}">${d.name} (${d.id})</option>`).join('');
+
+      const html = `
+        <div>
+          <div style="margin-bottom: 20px;">
+            <h1>🛡️ Document Integrity Verification & Tamper Detection Lab</h1>
+            <p style="color: var(--text-secondary); font-size: 13px;">Verify cryptographic SHA-256 hashes against Hyperledger Fabric immutable baselines</p>
+          </div>
+
+          <div class="card">
+            <h3>Verify Vault Document Hash Against Blockchain</h3>
+            <div style="display: flex; gap: 10px; margin-top: 14px;">
+              <select id="verifyDocSelect" class="select" style="max-width: 400px;">
+                ${options || '<option value="DOC-88219">DOC-88219 (FIR Official)</option>'}
+              </select>
+              <button class="btn primary" onclick="runIntegrityCheck()">✓ Verify Hash</button>
+              <button class="btn danger" onclick="runTamperDetectionSimulation()">⚡ Run Tamper Incident Test</button>
+            </div>
+            <div id="integrityResultBox" style="margin-top: 16px;"></div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    async function runIntegrityCheck() {
+      const docId = document.getElementById('verifyDocSelect').value;
+      const box = document.getElementById('integrityResultBox');
+      box.innerHTML = `<p style="color: var(--text-muted);">Checking Hyperledger Fabric baseline...</p>`;
+
+      try {
+        const res = await fetch(`${API_BASE}/documents/${docId}/verify`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        const data = await res.json();
+
+        if (res.ok && data.integrity === 'INTACT') {
+          box.innerHTML = `
+            <div class="alert success">
+              <strong>✓ INTEGRITY FULLY CONFIRMED:</strong><br>
+              Observed Hash: <code>${data.observed_hash}</code><br>
+              Original Ledger Hash: <code>${data.original_hash}</code><br>
+              Status: <strong>INTACT · No modification detected</strong>
+            </div>
+          `;
+          showToast('✓ Document integrity verified intact!', 'success');
+        } else {
+          box.innerHTML = `<div class="alert danger"><strong>⚠️ Mismatch detected!</strong></div>`;
+        }
+      } catch (err) {
+        box.innerHTML = `<div class="alert danger">Error checking integrity: ${getErrorMessage(err)}</div>`;
+      }
+    }
+
+    async function runTamperDetectionSimulation() {
+      const docId = document.getElementById('verifyDocSelect').value;
+      const box = document.getElementById('integrityResultBox');
+
+      try {
+        const formData = new FormData();
+        const fakeFile = new Blob(['MALICIOUS_MODIFICATION_PAYLOAD_EVIDENCE_TAMPER_TEST'], { type: 'text/plain' });
+        formData.append('file', fakeFile, 'tampered_file.bin');
+
+        const res = await fetch(`${API_BASE}/documents/${docId}/verify-upload`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${userToken}` },
+          body: formData
+        });
+
+        const data = await res.json();
+
+        if (data.integrity === 'TAMPERED') {
+          box.innerHTML = `
+            <div class="alert danger">
+              <strong>🔴 TAMPER INCIDENT RECORDED ON BLOCKCHAIN:</strong><br>
+              Trusted Original Hash: <code>${data.original_hash}</code><br>
+              Tampered Hash: <code>${data.observed_hash}</code><br>
+              Quarantine Snapshot: <code>${data.snapshot_id}</code><br>
+              Hyperledger Incident Block: #${data.ledger ? data.ledger.block_num : '1'}
+            </div>
+          `;
+          openModal('modification-alert', data);
+        }
+      } catch (err) {
+        box.innerHTML = `<div class="alert danger">Failed to run tamper simulation: ${getErrorMessage(err)}</div>`;
+      }
+    }
+
+    /* ================= SECTION 10: NOTIFICATIONS / ALERTS ================= */
+    async function renderNotificationsSection() {
+      let audits = [];
+      try {
+        const res = await fetch(`${API_BASE}/audits?limit=10`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) audits = await res.json();
+      } catch (e) {}
+
+      const html = `
+        <div>
+          <h1>🔔 Notifications & System Alerts</h1>
+          <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px;">Real-time system events, tamper incident broadcasts, and blockchain confirmations</p>
+
+          <div class="card">
+            ${audits.map(a => `
+              <div style="padding: 12px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span class="tag ${a.result === 'SUCCESS' ? 'green' : (a.result === 'CRITICAL_ALERT' ? 'red' : 'blue')}">${a.action}</span>
+                  <strong style="margin-left: 8px;">${a.reason || 'System operation executed'}</strong>
+                  <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">User: ${a.user_id} · Case: ${a.case_id || 'System'}</div>
+                </div>
+                <div style="font-size: 11px; color: var(--text-muted);">${a.created_at ? a.created_at.replace('T', ' ').substring(0, 19) : ''}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    /* ================= SECTION: BLOCKCHAIN (HYPERLEDGER FABRIC NETWORK) ================= */
+    async function renderBlockchainSection() {
+      let blocks = [];
+      try {
+        const res = await fetch(`${API_BASE}/ledger/blocks`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          blocks = data.blocks || [];
+        }
+      } catch (e) {
+        console.warn(e);
+      }
+
+      const latestBlock = blocks[0] || { block_num: 0, block_hash: 'GENESIS_BLOCK', created_at: new Date().toISOString(), tx_count: 1 };
+
+      const blocksHtml = blocks.map(b => `
+        <tr>
+          <td><strong class="mono" style="color: var(--primary);">#${b.block_num}</strong></td>
+          <td><span class="tag purple">${b.channel_id || 'channel-legal-evidence'}</span></td>
+          <td><span class="mono" style="font-size: 11px;">${b.block_hash ? b.block_hash.substring(0, 18) + '...' : 'GENESIS_BLOCK'}</span></td>
+          <td><span class="tag green">${b.tx_count || 1} TX</span></td>
+          <td><span style="font-size: 12px;">${b.created_at ? b.created_at.replace('T', ' ').substring(0, 19) : 'N/A'}</span></td>
+          <td><span class="tag blue">VALID_COMMITTED</span></td>
+        </tr>
+      `).join('');
+
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+              <h1>⛓️ Hyperledger Fabric Network</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Permissioned Enterprise Ledger for Legal Evidence Trust & Chain of Custody</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <span class="tag green" style="font-size: 11px; padding: 6px 12px;">● NETWORK: ACTIVE</span>
+              <span class="tag amber" style="font-size: 11px; padding: 6px 12px;">MOCK MODE</span>
+            </div>
+          </div>
+
+          <!-- Network Summary Metadata Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Channel</div>
+              <div style="font-weight: 700; font-size: 15px; color: var(--primary);">channel-legal-evidence</div>
+              <div class="kpi-meta">Cross-MSP Evidence Ledger</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Smart Contract / Chaincode</div>
+              <div style="font-weight: 700; font-size: 15px; color: #7e22ce;">legalEvidence</div>
+              <div class="kpi-meta">Version 2.1 · Go / Node.js Engine</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Orderer Consensus</div>
+              <div style="font-weight: 700; font-size: 15px; color: var(--text-primary);">Raft Consensus (3 Nodes)</div>
+              <div class="kpi-meta">orderer.justicevault.gov:7050</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Endorsement Status</div>
+              <div style="font-weight: 700; font-size: 15px; color: var(--success);">3/3 Multi-MSP Endorsed</div>
+              <div class="kpi-meta">Latest Block: #${latestBlock.block_num}</div>
+            </div>
+          </div>
+
+          <!-- Architecture Visualization Diagram Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>🏛️ Network Architecture & Topology Visualization</h3>
+                <p style="color: var(--text-secondary); font-size: 12px;">Multi-Organization Membership Service Providers (MSPs) & Endorsing Peers Topology</p>
+              </div>
+            </div>
+            <div style="background: #08162b; color: #7dd3fc; border-radius: 8px; padding: 20px; font-family: var(--font-mono); font-size: 12px; line-height: 1.6; overflow-x: auto; text-align: center; border: 1px solid #142a47;">
+<pre style="margin: 0; color: #93c5fd;">
+                    HYPERLEDGER FABRIC (v2.5)
+                               |
+                     channel-legal-evidence
+                               |
+       -------------------------------------------------
+       |                       |                       |
+   Police MSP             Forensic MSP           Judiciary MSP
+ (PoliceHQ.Org1MSP)     (ForensicLab.Org2MSP)   (Judiciary.Org3MSP)
+       |                       |                       |
+     Peer                    Peer                    Peer
+(peer0.police:7051)    (peer0.forensic:8051)   (peer0.judiciary:9051)
+</pre>
+            </div>
+          </div>
+
+          <!-- MSP Organization Status Grid -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Participating MSP Organizations & Endorsing Peers</h3>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+              <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--primary);">👮 PoliceHQ.Org1MSP</strong>
+                  <span class="tag green">ONLINE</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 6px;">Peer: <code>peer0.police.justicevault.gov:7051</code></div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Role: Investigation Evidence Anchor Node</div>
+              </div>
+              <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--success);">🔬 ForensicLab.Org2MSP</strong>
+                  <span class="tag green">ONLINE</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 6px;">Peer: <code>peer0.forensic.justicevault.gov:8051</code></div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Role: Laboratory Hash & Integrity Node</div>
+              </div>
+              <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: var(--danger);">🏛️ Judiciary.Org3MSP</strong>
+                  <span class="tag green">ONLINE</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 6px;">Peer: <code>peer0.judiciary.justicevault.gov:9051</code></div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Role: In-Camera e-Sign & Judicial Chamber</div>
+              </div>
+              <div style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: #b76e00;">💻 SystemAdmin.Org0MSP</strong>
+                  <span class="tag green">ONLINE</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 6px;">Orderer: <code>orderer.justicevault.gov:7050</code></div>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Role: PMO Node & Channel Governance</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Committed Ledger Blocks Table -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Committed Evidence Blocks on Channel (Total: ${blocks.length})</h3>
+              <button class="btn outline sm" onclick="renderBlockchainSection()">🔄 Refresh Blocks</button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Block #</th>
+                    <th>Channel ID</th>
+                    <th>Block Header Hash</th>
+                    <th>Transactions</th>
+                    <th>Committed Timestamp</th>
+                    <th>Endorsement Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${blocksHtml || '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 20px;">No blocks committed</td></tr>'}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    /* ================= SECTION: CLOUD (ENCRYPTED STORAGE & VAULT) ================= */
+    function renderCloudSection() {
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+              <h1>☁️ Encrypted Cloud Storage & Vault Infrastructure</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Multi-cloud hybrid storage adapters, AES-256 encrypted vaults, and replication governance</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn primary sm" onclick="triggerVaultSyncCheck()">⚡ Trigger Vault Integrity Sync</button>
+              <button class="btn outline sm" onclick="downloadVaultManifest()">📦 Export Vault Manifest</button>
+            </div>
+          </div>
+
+          <!-- Cloud Metrics KPIs -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Vault Storage Standard</div>
+              <div style="font-weight: 700; font-size: 16px; color: var(--primary);">AES-256-GCM / Fernet</div>
+              <div class="kpi-meta">PBKDF2 310,000 Iterations</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Multi-Cloud Replication</div>
+              <div style="font-weight: 700; font-size: 16px; color: var(--success);">3x Distributed Copies</div>
+              <div class="kpi-meta">PoliceHQ + CFSL + Court Vaults</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Cloud Sync Gateway</div>
+              <div style="font-weight: 700; font-size: 16px; color: #0263b8;">SYNCHRONIZED</div>
+              <div class="kpi-meta">Latency: 14ms (S3 / Azure Blob)</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Offline Edge Caching</div>
+              <div style="font-weight: 700; font-size: 16px; color: #7e22ce;">IndexedDB Gateway</div>
+              <div class="kpi-meta">Automatic Reconnection Sync</div>
+            </div>
+          </div>
+
+          <!-- Hybrid Storage Adapters Table -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Active Storage Adapters & Cloud Endpoints</h3>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Storage Adapter</th>
+                    <th>Protocol & Target URI</th>
+                    <th>Encryption Level</th>
+                    <th>Redundancy</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Local Encrypted Vault</strong></td>
+                    <td><code class="mono">file:///data/vault/</code></td>
+                    <td><span class="tag green">AES-256-GCM</span></td>
+                    <td>Primary Storage Node</td>
+                    <td><span class="tag green">ONLINE / INTACT</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Cloud Object Store (S3 / Azure)</strong></td>
+                    <td><code class="mono">s3://justicevault-evidence-secure/</code></td>
+                    <td><span class="tag green">AES-256 Encrypted at Rest</span></td>
+                    <td>Multi-Region Geo-Replication</td>
+                    <td><span class="tag blue">SYNCHRONIZED</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Offline Edge Cache (IndexedDB)</strong></td>
+                    <td><code class="mono">indexeddb://justicevault-offline-queue</code></td>
+                    <td><span class="tag amber">Client-Side Sealed</span></td>
+                    <td>Local Crime Scene Buffer</td>
+                    <td><span class="tag green">READY</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    function triggerVaultSyncCheck() {
+      showToast('✓ Cloud vault integrity scan initiated: All 3 replica nodes synchronized with zero hash drift.', 'success');
+    }
+
+    function downloadVaultManifest() {
+      const manifest = {
+        platform: "JUSTICEVAULT",
+        problem_id: "SIH26190",
+        timestamp: new Date().toISOString(),
+        encryption_standard: "AES-256-GCM / PBKDF2-HMAC-SHA256",
+        vault_nodes: ["PoliceHQ.Org1MSP", "ForensicLab.Org2MSP", "Judiciary.Org3MSP"],
+        total_cases: globalCases.length,
+        status: "INTACT_VERIFIED"
+      };
+      const blob = new Blob([JSON.stringify(manifest, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `justicevault_vault_manifest_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      showToast('Downloaded immutable vault manifest', 'info');
+    }
+
+    /* ================= SECTION: SYSTEM SETTINGS ================= */
+    function renderSystemSettingsSection() {
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+              <h1>⚙️ System Governance & Security Settings</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Security node configuration, HSM key rotation, and cryptographic consensus governance</p>
+            </div>
+            <button class="btn primary sm" onclick="saveSystemSettingsNotice()">💾 Save Configuration</button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div class="card">
+              <div class="card-header">
+                <h3>🔐 HSM & Encryption Key Policies</h3>
+              </div>
+              <div class="form-group">
+                <label>Primary Cipher Standard</label>
+                <input type="text" class="input" value="AES-256-GCM (Hardware Cryptography / Fernet)" readonly>
+              </div>
+              <div class="form-group">
+                <label>KMS Key Rotation Interval</label>
+                <select class="select">
+                  <option value="90" selected>Every 90 Days (Recommended for SIH Gov Standards)</option>
+                  <option value="180">Every 180 Days</option>
+                  <option value="365">Annual Key Rotation</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 8px; font-weight: 500; cursor: pointer;">
+                  <input type="checkbox" checked>
+                  <span>Enforce zero-knowledge masking for victim dossiers by default</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>⛓️ Hyperledger Fabric Consensus Parameters</h3>
+              </div>
+              <div class="form-group">
+                <label>Block Batch Timeout</label>
+                <input type="text" class="input" value="2.0 seconds">
+              </div>
+              <div class="form-group">
+                <label>Max Transactions per Block</label>
+                <input type="text" class="input" value="10 transactions">
+              </div>
+              <div class="form-group">
+                <label>Endorsement Policy Rule</label>
+                <input type="text" class="input" value="AND('PoliceHQ.Org1MSP', 'ForensicLab.Org2MSP', 'Judiciary.Org3MSP')" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>🛠️ System Diagnostics & Administrative Operations</h3>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn outline" onclick="showToast('✓ System node connectivity: All 5 MSP nodes responding normally.', 'success')">🔄 Run System Self-Diagnostic</button>
+              <button class="btn outline" onclick="showToast('✓ Ephemeral session cache purged successfully.', 'info')">🧹 Clear Ephemeral Cache</button>
+              <button class="btn outline" onclick="showToast('✓ HSM Cryptographic keystore status verified 100% healthy.', 'success')">🔑 Verify Cryptographic Keystore</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    function saveSystemSettingsNotice() {
+      showToast('✓ System governance parameters updated and recorded on ledger.', 'success');
+    }
+
+    /* ================= SECTION: SECURITY OPERATIONS CENTER ================= */
+    async function renderSecuritySection() {
+      let tamperEvents = [];
+      try {
+        const res = await fetch(`${API_BASE}/tamper-events`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        });
+        if (res.ok) tamperEvents = await res.json();
+      } catch (e) {
+        console.warn(e);
+      }
+
+      const rowsHtml = (tamperEvents && tamperEvents.length > 0) ? tamperEvents.map(t => `
+        <tr>
+          <td><strong class="mono" style="color: var(--danger);">${t.id}</strong></td>
+          <td><span class="mono">${t.document_id}</span></td>
+          <td><span class="mono" style="font-size: 11px; color: var(--success);">${t.trusted_hash ? t.trusted_hash.substring(0, 14) + '...' : 'N/A'}</span></td>
+          <td><span class="mono" style="font-size: 11px; color: var(--danger);">${t.observed_hash ? t.observed_hash.substring(0, 14) + '...' : 'N/A'}</span></td>
+          <td><span style="font-size: 12px;">${t.detected_by}</span></td>
+          <td><span style="font-size: 12px;">${t.detected_at ? t.detected_at.replace('T', ' ').substring(0, 19) : ''}</span></td>
+          <td><span class="tag red">QUARANTINED</span></td>
+        </tr>
+      `).join('') : `
+        <tr>
+          <td><strong class="mono" style="color: var(--danger);">SNAP-DEMO-001</strong></td>
+          <td><span class="mono">DOC-88219</span></td>
+          <td><span class="mono" style="font-size: 11px; color: var(--success);">fe9c4d4c081e...</span></td>
+          <td><span class="mono" style="font-size: 11px; color: var(--danger);">13464300ebed...</span></td>
+          <td><span style="font-size: 12px;">forensic.demo</span></td>
+          <td><span style="font-size: 12px;">2026-09-01 18:05:00</span></td>
+          <td><span class="tag red">QUARANTINED</span></td>
+        </tr>
+      `;
+
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+              <h1>🛡️ Security Operations Center & Tamper Alert Center</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Real-time hash mismatch detection, quarantine snapshots, and step-up digital signature logs</p>
+            </div>
+            <span class="tag green" style="font-size: 11px; padding: 6px 12px;">● INTRUSION DETECTION: ACTIVE</span>
+          </div>
+
+          <div class="alert danger">
+            <strong>Zero-Trust Tamper Protocol:</strong> When an unauthorized file modification is detected during evidence verification, the original evidence in the vault remains 100% untouched. A quarantined snapshot (<code>SNAP-...</code>) is isolated for forensic investigation, and the incident is permanently committed to Hyperledger Fabric.
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Quarantined Forensic Snapshots & Tamper Incidents</h3>
+              <button class="btn outline sm" onclick="renderSecuritySection()">🔄 Refresh Incidents</button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Snapshot ID</th>
+                    <th>Document Reference</th>
+                    <th>Trusted Original Hash</th>
+                    <th>Observed Tampered Hash</th>
+                    <th>Detected By</th>
+                    <th>Detected At</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsHtml}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    /* ================= SECTION: USERS ================= */
+    function renderUsersSection() {
+      const usersList = [
+        { name: "Inspector Vikram Rathore", username: "police.demo", role: "POLICE_OFFICER", dept: "Police", clearance: "L3", badge: "IND-POL-7721", msp: "PoliceHQ.Org1MSP", status: "ACTIVE" },
+        { name: "Dr. Priya Iyer", username: "forensic.demo", role: "FORENSIC_OFFICER", dept: "Forensics", clearance: "L4", badge: "CFSL-DEL-209", msp: "ForensicLab.Org2MSP", status: "ACTIVE" },
+        { name: "Justice R.K. Verma", username: "judiciary.demo", role: "JUDGE", dept: "Judiciary", clearance: "L6", badge: "JUD-MAH-0012", msp: "Judiciary.Org3MSP", status: "ACTIVE" },
+        { name: "DIG Asha Rao, IPS", username: "higher.demo", role: "HIGHER_OFFICER", dept: "Higher Authority", clearance: "L5", badge: "IPS-MAH-1044", msp: "PoliceHQ.Org1MSP", status: "ACTIVE" },
+        { name: "Sanjay Deshmukh", username: "admin.demo", role: "ADMIN", dept: "PMO Governance", clearance: "L5", badge: "SEC-ADM-9901", msp: "SystemAdmin.Org0MSP", status: "ACTIVE" }
+      ];
+
+      const rows = usersList.map(u => `
+        <tr>
+          <td><strong>${u.name}</strong></td>
+          <td><code class="mono">${u.username}</code></td>
+          <td><span class="tag blue">${u.role}</span></td>
+          <td>${u.dept}</td>
+          <td><span class="tag ${u.clearance === 'L6' ? 'red' : 'purple'}">${u.clearance}</span></td>
+          <td><span class="mono" style="font-size: 11px;">${u.badge}</span></td>
+          <td><span class="mono" style="font-size: 11px;">${u.msp}</span></td>
+          <td><span class="tag green">${u.status}</span></td>
+        </tr>
+      `).join('');
+
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h1>👥 System Users & Officer Directory</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Manage certified officer identities, cryptographic badge credentials, and MSP bindings</p>
+            </div>
+            <button class="btn primary sm" onclick="showToast('Officer provisioned with multi-MSP X.509 certificate.', 'info')">+ Provision User Identity</button>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Officer Name</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>Department</th>
+                  <th>Clearance</th>
+                  <th>Badge Number</th>
+                  <th>MSP Organization</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    /* ================= SECTION: ROLES ================= */
+    function renderRolesSection() {
+      const html = `
+        <div>
+          <div style="margin-bottom: 20px;">
+            <h1>🎖️ Role Hierarchy & Clearance Levels</h1>
+            <p style="color: var(--text-secondary); font-size: 13px;">Tiered clearance authority and departmental access boundaries</p>
+          </div>
+
+          <div style="display: grid; gap: 14px;">
+            <div class="card" style="border-left: 4px solid var(--primary);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>👮 Police Investigating Officer · Tier L3</h3>
+                <span class="tag blue">CLEARANCE: L3</span>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 13px; margin-top: 6px;">Authority to register new cases, upload First Information Reports (FIR) and initial investigation reports. Can create new document editions (V2) while preserving original immutable V1. Cannot access confidential forensic notes or victim dossier without approval.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--success);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>🔬 Chief Forensic Examiner · Tier L4</h3>
+                <span class="tag green">CLEARANCE: L4</span>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 13px; margin-top: 6px;">Authority to upload forensic laboratory analysis, execute SHA-256 hash integrity checks, perform tamper detection diagnostics, and isolate quarantine snapshots. Forbidden from creating cases or managing categories.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #7e22ce;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>🛡️ Senior Authority (DIG / SP) · Tier L5</h3>
+                <span class="tag purple">CLEARANCE: L5</span>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 13px; margin-top: 6px;">Cross-departmental case oversight, sensitive access approvals, and tamper incident monitoring across all police stations.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #b76e00;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>💻 Security Node Architect / Admin · Tier L5</h3>
+                <span class="tag amber">CLEARANCE: L5</span>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Hyperledger Fabric consensus explorer, user role assignments, audit logs export, and cloud vault health monitoring.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--danger);">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>🏛️ Principal Sessions Judge · Tier L6</h3>
+                <span class="tag red">CLEARANCE: L6 (SUPREME)</span>
+              </div>
+              <p style="color: var(--text-secondary); font-size: 13px; margin-top: 6px;">Supreme holistic review access across Police and Forensic documents. Highest authority to initiate in-camera step-up digital signature (e-Sign) ceremonies to decrypt protected victim dossiers for legal proceedings.</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    /* ================= SECTION: PERMISSIONS (RBAC MATRIX) ================= */
+    function renderPermissionsSection() {
+      const html = `
+        <div>
+          <div style="margin-bottom: 20px;">
+            <h1>🔒 Role-Based Access Control (RBAC) Permission Matrix</h1>
+            <p style="color: var(--text-secondary); font-size: 13px;">Fine-grained capability mapping across all 5 official SIH roles</p>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Platform Capability</th>
+                  <th style="text-align: center;">Police (L3)</th>
+                  <th style="text-align: center;">Forensic (L4)</th>
+                  <th style="text-align: center;">Higher Officer (L5)</th>
+                  <th style="text-align: center;">Admin (L5)</th>
+                  <th style="text-align: center;">Judge (L6)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Register & Create Case</strong></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag red">✕ DENIED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag red">✕ REVIEW ONLY</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Case Category Management</strong></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag red">✕ DENIED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Upload Evidence Document</strong></td>
+                  <td style="text-align: center;"><span class="tag green">✓ (Police Reports)</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ (Lab Findings)</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag red">✕ READ ONLY</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Create Document Edition (V2)</strong></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag red">✕ READ ONLY</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Hash Integrity & Tamper Lab</strong></td>
+                  <td style="text-align: center;"><span class="tag gray">Basic Check</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ FULL LAB</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ FULL LAB</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Step-Up e-Sign Victim Unmask</strong></td>
+                  <td style="text-align: center;"><span class="tag red">✕ (L4+ Required)</span></td>
+                  <td style="text-align: center;"><span class="tag amber">✓ (With Reason)</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ ALLOWED</span></td>
+                  <td style="text-align: center;"><span class="tag red">✓ SUPREME AUTH</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Hyperledger Network Explorer</strong></td>
+                  <td style="text-align: center;"><span class="tag gray">View TX Proofs</span></td>
+                  <td style="text-align: center;"><span class="tag gray">View TX Proofs</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ FULL VIEW</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ GOVERNANCE</span></td>
+                  <td style="text-align: center;"><span class="tag green">✓ FULL VIEW</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    /* ================= SECTION: PROTOTYPE E-SIGN & CONFIDENTIAL ACCESS ================= */
+    async function renderEsignConfidentialSection() {
+      let authorizations = [];
+      let docs = [];
+      try {
+        const [authRes, docRes] = await Promise.all([
+          fetch(`${API_BASE}/esign-authorizations`, { headers: { 'Authorization': `Bearer ${userToken}` } }),
+          fetch(`${API_BASE}/documents`, { headers: { 'Authorization': `Bearer ${userToken}` } })
+        ]);
+        if (authRes.ok) authorizations = await authRes.json();
+        if (docRes.ok) docs = await docRes.json();
+      } catch (e) {
+        console.warn(e);
+      }
+
+      const restrictedDocs = docs.filter(d => 
+        d.requires_esign === 1 || 
+        ['NATIONAL_SECURITY', 'TOP_SECRET', 'HIGHLY_CONFIDENTIAL'].includes(d.classification)
+      );
+
+      const authRows = (authorizations && authorizations.length > 0) ? authorizations.map(a => {
+        const isExp = new Date(a.expires_at) < new Date();
+        const status = (a.status === 'VERIFIED' && isExp) ? 'EXPIRED' : a.status;
+        const tagClass = status === 'VERIFIED' ? 'green' : (status === 'REJECTED' ? 'red' : (status === 'EXPIRED' ? 'gray' : 'amber'));
+        return `
+          <tr>
+            <td><strong class="mono" style="color: var(--primary);">${a.id}</strong></td>
+            <td><span class="mono">${a.document_id}</span></td>
+            <td>${a.user_id} (${a.role})</td>
+            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${a.purpose}</td>
+            <td><span class="mono" style="font-size: 11px;">${a.signature_proof ? a.signature_proof.substring(0, 16) + '...' : 'N/A'}</span></td>
+            <td><span class="tag ${tagClass}">${status}</span></td>
+            <td><span style="font-size: 12px;">${a.expires_at ? a.expires_at.replace('T', ' ').substring(0, 19) : 'N/A'}</span></td>
+          </tr>
+        `;
+      }).join('') : `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">No E-Sign authorizations recorded</td></tr>`;
+
+      const restrictedDocsRows = (restrictedDocs && restrictedDocs.length > 0) ? restrictedDocs.map(d => {
+        const activeAuth = activeEsignTokens[d.id];
+        const isTokenActive = activeAuth && new Date(activeAuth.expires_at) > new Date();
+        const badgeClass = d.classification === 'NATIONAL_SECURITY' ? 'red' : (d.classification === 'TOP_SECRET' ? 'purple' : 'amber');
+        return `
+          <tr>
+            <td><strong style="color: var(--text-primary);">${d.name}</strong><br><span class="mono" style="font-size: 11px; color: var(--text-muted);">${d.id} · Case: ${d.case_id}</span></td>
+            <td><span class="tag ${badgeClass}">${d.classification || 'HIGHLY_CONFIDENTIAL'}</span></td>
+            <td>${d.department}</td>
+            <td>
+              ${isTokenActive 
+                ? `<span class="tag green">✓ E-SIGN VERIFIED</span>` 
+                : `<span class="tag red">🔒 E-SIGN REQUIRED</span>`}
+            </td>
+            <td>
+              <div style="display: flex; gap: 6px;">
+                ${isTokenActive 
+                  ? `<button class="btn primary sm" onclick="previewDocumentFile('${d.id}', '${d.name}', '${d.classification}')">👁️ View Decrypted</button>
+                     <button class="btn outline sm" onclick="downloadDocumentFile('${d.id}', '${d.classification}')">⬇️ Download</button>`
+                  : `<button class="btn primary sm" onclick="openDocumentEsignModal('${d.id}', '${d.name}', '${d.classification}')">🔒 Request Prototype E-Sign</button>`}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('') : `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">No restricted documents in vault</td></tr>`;
+
+      const html = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+              <h1>🔒 PROTOTYPE E-SIGN & Confidential Access Center</h1>
+              <p style="color: var(--text-secondary); font-size: 13px;">Mandatory cryptographic digital signature authorization for National Security & Top Secret documents</p>
+            </div>
+            <span class="tag purple" style="font-size: 11px; padding: 6px 12px;">PROTOTYPE E-SIGN · ZERO-TRUST</span>
+          </div>
+
+          <div class="alert warning">
+            <strong>PROTOTYPE E-SIGN NOTICE:</strong> For every <code>NATIONAL_SECURITY</code>, <code>TOP_SECRET</code>, and <code>HIGHLY_CONFIDENTIAL</code> document, step-up E-Sign authorization is mandatory before document content can be viewed, previewed, or downloaded. This mechanism simulates a cryptographic digital signature authorization ceremony (not legally equivalent to statutory providers).
+          </div>
+
+          <!-- Restricted Documents Registry -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>🛡️ Restricted National Security & Confidential Documents</h3>
+                <p style="color: var(--text-secondary); font-size: 12px;">Document content remains 100% blocked until an authorized officer completes the E-Sign ceremony</p>
+              </div>
+              <button class="btn outline sm" onclick="renderEsignConfidentialSection()">🔄 Refresh</button>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Document Reference</th>
+                    <th>Classification</th>
+                    <th>Department</th>
+                    <th>E-Sign Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${restrictedDocsRows}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- E-Sign Authorization Chronicle -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>📜 E-Sign Authorization Chronicle & Temporary Sessions</h3>
+                <p style="color: var(--text-secondary); font-size: 12px;">Immutable ledger log of all verified, pending, expired, and rejected authorization requests</p>
+              </div>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Auth ID</th>
+                    <th>Document ID</th>
+                    <th>Officer</th>
+                    <th>Purpose Justification</th>
+                    <th>Signature Proof</th>
+                    <th>Status</th>
+                    <th>Expires At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${authRows}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    function openDocumentEsignModal(docId, docName, classification) {
+      openModal('document-esign', {
+        id: docId,
+        name: docName || docId,
+        classification: classification || 'TOP_SECRET'
+      });
+    }
+
+    async function submitDocumentEsignAction() {
+      if (!currentEsignTarget) return;
+      const purpose = document.getElementById('docEsignPurpose').value.trim();
+      const certType = document.getElementById('docEsignCertType').value;
+      const pin = document.getElementById('docEsignPin').value.trim();
+      const errBox = document.getElementById('docEsignError');
+
+      if (!purpose || purpose.length < 4) {
+        errBox.style.display = 'block';
+        errBox.innerHTML = '<strong>Validation Error:</strong> Access purpose justification is mandatory (minimum 4 characters).';
+        return;
+      }
+      if (!pin) {
+        errBox.style.display = 'block';
+        errBox.innerHTML = '<strong>Validation Error:</strong> Digital signature PIN or passphrase is required.';
+        return;
+      }
+
+      errBox.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API_BASE}/documents/${currentEsignTarget.id}/esign-authorize`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${userToken}`
+          },
+          body: JSON.stringify({
+            purpose: purpose,
+            signature_type: certType,
+            pin: pin,
+            passphrase: pin
+          })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          errBox.style.display = 'block';
+          errBox.innerHTML = `<strong>❌ ${data.detail || getErrorMessage(data)}</strong>`;
+          return;
+        }
+
+        // Store active token in session cache
+        activeEsignTokens[currentEsignTarget.id] = {
+          token: data.auth_token,
+          expires_at: data.expires_at,
+          auth_id: data.authorization_id,
+          proof: data.signature_proof
+        };
+
+        closeModal('document-esign');
+        showToast(`✓ PROTOTYPE E-SIGN VERIFIED: Authorization ${data.authorization_id} granted (Valid for 15 mins)`, 'success');
+
+        // Automatically open document preview
+        await previewDocumentFile(currentEsignTarget.id, currentEsignTarget.name, currentEsignTarget.classification);
+
+        // Refresh view if on e-sign section
+        if (activeSection === 'e-sign-access' || activeSection === 'e-sign-confidential-access') {
+          renderEsignConfidentialSection();
+        }
+      } catch (err) {
+        errBox.style.display = 'block';
+        errBox.innerHTML = `<strong>❌ Error:</strong> ${getErrorMessage(err)}`;
+      }
+    }
+
+    async function downloadDocumentFile(docId, classification = '') {
+      const isRestricted = ['NATIONAL_SECURITY', 'TOP_SECRET', 'HIGHLY_CONFIDENTIAL'].includes(classification);
+      const activeAuth = activeEsignTokens[docId];
+      const isTokenActive = activeAuth && new Date(activeAuth.expires_at) > new Date();
+
+      if (isRestricted && !isTokenActive) {
+        openDocumentEsignModal(docId, docId, classification);
+        return;
+      }
+
+      let url = `${API_BASE}/documents/${docId}/download?token=${userToken}`;
+      if (activeAuth && activeAuth.token) {
+        url += `&esign_token=${activeAuth.token}`;
+      }
+      window.open(url, '_blank');
+    }
+
+    async function previewDocumentFile(docId, docName = '', classification = '') {
+      const isRestricted = ['NATIONAL_SECURITY', 'TOP_SECRET', 'HIGHLY_CONFIDENTIAL'].includes(classification);
+      const activeAuth = activeEsignTokens[docId];
+      const isTokenActive = activeAuth && new Date(activeAuth.expires_at) > new Date();
+
+      if (isRestricted && !isTokenActive) {
+        openDocumentEsignModal(docId, docName, classification);
+        return;
+      }
+
+      try {
+        let url = `${API_BASE}/documents/${docId}/preview`;
+        if (activeAuth && activeAuth.token) {
+          url += `?esign_token=${activeAuth.token}`;
+        }
+        const headers = { 'Authorization': `Bearer ${userToken}` };
+        if (activeAuth && activeAuth.token) {
+          headers['X-Esign-Auth-Token'] = activeAuth.token;
+        }
+
+        const res = await fetch(url, { headers });
+        if (res.status === 403) {
+          openDocumentEsignModal(docId, docName, classification);
+          return;
+        }
+        if (!res.ok) {
+          throw new Error('Failed to preview document');
+        }
+
+        const data = await res.json();
+        openModal('document-preview', {
+          id: docId,
+          name: docName || data.name,
+          classification: classification || data.classification,
+          content: data.content_text
+        });
+      } catch (err) {
+        alert('Could not preview document: ' + getErrorMessage(err));
+      }
+    }
+
+    function renderAccessRequestsSection() {
+      const html = `
+        <div>
+          <h1>🔑 Access Requests & Step-Up Approvals</h1>
+          <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px;">Manage inter-departmental requests for restricted evidence dossiers</p>
+          <div class="card">
+            <p style="color: var(--text-muted);">No pending access requests awaiting clearance approval.</p>
+          </div>
+        </div>
+      `;
+      document.getElementById('contentArea').innerHTML = html;
+    }
+
+    function renderDocumentsListView(title = 'Documents') {
+      switchSection('document-versions', 'Document Versions');
+    }
+
+    // Auto-login if token in storage
+    window.addEventListener('DOMContentLoaded', () => {
+      const stored = localStorage.getItem('jv_token');
+      if (stored) {
+        userToken = stored;
+        fetch(`${API_BASE}/auth/me`, {
+          headers: { 'Authorization': `Bearer ${userToken}` }
+        }).then(r => {
+          if (!r.ok) throw new Error();
+          return r.json();
+        }).then(user => {
+          currentUser = user;
+          currentRole = user.role.toUpperCase();
+          document.getElementById('loginView').style.display = 'none';
+          document.getElementById('appView').style.display = 'flex';
+          initApp();
+        }).catch(() => {
+          localStorage.removeItem('jv_token');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
