@@ -1,0 +1,99 @@
+{
+  "name": "justicevault-network",
+  "version": "1.0.0",
+  "client": {
+    "organization": "PoliceHQ",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        },
+        "orderer": "300"
+      }
+    }
+  },
+  "channels": {
+    "channel-legal-evidence": {
+      "orderers": [
+        "orderer.justicevault.gov.in"
+      ],
+      "peers": {
+        "peer0.police.justicevault.gov.in": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer0.forensic.justicevault.gov.in": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer0.judiciary.justicevault.gov.in": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  },
+  "organizations": {
+    "PoliceHQ": {
+      "mspid": "PoliceHQ.Org1MSP",
+      "peers": [
+        "peer0.police.justicevault.gov.in"
+      ],
+      "certificateAuthorities": [
+        "ca-police"
+      ]
+    },
+    "ForensicLab": {
+      "mspid": "ForensicLab.Org2MSP",
+      "peers": [
+        "peer0.forensic.justicevault.gov.in"
+      ],
+      "certificateAuthorities": [
+        "ca-forensic"
+      ]
+    },
+    "Judiciary": {
+      "mspid": "Judiciary.Org3MSP",
+      "peers": [
+        "peer0.judiciary.justicevault.gov.in"
+      ],
+      "certificateAuthorities": [
+        "ca-judiciary"
+      ]
+    }
+  },
+  "orderers": {
+    "orderer.justicevault.gov.in": {
+      "url": "grpcs://localhost:7050",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer.justicevault.gov.in"
+      }
+    }
+  },
+  "peers": {
+    "peer0.police.justicevault.gov.in": {
+      "url": "grpcs://localhost:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.police.justicevault.gov.in"
+      }
+    },
+    "peer0.forensic.justicevault.gov.in": {
+      "url": "grpcs://localhost:8051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.forensic.justicevault.gov.in"
+      }
+    },
+    "peer0.judiciary.justicevault.gov.in": {
+      "url": "grpcs://localhost:9051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.judiciary.justicevault.gov.in"
+      }
+    }
+  }
+}
