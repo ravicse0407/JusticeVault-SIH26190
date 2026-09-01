@@ -1419,8 +1419,16 @@ def check_document_access_permission(document_id: str, user=Depends(current_user
 
 # ================= STATIC FRONTEND SERVING =================
 
-FRONTEND = ROOT / "frontend" / "index.html"
-
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def frontend_view():
-    return FileResponse(FRONTEND)
+    candidates = [
+        ROOT / "frontend" / "index.html",
+        Path.cwd() / "frontend" / "index.html",
+        Path(__file__).resolve().parent.parent.parent / "frontend" / "index.html",
+        Path(__file__).resolve().parent.parent / "frontend" / "index.html",
+        Path("/var/task/frontend/index.html")
+    ]
+    for p in candidates:
+        if p.exists():
+            return HTMLResponse(content=p.read_text(encoding="utf-8", errors="ignore"), status_code=200)
+    return HTMLResponse("<h1>JusticeVault UI</h1><p>Frontend file not found.</p>", status_code=200)
