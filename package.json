@@ -1,0 +1,25 @@
+{
+  "name": "justicevault",
+  "version": "2.5.0",
+  "description": "Secure Digital Evidence & Legal Document Trust Platform - SIH 2026 (SIH26190) Team GenX",
+  "scripts": {
+    "dev": "cd backend && uvicorn app.main:app --reload --port 8000",
+    "test": "cd backend && python test_api.py",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "fabric:up": "bash blockchain/network/network.sh up",
+    "fabric:down": "bash blockchain/network/network.sh down"
+  },
+  "keywords": [
+    "sih2026",
+    "legal-tech",
+    "evidence-management",
+    "hyperledger-fabric",
+    "tamper-detection",
+    "victim-privacy",
+    "zero-knowledge",
+    "digital-forensics"
+  ],
+  "author": "Team GenX (Smart India Hackathon 2026)",
+  "license": "UNLICENSED"
+}
